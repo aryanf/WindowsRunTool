@@ -1,0 +1,3 @@
+pypiwin32
+pyperclip==1.8.1
+boto3==1.34.19
