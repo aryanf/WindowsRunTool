@@ -1,3 +1,5 @@
 Add current directory to windows env path
 
-Modify Installer if you want to addition header command, by default it only provide ['p', 'i', 'l']
+pip install -r requirements.txt 
+
+Modify Installer if you want to addition key command, by default it only provide ['p', 'i', 'l']

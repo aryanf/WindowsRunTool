@@ -1,5 +1,6 @@
+
 class RunMessage:
-    def __init__(self, key, command, env, num, switch_1, switch_2, switch_3):
+    def __init__(self, key, command, env, num, switch_1, switch_2, switch_3):    
         self.key = key
         self.command = command
         self.env = env
@@ -34,6 +35,7 @@ class SubCommandMessage:
         print(f'env: {self.env}, num: {self.num}, switch1: {self.switch_1}, switch2: {self.switch_2}')
     def to_string(self):
         return f'env: {self.env}, num: {self.num}, switch1: {self.switch_1}, switch2: {self.switch_2}'
+    
 
 def to_main_command_message(message: RunMessage)-> MainCommandMessage:
     return MainCommandMessage(message.env, message.num, message.switch_1, message.switch_2, message.switch_3)

@@ -1,7 +1,7 @@
 import os
 import win32com.client
 
-key_commands = ['c', 'l']
+key_commands = ['p']
 
 current_directory = os.getcwd()
 for key_command in key_commands:
