@@ -11,7 +11,9 @@ captura_cli_path = os.path.join(get_open_source_app_dir(), 'Captura', 'captura-c
 
 def main(message: MainCommandMessage):
     '''
-Recording a video. You should stop the video
+Recording a video and store it in user video director.
+{switch_1} set name of video file. Default is current datetime.
+{num} set the length of video in minute. Default is 2 hours, and you have to stop it manually.
 '''
     seconds = 7200 # 2hours
     if int(message.num) != 1:
@@ -23,9 +25,3 @@ Recording a video. You should stop the video
     output, error = process.communicate()
     bluetooth = True if b'Jabra' in output else False
     subprocess.Popen([captura_cli_path, 'start', '--encoder', 'ffmpeg:1', '--length', str(seconds), f'--speaker={"2" if bluetooth else "0"}', '--mic=0', '--file', file_path])
-
-def short(message: SubCommandMessage):
-    '''
-Recording a 15 min video
-'''
-    print('recording a short video')
