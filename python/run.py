@@ -4,11 +4,18 @@ import time
 from help_utils import(print_all_commands_help)
 import importlib
 from itertools import zip_longest
+import subprocess
 from message import (RunMessage, to_main_command_message, to_sub_command_message)
 
 HELP = False
 DEBUG = False
 ENV_LIST = ['dev', 'staging', 'prod']  # First env item is the default
+
+
+def continue_terminal():
+    user_input = input()    
+    process = subprocess.Popen(user_input, shell=True)
+    process.communicate()
 
 
 def debug(log):
@@ -99,8 +106,10 @@ def command(arg1='', arg2='', arg3='', arg4='', arg5='', arg6='', arg7=''):
     if runMessage.command == None:
         if HELP:
             print_all_commands_help(directory_key)
+            continue_terminal()
         else:
             print('Error: command should be provided ...')
+            continue_terminal()
     else:
         continue_with_command(runMessage, current_directory, directory_key)
 
@@ -118,24 +127,24 @@ def continue_with_command(runMessage: RunMessage, current_directory, directory_k
                 # Call the Z function
                 if HELP:
                     print(getattr(x_module, runMessage.switch_1).__doc__)
-                    input()
+                    continue_terminal()
                 else:
                     getattr(x_module, runMessage.switch_1)(to_sub_command_message(runMessage))
             else:
                 if HELP:
                     print(getattr(x_module, "main").__doc__)
-                    input()
+                    continue_terminal()
                 else:
                     getattr(x_module, "main")(to_main_command_message(runMessage))
         except ImportError as e:
             print(e)
-            input()
+            continue_terminal()
         finally:
             # Remove the path to directory Y from the system path
             sys.path.remove(current_directory)
     else:
         print(f"Error: {script_path} not found in {directory_key}")
-        input()
+        continue_terminal()
 
 
 

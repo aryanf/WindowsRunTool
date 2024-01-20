@@ -56,4 +56,3 @@ def print_functions_in_directory(directory):
 
 def print_all_commands_help(directory_key):
     print_functions_in_directory(directory_key)
-    input()

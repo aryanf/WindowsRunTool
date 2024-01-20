@@ -16,17 +16,3 @@ Mouse clicking on screen repeatedly. Coordination, printed message and time inte
         pyautogui.moveTo(*locs[cur])
         pyautogui.click(*locs[cur])
         time.sleep(time_period)
-
-
-def hi(message: SubCommandMessage):
-    """
-    This is a docstring for my_method.
-    It describes what the method does and provides usage information.
-
-    Parameters:
-    - self: The instance of the class.
-
-    Returns:
-    - None
-    """
-    print('This is bulshit')
