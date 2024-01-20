@@ -1,8 +1,8 @@
 import sys
 import os
 import time
+from help_utils import(print_all_commands_help)
 import importlib
-import ast
 from itertools import zip_longest
 from message import (RunMessage, to_main_command_message, to_sub_command_message)
 
@@ -99,46 +99,15 @@ def command(arg1='', arg2='', arg3='', arg4='', arg5='', arg6='', arg7=''):
     directory_key = os.path.join(current_directory, runMessage.key)
     if runMessage.command == None:
         if HELP:
-            print_all_commands_help(current_directory, directory_key)
+            print_all_commands_help(directory_key)
         else:
             print('Error: command should be provided ...')
     else:
         continue_with_command(runMessage, current_directory, directory_key)
 
-def extract_functions(file_path):
-    functions = []
-    with open(file_path, 'r') as file:
-        tree = ast.parse(file.read())
-        for node in ast.walk(tree):
-            if isinstance(node, ast.FunctionDef):
-                functions.append(node.name)
-    return functions
-
-def print_functions_in_directory(directory):
-    LIST_ROW_COUNT = 10
-    COLUMN_BORDER_SPACE = 14
-    MODULE_FUNCTION_SPACE = 5
-    all_functions = []
-    all_module_names = []
-
-    for filename in os.listdir(directory):
-        if filename.endswith('.py'):
-            file_path = os.path.join(directory, filename)
-            functions = extract_functions(file_path)
-            if functions:
-                module_name = os.path.splitext(filename)[0]
-                all_module_names.append(module_name)
-                all_functions.append(functions)
-    for i in range(0, len(all_module_names)):
-        module_name_length = len(all_module_names[i])
-        for j in range(0, len(all_functions[i])):
-            func_name = all_functions[i][j].replace('main', '_')
-            print(f'{all_module_names[i] if j==0 else module_name_length*" "}{MODULE_FUNCTION_SPACE * " "}{func_name}')
 
 
-def print_all_commands_help(current_directory, directory_key):
-    print_functions_in_directory(directory_key)
-    input()
+
 
 def continue_with_command(runMessage: RunMessage, current_directory, directory_key):
     script_command = f"{runMessage.command}.py"
