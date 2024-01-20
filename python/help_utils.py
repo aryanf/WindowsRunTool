@@ -22,7 +22,7 @@ def extract_functions(file_path):
     with open(file_path, 'r') as file:
         tree = ast.parse(file.read())
         for node in ast.walk(tree):
-            if isinstance(node, ast.FunctionDef):
+            if isinstance(node, ast.FunctionDef) and not node.name.startswith('_'):
                 functions.append(node.name)
     sorted_functions = sorted(functions, key=lambda x: x != "main")
     return sorted_functions

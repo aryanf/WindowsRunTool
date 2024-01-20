@@ -94,7 +94,6 @@ def parse_args(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunMe
 
 def command(arg1='', arg2='', arg3='', arg4='', arg5='', arg6='', arg7=''):
     runMessage: RunMessage = parse_args(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-    #current_directory = os.getcwd()
     current_directory = os.path.dirname(os.path.abspath(__file__))
     directory_key = os.path.join(current_directory, runMessage.key)
     if runMessage.command == None:
@@ -106,19 +105,16 @@ def command(arg1='', arg2='', arg3='', arg4='', arg5='', arg6='', arg7=''):
         continue_with_command(runMessage, current_directory, directory_key)
 
 
-
-
-
 def continue_with_command(runMessage: RunMessage, current_directory, directory_key):
     script_command = f"{runMessage.command}.py"
     script_path = os.path.join(directory_key, script_command)
     if os.path.exists(script_path):
         sys.path.append(current_directory)
-        sys.path.append(directory_key)
         try:
             # Import the X module
-            x_module = importlib.import_module(runMessage.command)
-            if hasattr(x_module, runMessage.switch_1) and callable(getattr(x_module, runMessage.switch_1)):
+            x_module = importlib.import_module(f'{runMessage.key}.{runMessage.command}')
+            if (not runMessage.command.startswith('_') and 
+                hasattr(x_module, runMessage.switch_1) and callable(getattr(x_module, runMessage.switch_1))):
                 # Call the Z function
                 if HELP:
                     print(getattr(x_module, runMessage.switch_1).__doc__)
@@ -136,7 +132,6 @@ def continue_with_command(runMessage: RunMessage, current_directory, directory_k
             input()
         finally:
             # Remove the path to directory Y from the system path
-            sys.path.remove(directory_key)
             sys.path.remove(current_directory)
     else:
         print(f"Error: {script_path} not found in {directory_key}")
