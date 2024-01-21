@@ -1,6 +1,8 @@
 ## What is WindowsRunTool
+I have been using run panel as an easy interface to run different simple or complex tasks for many years.
+It became so handy that I thought that can be defined as separate tool, and anyone can enjoy it.
 This project aims to maximize run panel functionality in Windows, to ease running customized scripts from run panel.
-Follow installation steps to setup the project.
+Follow super simple installation steps to setup the project.
 Check /python/p directory which has couple of scripts, a good example is demo.py file.
 It has main(), func1() and func2()
 Those functions are triggered using run panel like:
