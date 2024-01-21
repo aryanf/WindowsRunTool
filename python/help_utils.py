@@ -36,6 +36,7 @@ def get_terminal_width():
 
 
 def print_functions_in_directory(directory):
+    temp_module_names = []
     all_module_functions = []
     all_functions_per_module = []
     for filename in os.listdir(directory):
@@ -45,7 +46,12 @@ def print_functions_in_directory(directory):
             counter = 0
             for function in functions:
                 module_name = os.path.splitext(filename)[0]
-                masked_function_name = function if function!='main' else '_'
+                temp_module_names.append(module_name)
+            longest_length = len(max(temp_module_names, key=len))
+            for function in functions:
+                temp_module_name = os.path.splitext(filename)[0]
+                module_name = temp_module_name + ' '*(longest_length-len(temp_module_name))
+                masked_function_name = function if function!='main' else (' ' if len(functions)==1 else '.')
                 all_module_functions.append(f'{module_name} {masked_function_name}')
                 masked_module_name = module_name if counter == 0 else len(module_name)*" "
                 all_functions_per_module.append(f'{masked_module_name} {masked_function_name}')
