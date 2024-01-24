@@ -28,11 +28,15 @@ Check each functionality by specifying the key command like 'p help demo' or 'p 
 ## Existing scripts
 
 ## Installation
-Add current directory to windows env path
-
 pip install -r requirements.txt 
 
 python installer.py
+What is does:
+1. This add current directory to path env variable (if not added earlier)
+2. Create key bat files and their link files (if not created earlier)
+3. Create directory for each key (if not created earlier)
+
+So, you can manually do the job, if installer fails to complete the task.
 
 ## Add extra key commands
 Modify Installer if you want additional key command, by default it only provide ['p', 'i', 'l']
