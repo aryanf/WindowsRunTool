@@ -1,3 +1,6 @@
+# Credit to Jonathan Hartley
+# from https://stackoverflow.com/questions/1085852/interface-for-modifying-windows-environment-variables-from-python
+
 from os import system, environ
 import win32con
 from win32gui import SendMessage

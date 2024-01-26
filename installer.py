@@ -2,7 +2,7 @@ import os
 import win32com.client
 from python.env_var_utils import prepend_env
 
-key_commands = ['p', 'i', 'l']
+key_commands = ['u', 'i', 'o']
 
 current_dir = os.getcwd()
 

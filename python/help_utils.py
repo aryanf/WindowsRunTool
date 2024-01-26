@@ -60,5 +60,5 @@ def print_functions_in_directory(directory):
     display_strings_in_columns(all_module_functions, all_functions_per_module, terminal_width)
 
 
-def print_all_commands_help(directory_key):
-    print_functions_in_directory(directory_key)
+def print_all_commands_help(key_dir):
+    print_functions_in_directory(key_dir)

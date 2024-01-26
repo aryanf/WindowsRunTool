@@ -5,7 +5,9 @@ from help_utils import(print_all_commands_help)
 import importlib
 from itertools import zip_longest
 import subprocess
-from message import (RunMessage, to_main_command_message, to_sub_command_message)
+from message import (RunMessage, to_main_command_message, to_sub_command_message, get_open_source_app_dir)
+
+json_edit_app_path = os.path.join(get_open_source_app_dir(), 'JsonEdit', 'JSONedit.exe')
 
 HELP = False
 DEBUG = False
@@ -101,24 +103,45 @@ def parse_args(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunMe
 
 def command(arg1='', arg2='', arg3='', arg4='', arg5='', arg6='', arg7=''):
     runMessage: RunMessage = parse_args(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-    current_directory = os.path.dirname(os.path.abspath(__file__))
-    directory_key = os.path.join(current_directory, runMessage.key)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    key_dir = os.path.join(current_dir, runMessage.key)
+    config_file_path = os.path.join(key_dir, 'web_configuration.json')
+    if os.path.exists(config_file_path):
+        run_information(runMessage, current_dir, key_dir, config_file_path)
+    else:
+        run_operation(runMessage, current_dir, key_dir)
+
+def run_information(runMessage: RunMessage, current_dir: str, key_dir: str, config_file_path: str):
+    if HELP:
+        subprocess.Popen([json_edit_app_path, config_file_path])
+    else:
+        sys.path.append(current_dir)
+        try:
+            x_module = importlib.import_module(f'{runMessage.key}.main')
+            getattr(x_module, "main")(runMessage, config_file_path)
+        except ImportError as e:
+            print(e)
+            continue_terminal()
+        finally:
+            sys.path.remove(current_dir)
+
+def run_operation(runMessage: RunMessage, current_dir: str, key_dir: str):
     if runMessage.command == None:
         if HELP:
-            print_all_commands_help(directory_key)
+            print_all_commands_help(key_dir)
             continue_terminal()
         else:
             print('Error: command should be provided ...')
             continue_terminal()
     else:
-        continue_with_command(runMessage, current_directory, directory_key)
+        continue_with_command(runMessage, current_dir, key_dir)
 
 
-def continue_with_command(runMessage: RunMessage, current_directory, directory_key):
+def continue_with_command(runMessage: RunMessage, current_dir, key_dir):
     script_command = f"{runMessage.command}.py"
-    script_path = os.path.join(directory_key, script_command)
+    script_path = os.path.join(key_dir, script_command)
     if os.path.exists(script_path):
-        sys.path.append(current_directory)
+        sys.path.append(current_dir)
         try:
             # Import the X module
             x_module = importlib.import_module(f'{runMessage.key}.{runMessage.command}')
@@ -141,9 +164,9 @@ def continue_with_command(runMessage: RunMessage, current_directory, directory_k
             continue_terminal()
         finally:
             # Remove the path to directory Y from the system path
-            sys.path.remove(current_directory)
+            sys.path.remove(current_dir)
     else:
-        print(f"Error: {script_path} not found in {directory_key}")
+        print(f"Error: {script_path} not found in {key_dir}")
         continue_terminal()
 
 

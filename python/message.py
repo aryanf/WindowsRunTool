@@ -38,8 +38,8 @@ class SubCommandMessage:
         return f'env: {self.env}, num: {self.num}, switch1: {self.switch_1}, switch2: {self.switch_2}'
 
 def get_open_source_app_dir():
-    current_directory = os.path.dirname(os.path.abspath(__file__))
-    root_directory = os.path.dirname(current_directory)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    root_directory = os.path.dirname(current_dir)
     app_directory = os.path.join(root_directory, 'portable_open_source_apps')
     return app_directory
 
