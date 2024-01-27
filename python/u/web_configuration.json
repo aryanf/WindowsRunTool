@@ -5,14 +5,14 @@
         {
             "name": "chrome",
             "app_path": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-            "history_path": "C:\\Users\\Aryan\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\\History",
+            "history_path": "C:\\Users\\John\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\\History",
             "env": "dev"
         },
         {
             "name": "edge",
             "app_path": "C:\\Program Files (x86)\\Microsoft\\edge\\Application\\msedge.exe",
-            "history_path": "C:\\Users\\aryan.firouzian\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History",
-            "env": "dev"
+            "history_path": "C:\\Users\\john.smith\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History",
+            "env": "prod"
         }
     ],
     "mapper": [

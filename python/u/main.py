@@ -9,27 +9,40 @@ def main(message: RunMessage, configuration_path: str):
         config = json.load(file)
     
     count =message.num
-    mapper = _get_mapper(config)
+    mapper_object = config.get('mapper', [])
+    mapper = convert_nested_dict(mapper_object[0])
     browser = _get_browser(config, message.env)
     browser_app_path = browser['app_path']
     browser_history_path = browser['history_path']
     browser_history_shadow_path = browser_history_path + '-Shadow'
     shutil.copy(browser_history_path, browser_history_shadow_path)
 
-    print(browser['name'])
-    print(mapper)
-    print(message.command)
 
     if message.command in mapper:
-        print(f'Command {message.command} not found ...')
-        input()
-        exit()
+        mapper = mapper[message.command]
+        if message.switch_1 in mapper:
+            mapper = mapper[message.switch_1]
+            if message.switch_2 in mapper:
+                mapper = mapper[message.switch_2]
+                url = find_link(browser_history_shadow_path, mapper['0'], count, message.switch_3)
+                url = mapper['1'] if url == '' else url
+                subprocess.Popen([browser_app_path, url])
+            else:
+                url = find_link(browser_history_shadow_path, mapper['0'], count, message.switch_2, message.switch_3)
+                print(url)
+                url = mapper['1'] if url == '' else url
+                subprocess.Popen([browser_app_path, url])
+        else:
+            url = find_link(browser_history_shadow_path, mapper['0'], count, message.switch_1, message.switch_2, message.switch_3)
+            url = mapper['1'] if url == '' else url
+            subprocess.Popen([browser_app_path, url])
     else:
-        url = find_link(browser_history_shadow_path, '@', message.command, message.switch_1, message.switch_2, message.switch_3, count)
+        url = find_link(browser_history_shadow_path, mapper['0'], count, message.command, message.switch_1, message.switch_2, message.switch_3)
+        url = mapper['1'] if url == '' else url
         subprocess.Popen([browser_app_path, url])
 
 
-def find_link(browser_history_shadow_path, base_url, term1=None, term2=None, term3=None, term4=None, count=1):
+def find_link(browser_history_shadow_path, base_url, count=1, term1=None, term2=None, term3=None, term4=None):
     con = sqlite3.connect(browser_history_shadow_path)
     cursor = con.cursor()
 
@@ -89,12 +102,11 @@ def _get_browser(config, env):
     input()
     exit()
 
-
-def _get_mapper(config):
-    mapper_list = config.get('mapper', [])
-    mapper = {}
-    for obj in mapper_list:
-        # Assuming each object has only one key-value pair
-        key, value = obj.popitem()
-        mapper[key] = value
-    return mapper
+def convert_nested_dict(d):
+    result = {}
+    for key, value in d.items():
+        if isinstance(value, dict):
+            result[key] = convert_nested_dict(value)
+        else:
+            result[key] = value
+    return result
