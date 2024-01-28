@@ -1,10 +1,10 @@
-from message import (RunMessage)
+from message import (RunUrlFetchMessage)
 import json
 import shutil
 import sqlite3
 import subprocess
 
-def main(message: RunMessage, configuration_path: str):
+def main(message: RunUrlFetchMessage, configuration_path: str):
     with open(configuration_path, 'r') as file:
         config = json.load(file)
     

@@ -5,9 +5,16 @@ from help_utils import(print_all_commands_help)
 import importlib
 from itertools import zip_longest
 import subprocess
-from message import (RunMessage, to_main_command_message, to_sub_command_message, get_open_source_app_dir)
+from message import (
+    RunOperationMessage,
+    RunUrlFetchMessage,
+    RunInfoFetchMessage, 
+    to_main_command_message, 
+    to_sub_command_message, 
+    get_open_source_app_dir)
 
 json_edit_app_path = os.path.join(get_open_source_app_dir(), 'JsonEdit', 'JSONedit.exe')
+notepad_app_path = os.path.join(get_open_source_app_dir(), 'Notepad++64', 'notepad++.exe')
 
 HELP = False
 DEBUG = False
@@ -85,7 +92,7 @@ def find_and_remove_first_int(input_list):
     else:
         return 1, input_list
 
-def parse_args(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunMessage:
+def parse_args_get_operation_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunOperationMessage:
     global HELP
     global DEBUG
     key = arg1
@@ -99,25 +106,75 @@ def parse_args(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunMe
     switch_1 = params[0] if len(params) > 0 else ''
     switch_2 = params[1] if len(params) > 1 else ''
     switch_3 = params[2] if len(params) > 2 else ''
-    return RunMessage(key, command, env, count, switch_1, switch_2, switch_3)
+    return RunOperationMessage(key, command, env, count, switch_1, switch_2, switch_3)
+
+def parse_args_get_url_fetch_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunUrlFetchMessage:
+    global HELP
+    global DEBUG
+    key = arg1
+    params = [arg for arg in [arg2, arg3, arg4, arg5, arg6, arg7] if arg != ""]
+    HELP, params = find_and_remove_help(params)
+    DEBUG, params = find_and_remove_debug(params)
+    command, params = find_and_remove_command(params)
+    env, params = find_and_remove_env(params)
+    count, params = find_and_remove_first_int(params)    # at this point switch and some search params are in params list
+    debug(f'parameters: {params}')
+    switch_1 = params[0] if len(params) > 0 else ''
+    switch_2 = params[1] if len(params) > 1 else ''
+    switch_3 = params[2] if len(params) > 2 else ''
+    return RunUrlFetchMessage(key, command, env, count, switch_1, switch_2, switch_3)
+
+def parse_args_get_info_fetch_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunInfoFetchMessage:
+    global HELP
+    global DEBUG
+    key = arg1
+    params = [arg for arg in [arg2, arg3, arg4, arg5, arg6, arg7] if arg != ""]
+    HELP, params = find_and_remove_help(params)
+    command, params = find_and_remove_command(params)
+    debug(f'parameters: {params}')
+    switch_1 = params[0] if len(params) > 0 else ''
+    switch_2 = params[1] if len(params) > 1 else ''
+    switch_3 = params[2] if len(params) > 2 else ''
+    return RunInfoFetchMessage(key, command, switch_1, switch_2, switch_3)
 
 def command(arg1='', arg2='', arg3='', arg4='', arg5='', arg6='', arg7=''):
-    runMessage: RunMessage = parse_args(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    key_dir = os.path.join(current_dir, runMessage.key)
+    key_dir = os.path.join(current_dir, arg1)
     config_file_path = os.path.join(key_dir, 'web_configuration.json')
-    if os.path.exists(config_file_path):
-        run_information(runMessage, current_dir, key_dir, config_file_path)
+    info_file_path = os.path.join(key_dir, 'info.diff')
+    if os.path.exists(info_file_path):
+        runMessage: RunInfoFetchMessage = parse_args_get_info_fetch_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
+        run_info_fetch(runMessage, current_dir, key_dir, info_file_path)
+    elif os.path.exists(config_file_path):
+        runMessage: RunUrlFetchMessage = parse_args_get_url_fetch_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
+        run_url_fetch(runMessage, current_dir, key_dir, config_file_path)
     else:
+        runMessage: RunOperationMessage = parse_args_get_operation_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
         run_operation(runMessage, current_dir, key_dir)
 
-def run_information(runMessage: RunMessage, current_dir: str, key_dir: str, config_file_path: str):
+
+def run_info_fetch(runMessage: RunInfoFetchMessage, current_dir: str, key_dir: str, info_file_path: str):
+    if HELP:
+        subprocess.Popen(['start', notepad_app_path, '-ldiff', info_file_path], shell=True)
+    else:
+        sys.path.append(current_dir)
+        try:
+            x_module = importlib.import_module(f'parse_info')
+            getattr(x_module, "main")(runMessage, info_file_path)
+        except ImportError as e:
+            print(e)
+            continue_terminal()
+        finally:
+            sys.path.remove(current_dir)
+
+
+def run_url_fetch(runMessage: RunUrlFetchMessage, current_dir: str, key_dir: str, config_file_path: str):
     if HELP:
         subprocess.Popen([json_edit_app_path, config_file_path])
     else:
         sys.path.append(current_dir)
         try:
-            x_module = importlib.import_module(f'{runMessage.key}.main')
+            x_module = importlib.import_module(f'parse_browser_config')
             getattr(x_module, "main")(runMessage, config_file_path)
         except ImportError as e:
             print(e)
@@ -125,7 +182,7 @@ def run_information(runMessage: RunMessage, current_dir: str, key_dir: str, conf
         finally:
             sys.path.remove(current_dir)
 
-def run_operation(runMessage: RunMessage, current_dir: str, key_dir: str):
+def run_operation(runMessage: RunOperationMessage, current_dir: str, key_dir: str):
     if runMessage.command == None:
         if HELP:
             print_all_commands_help(key_dir)
@@ -137,7 +194,7 @@ def run_operation(runMessage: RunMessage, current_dir: str, key_dir: str):
         continue_with_command(runMessage, current_dir, key_dir)
 
 
-def continue_with_command(runMessage: RunMessage, current_dir, key_dir):
+def continue_with_command(runMessage: RunOperationMessage, current_dir, key_dir):
     script_command = f"{runMessage.command}.py"
     script_path = os.path.join(key_dir, script_command)
     if os.path.exists(script_path):
@@ -177,8 +234,7 @@ def entry():
         print('p copy ...')
         print('l send ...')
     elif len(sys.argv) == 2:
-        print('key and command are needed, like:')
-        print(f'{sys.argv[1]} send ...')
+        command(sys.argv[1])
     elif len(sys.argv) == 3:
         command(sys.argv[1], sys.argv[2])
     elif len(sys.argv) == 4:
