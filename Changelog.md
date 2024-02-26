@@ -1,3 +1,8 @@
+1.2.1
+ - Update gitignore.
+ - Add aws utils and command to get aws credential by mapping env to profile
+ - Refactoring helper, message, run files and couple of commands
+
 1.2.0
  - Info fetch is enabled by i key command.
 

@@ -69,6 +69,11 @@ def get_open_source_app_dir():
     app_directory = os.path.join(root_directory, 'portable_open_source_apps')
     return app_directory
 
+def get_root_project_dir():
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    root_directory = os.path.dirname(current_dir)
+    return root_directory
+
 def to_main_command_message(message: RunOperationMessage)-> MainCommandMessage:
     return MainCommandMessage(message.env, message.num, message.switch_1, message.switch_2, message.switch_3)
 

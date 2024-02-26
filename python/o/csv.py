@@ -34,7 +34,7 @@ Open csv file from default directory, num specify only the nth recent file to op
     if not file :
         subprocess.Popen([app_path])
     else:        
-        subprocess.Popen([app_path, file ])
+        subprocess.Popen([app_path, file[0] ])
 
 def all(message: SubCommandMessage):
     '''

@@ -89,7 +89,14 @@ def find_link(browser_history_shadow_path, base_url, count=1, term1=None, term2=
             LIMIT ?"""
         cursor.execute(query, (term1, count))
     else:
-        return ''
+        term = base_url.replace('@', f'%%')
+        query = """
+            SELECT DISTINCT url 
+            FROM urls 
+            WHERE url LIKE ?
+            ORDER BY last_visit_time DESC 
+            LIMIT ?"""
+        cursor.execute(query, (term, count))
     urls = cursor.fetchall()
     return '' if len(urls)==0 else urls[-1][0]
 

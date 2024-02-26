@@ -1,6 +1,5 @@
 import sys
 import os
-import time
 from help_utils import(print_all_commands_help)
 import importlib
 from itertools import zip_longest

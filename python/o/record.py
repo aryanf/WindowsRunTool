@@ -25,3 +25,10 @@ Recording a video and store it in user video director.
     output, error = process.communicate()
     bluetooth = True if b'Jabra' in output else False
     subprocess.Popen([captura_cli_path, 'start', '--encoder', 'ffmpeg:1', '--length', str(seconds), f'--speaker={"2" if bluetooth else "0"}', '--mic=0', '--file', file_path])
+
+
+def dir(message: SubCommandMessage):
+    '''
+Open the directory of the records
+'''
+    subprocess.Popen(['explorer', video_store_path], shell=True)

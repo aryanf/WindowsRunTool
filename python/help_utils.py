@@ -34,7 +34,6 @@ def get_terminal_width():
     except:
         return 80  # Default value if terminal size cannot be determined
 
-
 def print_functions_in_directory(directory):
     temp_module_names = []
     all_module_functions = []
@@ -58,7 +57,6 @@ def print_functions_in_directory(directory):
                 counter = counter + 1
     terminal_width = get_terminal_width()
     display_strings_in_columns(all_module_functions, all_functions_per_module, terminal_width)
-
 
 def print_all_commands_help(key_dir):
     print_functions_in_directory(key_dir)

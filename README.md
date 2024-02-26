@@ -39,10 +39,23 @@ What is does:
 So, you can manually do the job, if installer fails to complete the task.
 
 ## Add extra key commands
-Modify Installer if you want additional key command, by default it only provide ['p', 'i', 'l']
+Modify Installer if you want additional key command, by default it only provide ['o', 'i', 'l']
 python installer.py
 
 
 ## Add your script
 demo.py file is an example script. Add new script file and with couple of functions in p directory.
 
+## Notepad folding style
+I use diff language to store information, as it appears to be easy to use the folding structure
+Style and keywords can be checked here from notepad++ source code
+https://github.com/notepad-plus-plus/notepad-plus-plus/blob/master/lexilla/lexers/LexDiff.cxx
+There is no external language model file to define diff language syntax for notepad++
+In short these keywords are used to form folding structure:
+1. first level folding: 'diff ', 'Index: '
+2. second level folding: '? ', '--- '
+3. third level folding: '@ '
+
+## How to debug
+Use your IDE (vscode is a good choice), and run integrated terminal from root directory of project, where link files exist.
+You can run same command which is supposed be run in run panel.
