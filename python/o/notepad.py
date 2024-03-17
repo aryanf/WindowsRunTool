@@ -1,5 +1,5 @@
 from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_dir)
-from p import note
+from o import note
 
 def main(message: MainCommandMessage):
     '''

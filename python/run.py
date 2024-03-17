@@ -4,6 +4,7 @@ from help_utils import(print_all_commands_help)
 import importlib
 from itertools import zip_longest
 import subprocess
+from time import sleep
 from message import (
     RunOperationMessage,
     RunUrlFetchMessage,
@@ -24,7 +25,6 @@ def continue_terminal():
     user_input = input()    
     process = subprocess.Popen(user_input, shell=True)
     process.communicate()
-
 
 def debug(log):
     if(DEBUG):
@@ -49,7 +49,7 @@ def find_and_remove_help(input_list):
     help_flag = False
     new_list = []
     for item in input_list:
-        if item == 'help':
+        if item == '-help':
             help_flag = True
         else:
             new_list.append(item)
@@ -59,7 +59,7 @@ def find_and_remove_debug(input_list):
     debug_flag = False
     new_list = []
     for item in input_list:
-        if item == 'debug':
+        if item == '-debug':
             debug_flag = True
         else:
             new_list.append(item)
@@ -143,16 +143,16 @@ def command(arg1='', arg2='', arg3='', arg4='', arg5='', arg6='', arg7=''):
     info_file_path = os.path.join(key_dir, 'info.diff')
     if os.path.exists(info_file_path):
         runMessage: RunInfoFetchMessage = parse_args_get_info_fetch_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-        run_info_fetch(runMessage, current_dir, key_dir, info_file_path)
+        run_info(runMessage, current_dir, key_dir, info_file_path)
     elif os.path.exists(config_file_path):
         runMessage: RunUrlFetchMessage = parse_args_get_url_fetch_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-        run_url_fetch(runMessage, current_dir, key_dir, config_file_path)
+        run_url(runMessage, current_dir, key_dir, config_file_path)
     else:
         runMessage: RunOperationMessage = parse_args_get_operation_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
         run_operation(runMessage, current_dir, key_dir)
 
 
-def run_info_fetch(runMessage: RunInfoFetchMessage, current_dir: str, key_dir: str, info_file_path: str):
+def run_info(runMessage: RunInfoFetchMessage, current_dir: str, key_dir: str, info_file_path: str):
     if HELP:
         subprocess.Popen(['start', notepad_app_path, '-ldiff', info_file_path], shell=True)
     else:
@@ -166,8 +166,7 @@ def run_info_fetch(runMessage: RunInfoFetchMessage, current_dir: str, key_dir: s
         finally:
             sys.path.remove(current_dir)
 
-
-def run_url_fetch(runMessage: RunUrlFetchMessage, current_dir: str, key_dir: str, config_file_path: str):
+def run_url(runMessage: RunUrlFetchMessage, current_dir: str, key_dir: str, config_file_path: str):
     if HELP:
         subprocess.Popen([json_edit_app_path, config_file_path])
     else:
@@ -184,14 +183,13 @@ def run_url_fetch(runMessage: RunUrlFetchMessage, current_dir: str, key_dir: str
 def run_operation(runMessage: RunOperationMessage, current_dir: str, key_dir: str):
     if runMessage.command == None:
         if HELP:
-            print_all_commands_help(key_dir)
+            print_all_commands_help(key_dir, runMessage.key)
             continue_terminal()
         else:
             print('Error: command should be provided ...')
             continue_terminal()
     else:
         continue_with_command(runMessage, current_dir, key_dir)
-
 
 def continue_with_command(runMessage: RunOperationMessage, current_dir, key_dir):
     script_command = f"{runMessage.command}.py"
@@ -203,7 +201,7 @@ def continue_with_command(runMessage: RunOperationMessage, current_dir, key_dir)
             x_module = importlib.import_module(f'{runMessage.key}.{runMessage.command}')
             if (not runMessage.command.startswith('_') and 
                 hasattr(x_module, runMessage.switch_1) and callable(getattr(x_module, runMessage.switch_1))):
-                # Call the Z function
+                # Call Z function
                 if HELP:
                     print(getattr(x_module, runMessage.switch_1).__doc__)
                     continue_terminal()
@@ -222,10 +220,9 @@ def continue_with_command(runMessage: RunOperationMessage, current_dir, key_dir)
             # Remove the path to directory Y from the system path
             sys.path.remove(current_dir)
     else:
-        print(f"Error: {script_path} not found in {key_dir}")
-        continue_terminal()
-
-
+        print(f"Error: {runMessage.command} not found in {key_dir}, running default Windows command ...")
+        sleep(1)
+        subprocess.Popen([runMessage.command], shell=True)
 
 def entry():
     if len(sys.argv) == 1:
