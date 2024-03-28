@@ -10,7 +10,7 @@ def is_int(s):
     except ValueError:
         return False
 
-def show(options, enumerating=False, zero_indexed=False, enable_input=True,  info='', item_per_col=30):
+def show(options, enumerating=False, zero_indexed=False, enable_input=True, info='', item_per_col=30, default_selected_index=0):
     '''
 Pass a list to select an item.
 Can be shown with prefix number (0-based or 1-based).
@@ -22,16 +22,16 @@ return (index, content)
     result_content = [None]
     result_index = [None]
 
-    curses.wrapper(get_user_choice, options, enumerating, zero_indexed, lambda x: result_content.__setitem__(0, x), lambda x: result_index.__setitem__(0, x), enable_input, info, item_per_col)
+    curses.wrapper(get_user_choice, options, enumerating, zero_indexed, lambda x: result_content.__setitem__(0, x), lambda x: result_index.__setitem__(0, x), enable_input, info, item_per_col, default_selected_index)
     return (result_index[0], result_content[0])
 
-def get_user_choice(stdscr, options, enumerating, zero_indexed, set_result_content_callback, set_result_index_callback, enable_input, info, item_per_col):
+def get_user_choice(stdscr, options, enumerating, zero_indexed, set_result_content_callback, set_result_index_callback, enable_input, info, item_per_col, default_selected_index):
     rows = item_per_col
     cols = 3
     curses.curs_set(0)
     curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
-
-    selected_row, selected_col = 0, 0
+    selected_row, selected_col = divmod(default_selected_index, rows)
+    
     if enumerating:
         temp_options = [f"{i}:  {item}" for i, item in enumerate(options, start=0 if zero_indexed else 1)]
     else:

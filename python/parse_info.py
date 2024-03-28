@@ -206,10 +206,8 @@ def _show_content(info_path, title, topic, sub_topic, browser='chrome'):
         if validators.url(cmd):
             if browser == 'chrome':
                 subprocess.Popen([f'{chrome_path}', f'{cmd}'], shell=True)
-                pyperclip.copy(cmd)
             elif browser == 'edge':
                 subprocess.Popen([f'{edge_path}', f'{cmd}'], shell=True)
-                pyperclip.copy(cmd)
         else:
             pyperclip.copy(cmd)
         _show_content(info_path, title, topic, sub_topic, browser=browser)

@@ -65,8 +65,9 @@ def print_functions_in_directory(key_dir, key):
     
     display(all_module_functions, all_functions_per_module, key, key_dir)
 
-def display(all_module_functions, all_functions_per_module, key, key_dir):
-    i, cmd = curses_terminal.show(all_module_functions, enumerating=False, zero_indexed=False, info='', item_per_col=15)
+def display(all_module_functions, all_functions_per_module, key, key_dir, default_selected_index=0):
+    i, cmd = curses_terminal.show(all_module_functions, enumerating=False, zero_indexed=False, info='', item_per_col=15, default_selected_index=default_selected_index)
+    print(i)
     if cmd in all_module_functions:
         params = cmd.strip().split(' ')
         script_command = f"{params[0]}.py"
@@ -78,7 +79,7 @@ def display(all_module_functions, all_functions_per_module, key, key_dir):
             print(getattr(x_module, 'main').__doc__)
         input()
         os.system('cls')    
-        print_all_commands_help(key_dir, key)
+        display(all_module_functions, all_functions_per_module, key, key_dir, default_selected_index= int(i))
     elif cmd == 'e' or cmd == 'exit':
         exit()
     else:
