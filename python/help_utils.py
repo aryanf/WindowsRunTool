@@ -1,6 +1,13 @@
 import os
 import ast
 import shutil
+import win32gui
+import win32con
+import curses_terminal
+import importlib
+
+hwnd = win32gui.GetForegroundWindow()
+win32gui.SetWindowPos(hwnd,win32con.HWND_TOP,1,1,900,800,0)
 
 def display_strings_in_columns(all_module_functions, all_functions_per_module, terminal_width):
     max_length = max(len(s) for s in all_module_functions) + 15
@@ -34,14 +41,13 @@ def get_terminal_width():
     except:
         return 80  # Default value if terminal size cannot be determined
 
-
-def print_functions_in_directory(directory):
+def print_functions_in_directory(key_dir, key):
     temp_module_names = []
     all_module_functions = []
     all_functions_per_module = []
-    for filename in os.listdir(directory):
+    for filename in os.listdir(key_dir):
         if filename.endswith('.py'):
-            file_path = os.path.join(directory, filename)
+            file_path = os.path.join(key_dir, filename)
             functions = extract_functions(file_path)
             counter = 0
             for function in functions:
@@ -51,14 +57,34 @@ def print_functions_in_directory(directory):
             for function in functions:
                 temp_module_name = os.path.splitext(filename)[0]
                 module_name = temp_module_name + ' '*(longest_length-len(temp_module_name))
-                masked_function_name = function if function!='main' else (' ' if len(functions)==1 else '.')
-                all_module_functions.append(f'{module_name} {masked_function_name}')
+                masked_function_name = function if function!='main' else (' ' if len(functions)==1 else '')
+                all_module_functions.append(f'{temp_module_name} {masked_function_name}')
                 masked_module_name = module_name if counter == 0 else len(module_name)*" "
                 all_functions_per_module.append(f'{masked_module_name} {masked_function_name}')
                 counter = counter + 1
-    terminal_width = get_terminal_width()
-    display_strings_in_columns(all_module_functions, all_functions_per_module, terminal_width)
+    
+    display(all_module_functions, all_functions_per_module, key, key_dir)
 
+def display(all_module_functions, all_functions_per_module, key, key_dir, default_selected_index=0):
+    i, cmd = curses_terminal.show(all_module_functions, enumerating=False, zero_indexed=False, info='', item_per_col=15, default_selected_index=default_selected_index)
+    print(i)
+    if cmd in all_module_functions:
+        params = cmd.strip().split(' ')
+        script_command = f"{params[0]}.py"
+        script_path = os.path.join(key_dir, script_command)
+        x_module = importlib.import_module(f'{key}.{params[0]}')
+        if len(params) > 1:
+            print(getattr(x_module, params[1]).__doc__)
+        else:
+            print(getattr(x_module, 'main').__doc__)
+        input()
+        os.system('cls')    
+        display(all_module_functions, all_functions_per_module, key, key_dir, default_selected_index= int(i))
+    elif cmd == 'e' or cmd == 'exit':
+        exit()
+    else:
+        print_all_commands_help(key_dir, key)
+    
 
-def print_all_commands_help(key_dir):
-    print_functions_in_directory(key_dir)
+def print_all_commands_help(key_dir, key):
+    print_functions_in_directory(key_dir, key)

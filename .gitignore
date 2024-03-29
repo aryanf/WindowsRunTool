@@ -1,1 +1,7 @@
+.vscode/
+*.bat
+*.lnk
 portable_open_source_apps/*
+portable_open_source_apps/**/*
+python/__pycache__/*.pyc
+python/**/__pycache__/*.pyc

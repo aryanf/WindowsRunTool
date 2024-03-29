@@ -6,4 +6,6 @@ pyperclip
 importlib
 pytest-shutil
 pathlib
+windows-curses
+validators
 pyperclip==1.8.1
