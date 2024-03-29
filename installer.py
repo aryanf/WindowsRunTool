@@ -1,10 +1,24 @@
 import os
 import win32com.client
 from python.env_var_utils import prepend_env
+import subprocess
+
+
+
 
 key_commands = ['o', 'i', 'l']
 
 current_dir = os.getcwd()
+
+# Install library dependencies
+# Define the command
+command = 'pip install -r requirements.txt'
+# Execute the command
+try:
+    subprocess.check_call(command, shell=True)
+    print("Package installed successfully!")
+except subprocess.CalledProcessError as e:
+    print("An error occurred:", e)
 
 # This is going to add current directory to path env var
 # If you face a problem here, comment this code and add it manually
