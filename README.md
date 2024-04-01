@@ -89,5 +89,5 @@ In short these keywords are used to form folding structure:
 3. third level folding: '@ '
 
 # Documents
-1. [debug](http://www.fourthexample.com) 
+1. [debug](docs/DEBUG.md) 
 
