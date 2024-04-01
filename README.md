@@ -22,9 +22,25 @@ Those functions are triggered using run panel like:
 
 p demo => demo.main()
 
+![Alt text](images/demo_main.png)
+
+is going to run
+
+
+![Alt text](images/demo_main_code.png)
+
+or other cases be like calling other functions in the file (which are not main)
+
 p demo func1 => demo.func1()
 
-p demo func2 => demo.func2()
+![Alt text](images/demo_func1.png)
+
+is going to run
+
+
+![Alt text](images/demo_func1_code.png)
+
+this way you can call many python scripts and functions
 
 you can also pass some parameters to these functions like 
 a number, 2 or 3 strings (3 strings to main() and 2 strings to func1 or func2), predefined values like:
@@ -34,8 +50,8 @@ Play around and run demo functions with parameters to see how they are passed to
 
 Check structure of these object in python/message.py
 There are some other scripts that I found useful example to increase productivity.
-Open run panel (WinKey+r) and type 'p help' to check all existing script
-Check each functionality by specifying the key command like 'p help demo' or 'p help record'
+Open run panel (WinKey+r) and type 'p -help' to check all existing script
+Check each functionality by specifying the key command like 'p -help demo' or 'p -help record'
 
 You can create your own python file, and just call it from run panel.
 
@@ -72,19 +88,6 @@ In short these keywords are used to form folding structure:
 2. second level folding: '? ', '--- '
 3. third level folding: '@ '
 
-## How to debug
-Use your IDE (vscode is a good choice), and run integrated terminal from root directory of project, where link files exist.
-If running vscode, a configuration like below can help to debug a target command
+# Documents
+1. [debug](http://www.fourthexample.com) 
 
-    "configurations": [
-        {
-            "name": "i",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "${workspaceFolder}/python/run.py",
-            "console": "integratedTerminal",
-            "args": "o note my_fav_food"
-        }
-    ]
-
-Instead of running command in run panel, try to run it in a terminal at root of this project.
