@@ -89,6 +89,8 @@ In short these keywords are used to form folding structure:
 3. third level folding: '@ '
 
 # Documents
-1. [operations](docs/OPERATIONS.md)
-1. [debug](docs/DEBUG.md) 
+1. [operations [o ...]](docs/OPERATIONS.md)
+1. [info [i ...]](docs/INFORMATION.md)
+1. [urls [l ...]](docs/URLS.md)
+2. [debug](docs/DEBUG.md) 
 

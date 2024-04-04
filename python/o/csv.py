@@ -1,10 +1,9 @@
-from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_dir)
+from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_dir, get_download_dir)
 import os
 from pathlib import Path
 import subprocess
 
-username = os.getenv('USER') or os.getenv('LOGNAME') or os.getenv('USERNAME')
-download_path = f'C:\\Users\\{username}\\Downloads\\'
+download_path = get_download_dir()
 app_path = os.path.join(get_open_source_app_dir(), 'CsvFileView', 'CSVFileView.exe')
 
 def _get_n_recent_files(num):

@@ -1,7 +1,8 @@
 Operation commands can be easily added by adding a python script to run a useful tool or process.
 
 There are some existing example to use them right away:
-get `WinKey + r` to open run panel, and then type
+
+Use `WinKey + r` to open run panel, and then type
 
 - `o compare` => to open WinMerge to compare multiple files.
 - `o csv` => to open csv editor. It reads last existing csv file in Download dir by default.

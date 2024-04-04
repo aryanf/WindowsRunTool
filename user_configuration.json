@@ -1,0 +1,25 @@
+{
+    "username": "John",
+    "env": [
+        "dev",
+        "staging",
+        "prod"
+    ],
+    "paths": {
+        "Downloads": "C:\\Users\\John\\Downloads\\",
+        "Documents": "",
+        "Videos": ""
+    },
+    "browsers": {
+        "chrome": {
+            "app_path": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+            "history_path": "C:\\Users\\Aryan\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\\History",
+            "env_id": 0
+        },
+        "edge": {
+            "app_path": "C:\\Program Files (x86)\\Microsoft\\edge\\Application\\msedge.exe",
+            "history_path": "C:\\Users\\aryan.firouzian\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History",
+            "env_id": 2
+        }
+    }
+}
