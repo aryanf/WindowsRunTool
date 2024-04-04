@@ -1,23 +1,41 @@
-Operation commands can be easily added by adding a python script to run a useful tool or process.
+# Operation: [key: o]
 
-There are some existing example to use them right away:
+Follow super simple installation steps to setup the project.
+Check `/python/p` directory which has couple of scripts, a good example is `demo.py` file.
+It has `main()`, `func1()` and `func2()`
+Those functions are triggered using run panel like:
 
-Use `WinKey + r` to open run panel, and then type
+`p demo` => demo.main()
 
-- `o compare` => to open WinMerge to compare multiple files.
-- `o csv` => to open csv editor. It reads last existing csv file in Download dir by default.
-- `o find` => to open Everything tool and search for files
-- `o hex` => to open frhed binary and text editor
-- `o gif` => to run search record to gif
-- `o note` => to open notepad++
-- `o shot` => to screenshot 
-- `o record` => to video record your screen (make sure all huge files are cloned in `portable_oepn_source_app/Captura`, some huge files like ffmpeg.exe, ffplay.exe or ffprobe might be missed)
-- `o timer` => run a time (run help to see how to pass parameters)
-- `o wait` => run a script to prevent your device to sleep
+![Alt text](../images/demo_main.png)
+
+is going to run
+
+![Alt text](../images/demo_main_code.png)
 
 
+or other cases be like calling other functions in the file (which are not main)
 
-There might be some switches for these commands like `o shot edit`, you can read help documentation for each command by running `o -help`
+`p demo func1` => demo.func1()
 
-It is good practice to provide meaningful comments for your functions. You can then use help command to read them easily. 
+![Alt text](../images/demo_func1.png)
 
+is going to run
+
+![Alt text](../images/demo_func1_code.png)
+
+
+This way you can call many python scripts and functions.
+
+You can also pass some parameters to these functions like 
+A number, 2 or 3 strings (3 strings to main() and 2 strings to func1 or func2), predefined values like:
+An env fix value from [dev, staging, prod], help and debug
+
+Play around and run demo functions with parameters to see how they are passed to functions as properties of MainCommandMessage and SubCommandMessage.
+
+Check structure of these object in `python/message.py`
+There are some other scripts that I found useful example to increase productivity.
+Open run panel `WinKey+r` and type `p -help` to check all [existing scripts](EXISTING_SCRIPTS.md).
+Check each functionality by specifying the key command like `p -help demo` or `p -help record`
+
+You can create your own python file, and just call it from run panel.

@@ -1,3 +1,5 @@
+# URL Commands
+
 Url commands can be used to query browser history and open a page that match the criteria.
 
 There is urls.json file that define how it should work, see example below
