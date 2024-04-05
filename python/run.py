@@ -84,6 +84,8 @@ def find_and_remove_operator(input_list):
     for item in input_list:
         if item == 'or':
             operator = 'or'
+        elif item == 'and':
+            operator = 'and'
         else:
             new_list.append(item)
     return operator, new_list

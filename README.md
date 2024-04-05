@@ -13,7 +13,27 @@ Like example below is running shot operation:
 
 ![Alt text](images/run_panel.png)
 
+# Operation Command
 
+Demo
+![Alt text](images/operation_case_1.gif)
+
+More examples
+![Alt text](images/operation_case_2.gif)
+
+[more about operation command](docs/OPERATIONS.md)
+
+# Information Command
+
+![Alt text](images/info_case_1.gif)
+
+[more about information command](docs/INFORMATION.md)
+
+# Url Command
+
+![Alt text](images/url_case_1.gif)
+
+[more about url command](docs/URLS.md)
 
 # Installation
 `pip install -r requirements.txt` 

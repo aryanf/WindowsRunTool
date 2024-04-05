@@ -23,6 +23,7 @@ Use `WinKey + r` to open run panel, and then type
 - `i` => to see all top level topics
 - `i -help` => to open `info.diff` file to edit
 
+When reaching to the content, you can select a line, line content will be copied to clipboard, or it opens browser if the line is url address.
 While the console is open, you can type `i` and `Enter` to open `info.diff` file in correct line.
 You can also type `e` or `exit` and `Enter` to exit the console.
 Even you use capital letter for topics or sub-topics in `info.diff`, all commands and switches to input to run panel should be lowercase.
