@@ -236,7 +236,7 @@ def continue_with_command(runMessage: RunOperationMessage, current_dir, key_dir)
             sys.path.remove(current_dir)
     else:
         print(f"Error: {runMessage.command} not found in {key_dir}, running default Windows command ...")
-        sleep(1)
+        input("Press Enter ...")
         subprocess.Popen([runMessage.command], shell=True)
 
 def entry():
