@@ -1,4 +1,4 @@
-from message import (RunInfoFetchMessage)
+from message import (RunInfoMessage)
 import subprocess
 import pyperclip
 import win32gui
@@ -24,7 +24,7 @@ browser_mapping = {
     'edge': 'edge'
 }
 
-def main(message: RunInfoFetchMessage, info_path: str):
+def main(message: RunInfoMessage, info_path: str, user_path: str):
     if message.command and message.switch_1 and message.switch_2:
         _show_content(info_path, message.command, message.switch_1, message.switch_2)
     elif message.command and message.switch_1:

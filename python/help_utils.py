@@ -9,6 +9,15 @@ import importlib
 hwnd = win32gui.GetForegroundWindow()
 win32gui.SetWindowPos(hwnd,win32con.HWND_TOP,1,1,900,800,0)
 
+def convert_nested_dict(d):
+    result = {}
+    for key, value in d.items():
+        if isinstance(value, dict):
+            result[key] = convert_nested_dict(value)
+        else:
+            result[key] = value
+    return result
+
 def display_strings_in_columns(all_module_functions, all_functions_per_module, terminal_width):
     max_length = max(len(s) for s in all_module_functions) + 15
     num_columns = terminal_width // max_length
@@ -73,18 +82,19 @@ def display(all_module_functions, all_functions_per_module, key, key_dir, defaul
         script_command = f"{params[0]}.py"
         script_path = os.path.join(key_dir, script_command)
         x_module = importlib.import_module(f'{key}.{params[0]}')
+        os.system('cls')    
         if len(params) > 1:
             print(getattr(x_module, params[1]).__doc__)
         else:
             print(getattr(x_module, 'main').__doc__)
+        print('Press the "Enter" key ...')
         input()
         os.system('cls')    
-        display(all_module_functions, all_functions_per_module, key, key_dir, default_selected_index= int(i))
+        display(all_module_functions, all_functions_per_module, key, key_dir)
     elif cmd == 'e' or cmd == 'exit':
         exit()
     else:
         print_all_commands_help(key_dir, key)
     
-
 def print_all_commands_help(key_dir, key):
     print_functions_in_directory(key_dir, key)

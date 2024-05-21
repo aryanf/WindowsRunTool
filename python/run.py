@@ -2,15 +2,15 @@ import sys
 import os
 from help_utils import(print_all_commands_help)
 import importlib
-from itertools import zip_longest
 import subprocess
 from time import sleep
 from message import (
     RunOperationMessage,
-    RunUrlFetchMessage,
-    RunInfoFetchMessage, 
+    RunUrlMessage,
+    RunInfoMessage, 
     to_main_command_message, 
-    to_sub_command_message, 
+    to_sub_command_message,
+    get_all_env,
     get_open_source_app_dir)
 
 json_edit_app_path = os.path.join(get_open_source_app_dir(), 'JsonEdit', 'JSONedit.exe')
@@ -18,7 +18,6 @@ notepad_app_path = os.path.join(get_open_source_app_dir(), 'Notepad++64', 'notep
 
 HELP = False
 DEBUG = False
-ENV_LIST = ['dev', 'staging', 'prod']  # First env item is the default
 
 
 def continue_terminal():
@@ -66,17 +65,30 @@ def find_and_remove_debug(input_list):
     return debug_flag, new_list
 
 def find_and_remove_env(input_list):
+    env_list = get_all_env()
     env = None
     new_list = []
     for item in input_list:
-        if item in ENV_LIST and env is None:
+        if item in env_list and env is None:
             env = item
         else:
             new_list.append(item)
     if env is not None:
         return env, new_list
     else:
-        return ENV_LIST[0], input_list
+        return env_list[0], input_list
+    
+def find_and_remove_operator(input_list):
+    operator = 'and'
+    new_list = []
+    for item in input_list:
+        if item == 'or':
+            operator = 'or'
+        elif item == 'and':
+            operator = 'and'
+        else:
+            new_list.append(item)
+    return operator, new_list
     
 def find_and_remove_first_int(input_list):
     found_int = None
@@ -91,7 +103,7 @@ def find_and_remove_first_int(input_list):
     else:
         return 1, input_list
 
-def parse_args_get_operation_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunOperationMessage:
+def parse_args_operation_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunOperationMessage:
     global HELP
     global DEBUG
     key = arg1
@@ -107,7 +119,7 @@ def parse_args_get_operation_message(arg1, arg2, arg3='', arg4='', arg5='', arg6
     switch_3 = params[2] if len(params) > 2 else ''
     return RunOperationMessage(key, command, env, count, switch_1, switch_2, switch_3)
 
-def parse_args_get_url_fetch_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunUrlFetchMessage:
+def parse_args_url_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunUrlMessage:
     global HELP
     global DEBUG
     key = arg1
@@ -116,14 +128,15 @@ def parse_args_get_url_fetch_message(arg1, arg2, arg3='', arg4='', arg5='', arg6
     DEBUG, params = find_and_remove_debug(params)
     command, params = find_and_remove_command(params)
     env, params = find_and_remove_env(params)
+    operator, params = find_and_remove_operator(params)
     count, params = find_and_remove_first_int(params)    # at this point switch and some search params are in params list
     debug(f'parameters: {params}')
     switch_1 = params[0] if len(params) > 0 else ''
     switch_2 = params[1] if len(params) > 1 else ''
     switch_3 = params[2] if len(params) > 2 else ''
-    return RunUrlFetchMessage(key, command, env, count, switch_1, switch_2, switch_3)
+    return RunUrlMessage(key, command, env, count, operator, switch_1, switch_2, switch_3)
 
-def parse_args_get_info_fetch_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunInfoFetchMessage:
+def parse_args_info_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunInfoMessage:
     global HELP
     global DEBUG
     key = arg1
@@ -134,53 +147,55 @@ def parse_args_get_info_fetch_message(arg1, arg2, arg3='', arg4='', arg5='', arg
     switch_1 = params[0] if len(params) > 0 else ''
     switch_2 = params[1] if len(params) > 1 else ''
     switch_3 = params[2] if len(params) > 2 else ''
-    return RunInfoFetchMessage(key, command, switch_1, switch_2, switch_3)
+    return RunInfoMessage(key, command, switch_1, switch_2, switch_3)
 
-def command(arg1='', arg2='', arg3='', arg4='', arg5='', arg6='', arg7=''):
+def run_command(arg1='', arg2='', arg3='', arg4='', arg5='', arg6='', arg7=''):
     current_dir = os.path.dirname(os.path.abspath(__file__))
+    root_dir = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
     key_dir = os.path.join(current_dir, arg1)
-    config_file_path = os.path.join(key_dir, 'web_configuration.json')
+    user_file_path = os.path.join(root_dir, 'user_configuration.json')
+    url_file_path = os.path.join(key_dir, 'urls.json')
     info_file_path = os.path.join(key_dir, 'info.diff')
     if os.path.exists(info_file_path):
-        runMessage: RunInfoFetchMessage = parse_args_get_info_fetch_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-        run_info(runMessage, current_dir, key_dir, info_file_path)
-    elif os.path.exists(config_file_path):
-        runMessage: RunUrlFetchMessage = parse_args_get_url_fetch_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-        run_url(runMessage, current_dir, key_dir, config_file_path)
+        runMessage: RunInfoMessage = parse_args_info_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
+        run_info(runMessage, current_dir, key_dir, info_file_path, user_file_path)
+    elif os.path.exists(url_file_path):
+        runMessage: RunUrlMessage = parse_args_url_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
+        run_url(runMessage, current_dir, key_dir, url_file_path, user_file_path)
     else:
-        runMessage: RunOperationMessage = parse_args_get_operation_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
-        run_operation(runMessage, current_dir, key_dir)
+        runMessage: RunOperationMessage = parse_args_operation_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
+        run_operation(runMessage, current_dir, key_dir, user_file_path)
 
 
-def run_info(runMessage: RunInfoFetchMessage, current_dir: str, key_dir: str, info_file_path: str):
+def run_info(runMessage: RunInfoMessage, current_dir: str, key_dir: str, info_file_path: str, user_file_path: str):
     if HELP:
         subprocess.Popen(['start', notepad_app_path, '-ldiff', info_file_path], shell=True)
     else:
         sys.path.append(current_dir)
         try:
             x_module = importlib.import_module(f'parse_info')
-            getattr(x_module, "main")(runMessage, info_file_path)
+            getattr(x_module, "main")(runMessage, info_file_path, user_file_path)
         except ImportError as e:
             print(e)
             continue_terminal()
         finally:
             sys.path.remove(current_dir)
 
-def run_url(runMessage: RunUrlFetchMessage, current_dir: str, key_dir: str, config_file_path: str):
+def run_url(runMessage: RunUrlMessage, current_dir: str, key_dir: str, url_file_path: str, user_file_path: str):
     if HELP:
-        subprocess.Popen([json_edit_app_path, config_file_path])
+        subprocess.Popen([json_edit_app_path, url_file_path])
     else:
         sys.path.append(current_dir)
         try:
-            x_module = importlib.import_module(f'parse_browser_config')
-            getattr(x_module, "main")(runMessage, config_file_path)
+            x_module = importlib.import_module(f'parse_urls')
+            getattr(x_module, "main")(runMessage, url_file_path, user_file_path)
         except ImportError as e:
             print(e)
             continue_terminal()
         finally:
             sys.path.remove(current_dir)
 
-def run_operation(runMessage: RunOperationMessage, current_dir: str, key_dir: str):
+def run_operation(runMessage: RunOperationMessage, current_dir: str, key_dir: str, user_file_path: str):
     if runMessage.command == None:
         if HELP:
             print_all_commands_help(key_dir, runMessage.key)
@@ -221,7 +236,7 @@ def continue_with_command(runMessage: RunOperationMessage, current_dir, key_dir)
             sys.path.remove(current_dir)
     else:
         print(f"Error: {runMessage.command} not found in {key_dir}, running default Windows command ...")
-        sleep(1)
+        input("Press Enter ...")
         subprocess.Popen([runMessage.command], shell=True)
 
 def entry():
@@ -230,19 +245,19 @@ def entry():
         print('p copy ...')
         print('l send ...')
     elif len(sys.argv) == 2:
-        command(sys.argv[1])
+        run_command(sys.argv[1])
     elif len(sys.argv) == 3:
-        command(sys.argv[1], sys.argv[2])
+        run_command(sys.argv[1], sys.argv[2])
     elif len(sys.argv) == 4:
-        command(sys.argv[1], sys.argv[2], sys.argv[3])
+        run_command(sys.argv[1], sys.argv[2], sys.argv[3])
     elif len(sys.argv) == 5:
-        command(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+        run_command(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
     elif len(sys.argv) == 6:
-        command(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+        run_command(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
     elif len(sys.argv) == 7:
-        command(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6])
+        run_command(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6])
     elif len(sys.argv) == 8:
-        command(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6], sys.argv[7])
+        run_command(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6], sys.argv[7])
     else:
         print('Error: too many parameters')
 

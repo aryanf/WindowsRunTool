@@ -1,11 +1,9 @@
-from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_dir)
+from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_dir, get_document_dir)
 import os
 import shutil
 import subprocess
 
-
-username = os.getenv('USER') or os.getenv('LOGNAME') or os.getenv('USERNAME')
-document_path = f'C:\\Users\\{username}\\Documents\\'
+document_path = get_document_dir()
 app_path = os.path.join(get_open_source_app_dir(), 'Notepad++64', 'notepad++.exe')
 template_path = os.path.join(get_open_source_app_dir(), 'Notepad++64', 'template.txt')
 

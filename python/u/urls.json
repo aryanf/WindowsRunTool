@@ -1,0 +1,38 @@
+{
+    "dev": [
+        "@",
+        "https://github.com"
+    ],
+    "github": {
+        "dev": [
+            "https://github.com/@",
+            "https://github.com"
+        ],
+        "run": {
+            "dev": [
+                "https://github.com/aryanf/WindowsRunTool/@",
+                "https://github.com/aryanf/WindowsRunTool"
+            ]
+        }
+    },
+    "mybrowser": {
+        "dev": [
+            "https://www.whatismybrowser.com/@",
+            "https://www.google.com/chrome"
+        ],
+        "staging": [
+            "https://www.whatismybrowser.com/@",
+            "https://play.google.com/store/apps/details"
+        ],
+        "prod": [
+            "https://www.whatismybrowser.com/@",
+            "https://www.microsoft.com/en-us/edge"
+        ]
+    },
+    "chatgpt": {
+        "dev": [
+            "https://chat.openai.com/",
+            "https://chat.openai.com/"
+        ]
+    }
+}

@@ -1,4 +1,5 @@
 import curses
+import math
 
 def get_user_input():
     return input("Enter some input: ")
@@ -27,7 +28,7 @@ return (index, content)
 
 def get_user_choice(stdscr, options, enumerating, zero_indexed, set_result_content_callback, set_result_index_callback, enable_input, info, item_per_col, default_selected_index):
     rows = item_per_col
-    cols = 3
+    cols = math.ceil(len(options)/rows)
     curses.curs_set(0)
     curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
     selected_row, selected_col = divmod(default_selected_index, rows)
@@ -46,11 +47,24 @@ def get_user_choice(stdscr, options, enumerating, zero_indexed, set_result_conte
         if key == curses.KEY_UP:
             selected_row = max(0, selected_row - 1)
         elif key == curses.KEY_DOWN:
-            selected_row = min(rows - 1, selected_row + 1)
+            next_col = min(cols - 1, selected_col + 1)
+            if next_col == selected_col:  # Check if we're already at the last column
+                col_items = min(rows, len(options) - next_col * rows)
+                selected_row = min(col_items -1, selected_row + 1)
+            else:    
+                selected_row = min(rows - 1, selected_row + 1)
         elif key == curses.KEY_LEFT:
             selected_col = max(0, selected_col - 1)
         elif key == curses.KEY_RIGHT:
-            selected_col = min(cols - 1, selected_col + 1)
+            next_col = min(cols - 1, selected_col + 1)
+            if next_col == selected_col:  # Check if we're already at the last column
+                selected_col = next_col
+            else:
+                next_col_items = min(rows, len(options) - next_col * rows)  # Number of items in the next column
+                if selected_row < next_col_items:
+                    selected_col = next_col
+                    selected_row = min(selected_row, next_col_items - 1)
+            # selected_col = min(cols - 1, selected_col + 1)
         elif key == curses.KEY_ENTER or key in [10, 13]:
             stdscr.clear()
             if use_arrow:

@@ -1,10 +1,10 @@
-from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_dir)
+from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_dir, get_video_dir)
 import os
 from datetime import datetime
 import subprocess
 
-username = os.getenv('USER') or os.getenv('LOGNAME') or os.getenv('USERNAME')
-video_store_path = f'C:\\Users\\{username}\\Videos\\Captura'
+
+video_store_path = os.path.join(get_video_dir(), 'Captura')
 if not os.path.exists(video_store_path):
     os.makedirs(video_store_path)
 captura_cli_path = os.path.join(get_open_source_app_dir(), 'Captura', 'captura-cli.exe')
