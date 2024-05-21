@@ -16,108 +16,50 @@ def main(message: RunUrlFetchMessage, configuration_path: str):
     browser_history_path = browser['history_path']
     browser_history_shadow_path = browser_history_path + '-Shadow'
     shutil.copy(browser_history_path, browser_history_shadow_path)
+    switches = []
+    if message.switch_1:
+        switches.append(message.switch_1)
+    if message.switch_2:
+        switches.append(message.switch_2)
+    if message.switch_3:
+        switches.append(message.switch_3)
 
-
+    # update mapper and switches
     if message.command in mapper:
         mapper = mapper[message.command]
-        if message.switch_1 in mapper:
-            mapper = mapper[message.switch_1]
-            if message.switch_2 in mapper:
-                mapper = mapper[message.switch_2]
-                if message.env + '0' in mapper:
-                    url = find_link(browser_history_shadow_path, mapper[message.env + '0'], count, message.switch_3)
-                    url = mapper[message.env + '1'] if url == '' else url
-                    subprocess.Popen([browser_app_path, url])
-                else:
-                    url = find_link(browser_history_shadow_path, mapper['0'], count, message.switch_3)
-                    url = mapper['1'] if url == '' else url
-                    subprocess.Popen([browser_app_path, url])
-            else:
-                if message.env + '0' in mapper:
-                    url = find_link(browser_history_shadow_path, mapper[message.env + '0'], count, message.switch_2, message.switch_3)
-                    url = mapper[message.env + '1'] if url == '' else url
-                    subprocess.Popen([browser_app_path, url])
-                else:
-                    url = find_link(browser_history_shadow_path, mapper['0'], count, message.switch_2, message.switch_3)
-                    print(url)
-                    url = mapper['1'] if url == '' else url
-                    subprocess.Popen([browser_app_path, url])
-        else:
-            if message.env + '0' in mapper:
-                url = find_link(browser_history_shadow_path, mapper[message.env + '0'], count, message.switch_1, message.switch_2, message.switch_3)
-                url = mapper[message.env + '1'] if url == '' else url
-                subprocess.Popen([browser_app_path, url])
-            else:
-                url = find_link(browser_history_shadow_path, mapper['0'], count, message.switch_1, message.switch_2, message.switch_3)
-                url = mapper['1'] if url == '' else url
-                subprocess.Popen([browser_app_path, url])
+        existing_switch = next((switch for switch in switches if switch in mapper), None)
+        while existing_switch:
+            mapper = mapper[existing_switch]
+            switches.remove(existing_switch)
+            existing_switch = next((switch for switch in switches if switch in mapper), None)
     else:
-        if message.env + '0' in mapper:
-            url = find_link(browser_history_shadow_path, mapper[message.env + '0'], count, message.command, message.switch_1, message.switch_2, message.switch_3)
-            url = mapper[message.env + '1'] if url == '' else url
-            subprocess.Popen([browser_app_path, url])
-        else:
-            url = find_link(browser_history_shadow_path, mapper['0'], count, message.command, message.switch_1, message.switch_2, message.switch_3)
-            url = mapper['1'] if url == '' else url
-            subprocess.Popen([browser_app_path, url])
+        switches.append(message.command)
+
+    # find the url
+    if message.env + '0' in mapper:
+        url = find_link(browser_history_shadow_path, mapper[message.env + '0'], count, switches)
+        url = mapper[message.env + '1'] if url == '' else url
+        subprocess.Popen([browser_app_path, url])
+    else:
+        url = find_link(browser_history_shadow_path, mapper['0'], count, switches)
+        url = mapper['1'] if url == '' else url
+        subprocess.Popen([browser_app_path, url])
 
 
-def find_link(browser_history_shadow_path, base_url, count=1, term1=None, term2=None, term3=None, term4=None):
+def find_link(browser_history_shadow_path, base_url, count=1, terms=[]):
     con = sqlite3.connect(browser_history_shadow_path)
     cursor = con.cursor()
     if not '@' in base_url:
         return base_url
-    if term4:    
-        term1 = base_url.replace('@', f'%{term1}%')
-        term2 = base_url.replace('@', f'%{term2}%')
-        term3 = base_url.replace('@', f'%{term3}%')
-        term4 = base_url.replace('@', f'%{term4}%')
-        query = """
-            SELECT DISTINCT url 
-            FROM urls 
-            WHERE url LIKE ? and url LIKE ? and url LIKE ? and url LIKE ? 
-            ORDER BY last_visit_time DESC 
-            LIMIT ?"""
-        cursor.execute(query, (term1, term2, term3, term4, count))
-    elif term3:    
-        term1 = base_url.replace('@', f'%{term1}%')
-        term2 = base_url.replace('@', f'%{term2}%')
-        term3 = base_url.replace('@', f'%{term3}%')
-        query = """
-            SELECT DISTINCT url 
-            FROM urls 
-            WHERE url LIKE ? and url LIKE ? and url LIKE ? 
-            ORDER BY last_visit_time DESC 
-            LIMIT ?"""
-        cursor.execute(query, (term1, term2, term3, count))
-    elif term2:    
-        term1 = base_url.replace('@', f'%{term1}%')
-        term2 = base_url.replace('@', f'%{term2}%')
-        query = """
-            SELECT DISTINCT url 
-            FROM urls 
-            WHERE url LIKE ? and url LIKE ?
-            ORDER BY last_visit_time DESC 
-            LIMIT ?"""
-        cursor.execute(query, (term1, term2, count))
-    elif term1:    
-        term1 = base_url.replace('@', f'%{term1}%')
-        query = """
-            SELECT DISTINCT url 
-            FROM urls 
-            WHERE url LIKE ?
-            ORDER BY last_visit_time DESC 
-            LIMIT ?"""
-        cursor.execute(query, (term1, count))
-    else:
-        term = base_url.replace('@', f'%%')
-        query = """
-            SELECT DISTINCT url 
-            FROM urls 
-            WHERE url LIKE ?
-            ORDER BY last_visit_time DESC 
-            LIMIT ?"""
-        cursor.execute(query, (term, count))
+    terms = [base_url.replace('@', f'%{term}%') for term in terms]
+    placeholders = ' and '.join('url LIKE ?' for term in terms)
+    query = f"""
+        SELECT DISTINCT url 
+        FROM urls 
+        WHERE {placeholders}
+        ORDER BY last_visit_time DESC 
+        LIMIT ?"""
+    cursor.execute(query, (*terms, count))
     urls = cursor.fetchall()
     return '' if len(urls)==0 else urls[-1][0]
 
