@@ -3,7 +3,6 @@ pyautogui
 pywin32
 winregistry
 pyperclip
-importlib
 pytest-shutil
 pathlib
 windows-curses

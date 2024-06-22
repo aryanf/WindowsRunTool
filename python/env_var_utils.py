@@ -2,6 +2,7 @@
 # from https://stackoverflow.com/questions/1085852/interface-for-modifying-windows-environment-variables-from-python
 
 from os import system, environ
+import ctypes
 import win32con
 from win32gui import SendMessage
 from winreg import (
@@ -34,9 +35,11 @@ def set_env(name, value):
     key = OpenKey(HKEY_CURRENT_USER, 'Environment', 0, KEY_ALL_ACCESS)
     SetValueEx(key, name, 0, REG_EXPAND_SZ, value)
     CloseKey(key)
-    SendMessage(
-        win32con.HWND_BROADCAST, win32con.WM_SETTINGCHANGE, 0, 'Environment')
-
+    try:
+        ctypes.windll.user32.SendMessage(
+            win32con.HWND_BROADCAST, win32con.WM_SETTINGCHANGE, 0, 'Environment')
+    except Exception as e:
+        print(e)
 
 def remove(paths, value):
     while value in paths:
@@ -54,6 +57,7 @@ def unique(paths):
 def prepend_env(name, values):
     for value in values:
         paths = get_env(name).split(';')
+        print(f'paths: {paths}')
         remove(paths, '')
         paths = unique(paths)
         remove(paths, value)

@@ -1,3 +1,8 @@
+1.2.2
+ - Fix for csv and json to open latest from Download dir.
+ - Minor fix for web history command.
+ - Installer look at directories under python and crate key env variable that can be called by run panel.
+
 1.2.1
  - Update gitignore.
  - Add aws utils and command to get aws credential by mapping env to profile

@@ -30,18 +30,18 @@ def main(message: MainCommandMessage):
 Open json file from default directory, num specify only the nth recent file to open
 '''
     number = 1 if message.num == 0 else message.num
-    file = _get_n_recent_files(int(number))
+    file = _get_n_recent_file(int(number))
     if not file :
         subprocess.Popen([app_path])
     else:        
-        subprocess.Popen([app_path, file[0] ])
+        subprocess.Popen([app_path, file ])
 
 def all(message: SubCommandMessage):
     '''
 Open n json files from default directory, num specify all nth recent files to open
 '''
     number = 1 if message.num == 0 else message.num
-    files = _get_n_recent_file(int(number))
+    files = _get_n_recent_files(int(number))
     if not files :
         subprocess.Popen([app_path ])
     else:

@@ -37,14 +37,13 @@ def main(message: RunUrlMessage, url_path: str, user_path: str):
         switches.append(message.command)
 
     # find the url
-    if message.env + '0' in mapper:
-        url = find_link(browser_history_shadow_path, mapper[message.env + '0'], count, operator, switches)
-        url = mapper[message.env + '1'] if url == '' else url
-        subprocess.Popen([browser_app_path, url])
-    else:
-        url = find_link(browser_history_shadow_path, mapper['0'], count, operator, switches)
-        url = mapper['1'] if url == '' else url
-        subprocess.Popen([browser_app_path, url])
+    url = ''
+    url = find_link(browser_history_shadow_path, mapper[message.env][0], count, operator, switches)
+    if url == '':
+        url = mapper[message.env][1]
+        for switch  in switches:
+            url = url.replace('@', switch, 1)
+    subprocess.Popen([browser_app_path, url])
 
 
 def find_link(browser_history_shadow_path, base_url, count=1, operator='and', terms=[]):
@@ -52,7 +51,7 @@ def find_link(browser_history_shadow_path, base_url, count=1, operator='and', te
     cursor = con.cursor()
     if not '@' in base_url:
         return base_url
-    terms = [base_url.replace('@', f'%{term}%') for term in terms]
+    terms = [base_url.replace('@', f'%{term}%') for term in terms] if terms else [base_url.replace('@', '%')]
     placeholders = f' {operator} '.join('url LIKE ?' for term in terms)
     query = f"""
         SELECT DISTINCT url 
