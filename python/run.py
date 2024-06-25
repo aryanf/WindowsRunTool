@@ -1,4 +1,5 @@
 import sys
+import win32com.client 
 import os
 from help_utils import(print_all_commands_help)
 import importlib
@@ -28,6 +29,12 @@ def continue_terminal():
 def debug(log):
     if(DEBUG):
         print(log)
+
+def get_target_path(lnk_file_path):
+    shell = win32com.client.Dispatch("WScript.Shell")
+    shortcut = shell.CreateShortCut(lnk_file_path)
+    print(shortcut.Targetpath)
+    return shortcut.Targetpath
 
 def is_int(s):
     try:
@@ -156,8 +163,13 @@ def run_command(arg1='', arg2='', arg3='', arg4='', arg5='', arg6='', arg7=''):
     user_file_path = os.path.join(root_dir, 'user_configuration.json')
     url_file_path = os.path.join(key_dir, 'urls.json')
     info_file_path = os.path.join(key_dir, 'info.diff')
+    info_link_file_path = os.path.join(key_dir, 'info.lnk')
     if os.path.exists(info_file_path):
         runMessage: RunInfoMessage = parse_args_info_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
+        run_info(runMessage, current_dir, key_dir, info_file_path, user_file_path)
+    if os.path.exists(info_link_file_path):
+        runMessage: RunInfoMessage = parse_args_info_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)
+        info_file_path = get_target_path(info_link_file_path)
         run_info(runMessage, current_dir, key_dir, info_file_path, user_file_path)
     elif os.path.exists(url_file_path):
         runMessage: RunUrlMessage = parse_args_url_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7)

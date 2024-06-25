@@ -1,3 +1,6 @@
+1.2.3
+ - info.lnk can be used instead of info.diff. link object should refer to info.diff.
+
 1.2.2
  - Fix for csv and json to open latest from Download dir.
  - Minor fix for web history command.
