@@ -1,3 +1,8 @@
+1.2.4
+ - Let notepad++ to open a new instance
+ - Add e key command to open explorer in predefined location using q-dir
+ - Add d key command to manage virtual desktops
+
 1.2.3
  - info.lnk can be used instead of info.diff. link object should refer to info.diff.
 
