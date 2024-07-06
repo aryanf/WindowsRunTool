@@ -7,6 +7,7 @@ import win32con
 
 def main(message: MainCommandMessage):
     '''
+This need PowerToy to run in background
 Get text from screen (run PowerToy Text Extractor)
 '''
     hwnd = win32gui.GetForegroundWindow()
@@ -15,6 +16,7 @@ Get text from screen (run PowerToy Text Extractor)
 
 def text(message:SubCommandMessage):
     '''
+This need PowerToy to run in background
 Get text from screen (run PowerToy Text Extractor)
 '''
     hwnd = win32gui.GetForegroundWindow()
