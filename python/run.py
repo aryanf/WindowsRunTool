@@ -117,9 +117,9 @@ def parse_args_operation_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='',
     params = [arg for arg in [arg2, arg3, arg4, arg5, arg6, arg7] if arg != ""]
     HELP, params = find_and_remove_help(params)
     DEBUG, params = find_and_remove_debug(params)
+    count, params = find_and_remove_first_int(params)
     command, params = find_and_remove_command(params)
     env, params = find_and_remove_env(params)
-    count, params = find_and_remove_first_int(params)    # at this point switch and some search params are in params list
     debug(f'parameters: {params}')
     switch_1 = params[0] if len(params) > 0 else ''
     switch_2 = params[1] if len(params) > 1 else ''
@@ -213,8 +213,8 @@ def run_operation(runMessage: RunOperationMessage, current_dir: str, key_dir: st
             print_all_commands_help(key_dir, runMessage.key)
             continue_terminal()
         else:
-            print('Error: command should be provided ...')
-            continue_terminal()
+            runMessage.command = '_'
+            continue_with_command(runMessage, current_dir, key_dir)
     else:
         continue_with_command(runMessage, current_dir, key_dir)
 
