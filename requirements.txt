@@ -8,4 +8,5 @@ pathlib
 windows-curses
 pytz
 validators
+pyvda
 pyperclip==1.8.1
