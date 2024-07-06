@@ -1,14 +1,16 @@
-from message import (RunInfoMessage)
+from message import (RunInfoMessage, get_open_source_app_dir)
 import subprocess
 import pyperclip
 import win32gui
 import win32con
 import curses_terminal
 import validators
+import os
 
 hwnd = win32gui.GetForegroundWindow()
 win32gui.SetWindowPos(hwnd,win32con.HWND_TOP,1,1,900,800,0)
 
+qdir_path = os.path.join(get_open_source_app_dir(), 'Q-Dir', 'Q-Dir_x64.exe')
 chrome_path = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
 edge_path = 'C:\\Program Files (x86)\\Microsoft\\edge\\Application\\msedge.exe'
 browser_mapping = {
@@ -111,18 +113,33 @@ def _show(my_list: list) -> None:
 
 def _is_int(s) -> bool:
     try:
+        if s == None:
+            return False
         int(s)
         return True
     except ValueError:
         return False
 
 
-def _handle_input(command, info_path, my_list, line_number=1, to_copy=False):
+def _handle_input(command, info_path, line_number=1, title=None, topic=None, sub_topic=None):
     if command == 'i':
         subprocess.Popen(['start', 'notepad++', f'{info_path}', f'-n{line_number}'], shell=True)
         exit()
-    elif command == 'exit' or command == 'e':
+    elif command == 'exit' or command == 'quit' or command == 'q' or command == 'e':
         exit()
+    elif command == 'open' or command == 'o':
+        parts = [os.path.dirname(info_path)]
+        if title is not None:
+            parts.append(title)
+        if topic is not None:
+            parts.append(topic)
+        if sub_topic is not None:
+            parts.append(sub_topic)
+        target_path = os.path.join(*parts)
+        if os.path.isdir(target_path):
+            subprocess.Popen(['start', qdir_path, target_path], shell=True)
+        else:
+            print(f'Path not found: {target_path}')
     else:
         browser = browser_mapping.get(command, 'chrome')
         return browser
@@ -133,8 +150,10 @@ def _show_titles(info_path):
     titles, line_number = _get_titles(lines)
     i, cmd = _show(titles)
     if i == None:
-        _ = _handle_input(cmd, info_path, titles, line_number, False)
-    if i == 0:
+        _ = _handle_input(cmd, info_path, line_number)
+    if not _is_int(i):
+        _show_titles(info_path)
+    elif i == 0:
         _show_titles(info_path)
     else:
         _show_topics(info_path, i)    
@@ -151,11 +170,14 @@ def _show_topics(info_path, title):
     else:
         i, cmd = _show(topics)
         if i == None:
-            _ = _handle_input(cmd, info_path, topics, line_number, False)
-        if i == 0:
+            _ = _handle_input(cmd, info_path, line_number, title,)
+        if not _is_int(i):
+            _show_topics(info_path, title)
+        elif i == 0:
             _show_titles(info_path)
         else:
             _show_subtopics(info_path, title, i)
+
 
 def _show_subtopics(info_path, title, topic):
     lines = _get_content_lines(info_path)
@@ -171,8 +193,10 @@ def _show_subtopics(info_path, title, topic):
     else:
         i, cmd = _show(subtopics)
         if i == None:
-            _ = _handle_input(cmd, info_path, subtopics, line_number, False)
-        if topic and i == 0:
+            _ = _handle_input(cmd, info_path, line_number, title, topic)
+        if not _is_int(i):
+            _show_subtopics(info_path, title, topic)
+        elif topic and i == 0:
             _show_topics(info_path, title)
         elif i == 0:
             _show_titles(info_path)
@@ -194,9 +218,11 @@ def _show_content(info_path, title, topic, sub_topic, browser='chrome'):
     content, line_number = _get_content(lines, title, topic, sub_topic)
     i, cmd =_show(content)
     if i == None:
-        browser = _handle_input(cmd, info_path, content, line_number, True)
+        browser = _handle_input(cmd, info_path, line_number, title, topic, sub_topic)
         _show_content(info_path, title, topic, sub_topic, browser=browser)
-    if sub_topic and i == 0:
+    if not _is_int(i):
+        _show_content(info_path, title, topic, sub_topic)
+    elif sub_topic and i == 0:
         _show_subtopics(info_path, title, topic)
     elif topic and i == 0:
         _show_topics(info_path, title)
