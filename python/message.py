@@ -20,7 +20,7 @@ class RunUrlMessage:
         self.key = key
         self.command = command
         self.env = env
-        self.num = num
+        self.num = 1 if num == 0 else num
         self.operator = operator
         self.switch_1 = switch_1
         self.switch_2 = switch_2

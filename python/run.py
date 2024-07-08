@@ -108,7 +108,7 @@ def find_and_remove_first_int(input_list):
     if found_int is not None:
         return found_int, new_list
     else:
-        return 1, input_list
+        return 0, input_list
 
 def parse_args_operation_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunOperationMessage:
     global HELP

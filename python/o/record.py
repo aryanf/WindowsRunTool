@@ -16,7 +16,7 @@ Recording a video and store it in user video director.
 {num} set the length of video in minute. Default is 2 hours, and you have to stop it manually.
 '''
     seconds = 7200 # 2hours
-    if int(message.num) != 1:
+    if int(message.num) != 1 or int(message.num) != 0:
         seconds = int(message.num) * 60
     name = message.switch_1 if message.switch_1 != '' else datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     file_path = os.path.join(video_store_path, f'{name}.avi')
