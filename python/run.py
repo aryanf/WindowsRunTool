@@ -246,6 +246,10 @@ def continue_with_command(runMessage: RunOperationMessage, current_dir, key_dir)
         finally:
             # Remove the path to directory Y from the system path
             sys.path.remove(current_dir)
+    elif os.path.exists(os.path.join(key_dir, "_.py")):
+        runMessage.switch_1 = runMessage.command
+        runMessage.command = '_'
+        continue_with_command(runMessage, current_dir, key_dir)
     else:
         print(f"Error: {runMessage.command} not found in {key_dir}, running default Windows command ...")
         input("Press Enter ...")
