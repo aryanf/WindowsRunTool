@@ -7,7 +7,7 @@ import win32process, win32gui
 import curses_terminal
 
 
-def find_substring_index(lst, input_str):
+def _find_substring_index(lst, input_str):
     for index, item in enumerate(lst):
         if input_str in item:
             return index
@@ -26,7 +26,7 @@ The number of the desktop is the message.num, the default value is 1
     if num == 0 and not switch:
         VirtualDesktop.go(current_desktop)
     elif switch:
-        idx = find_substring_index(desktop_names, switch)
+        idx = _find_substring_index(desktop_names, switch)
         if idx == -1:
             print('Desktop not found')
             input('Press Enter to continue...')

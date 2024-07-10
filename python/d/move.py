@@ -7,7 +7,7 @@ import win32process, win32gui
 import curses_terminal
 import psutil
 
-def find_substring_index(lst, input_str):
+def _find_substring_index(lst, input_str):
     for index, item in enumerate(lst):
         if input_str in item:
             return index
@@ -18,7 +18,9 @@ def find_substring_index(lst, input_str):
 def main(message: MainCommandMessage):
     '''
 Move the latest select window to another virtual desktop
-The number of target virtual desktop is the message.num
+Use target desktop name or number to move the window
+If string is used it tries to find the desktop name that contains the string
+if number it 1-based order of desktops
 '''
     current_desktop = VirtualDesktop.current()
     apps = current_desktop.apps_by_z_order()
@@ -42,7 +44,7 @@ The number of target virtual desktop is the message.num
     desktop_names = [d.name for d in get_virtual_desktops()]
     switch = message.switch_1
     if switch:
-        idx = find_substring_index(desktop_names, switch)
+        idx = _find_substring_index(desktop_names, switch)
         if idx == -1:
             print('Desktop not found')
             input('Press Enter to continue...')
