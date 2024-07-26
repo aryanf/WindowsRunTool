@@ -13,6 +13,7 @@ def main(message: RunUrlMessage, url_path: str, user_path: str):
     count = message.num
     operator = message.operator
     browser = _get_browser(user_config, message.env)
+    browser_debug_port = browser['debug_port']
     browser_app_path = browser['app_path']
     browser_history_path = browser['history_path']
     browser_history_shadow_path = browser_history_path + '-Shadow'
@@ -43,7 +44,7 @@ def main(message: RunUrlMessage, url_path: str, user_path: str):
         url = mapper[message.env][1]
         for switch  in switches:
             url = url.replace('@', switch, 1)
-    subprocess.Popen([browser_app_path, url])
+    subprocess.Popen([browser_app_path, f'--remote-debugging-port={browser_debug_port}' , url])
 
 
 def find_link(browser_history_shadow_path, base_url, count=1, operator='and', terms=[]):

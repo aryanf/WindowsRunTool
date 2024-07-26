@@ -9,7 +9,7 @@ import curses_terminal
 
 def _find_substring_index(lst, input_str):
     for index, item in enumerate(lst):
-        if input_str in item:
+        if input_str.lower() in item.lower():
             return index
     return -1  # return -1 if the input string is not found in any item
 
