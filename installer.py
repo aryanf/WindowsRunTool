@@ -1,6 +1,4 @@
 import os
-import win32com.client
-from python.env_var_utils import prepend_env
 import subprocess
 
 
@@ -37,8 +35,6 @@ remove_files_with_extension(current_dir, ['.bat', '.lnk'])
 # Get all key directories un {current_dir}/python
 key_commands = get_first_level_directory_names(os.path.join(current_dir, 'python'))
 # Install library dependencies
-# Define the command
-print(f'key commands: {key_commands}')
 
 print('Installing package dependencies...')
 command = 'pip install -r requirements.txt'
@@ -50,8 +46,12 @@ except subprocess.CalledProcessError as e:
     print("An error occurred:", e)
 
 # This is going to add current directory to path env var
+# Define the command
+print(f'key commands: {key_commands}')
 # If you face a problem here, comment this code and add it manually
 print('Adding current directory to path env var...')
+import win32com.client
+from python.env_var_utils import prepend_env
 prepend_env('Path', [
     current_dir
     ])
