@@ -36,10 +36,15 @@ def set_env(name, value):
     SetValueEx(key, name, 0, REG_EXPAND_SZ, value)
     CloseKey(key)
     try:
-        ctypes.windll.user32.SendMessage(
-            win32con.HWND_BROADCAST, win32con.WM_SETTINGCHANGE, 0, 'Environment')
+        HWND_BROADCAST = 0xFFFF
+        WM_SETTINGCHANGE = 0x1A
+        SMTO_ABORTIFHUNG = 0x0002
+        result = ctypes.c_long()
+        SendMessageTimeoutW = ctypes.windll.user32.SendMessageTimeoutW
+        SendMessageTimeoutW(HWND_BROADCAST, WM_SETTINGCHANGE, 0, u'Environment', SMTO_ABORTIFHUNG, 5000, ctypes.byref(result))
     except Exception as e:
         print(e)
+
 
 def remove(paths, value):
     while value in paths:

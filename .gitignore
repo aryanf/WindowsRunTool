@@ -1,5 +1,6 @@
 .vscode/
 *.bat
+!install.bat
 *.lnk
 portable_open_source_apps/*
 portable_open_source_apps/**/*
