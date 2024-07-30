@@ -23,7 +23,7 @@ def remove_files_with_extension(directory, extensions):
         files = os.listdir(directory)
         for file in files:
             # Check if the file ends with any of the specified extensions
-            if any(file.endswith(ext) for ext in extensions):
+            if file != 'install.bat' and any(file.endswith(ext) for ext in extensions):
                 # Construct the full path to the file
                 file_path = os.path.join(directory, file)
                 # Remove the file
@@ -45,7 +45,7 @@ def update_key_commands_links():
     print(f'key commands: {key_commands}')
     try:
         for key_command in key_commands:
-            print(f'Creating bat and shortcut for {key_command}...')
+            print(f'Creating bat and shortcut for {key_command}')
             bat_file_path = os.path.join(current_dir, f'{key_command}.bat')
             shortcut_file_path = os.path.join(current_dir, f'{key_command}.lnk')
             python_script_path = os.path.join(current_dir, 'python', 'run.py')
@@ -73,7 +73,6 @@ if ["%~1"]==[""] (
     python "%base%/python/run.py" {key_command} %1 %2 %3 %4 %5 %6
 )
 '''
-                print(f'bat_content: {bat_content}')
                 # Create bat file
                 with open(bat_file_path, 'w') as bat_file:
                     bat_file.write(bat_content)
@@ -84,14 +83,7 @@ if ["%~1"]==[""] (
                 shortcut.Targetpath = bat_file_path
                 shortcut.save()
 
-                print(f'Successfully created bat and shortcut in {current_dir}.')
-
-            if not os.path.exists(directory_path):
-                # Create the directory
-                os.makedirs(directory_path)
-                print(f"Directory '{directory_path}' created.")
-            else:
-                print(f"Directory '{directory_path}' already exists.")
+                print(f'Successfully created {key_command} bat and shortcut in {current_dir}.')
     except Exception as e:
         print(f'An error occurred: {e}')
         raise e
