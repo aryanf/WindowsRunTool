@@ -13,6 +13,7 @@ win32gui.SetWindowPos(hwnd,win32con.HWND_TOP,1,1,900,800,0)
 qdir_path = os.path.join(get_open_source_app_dir(), 'Q-Dir', 'Q-Dir_x64.exe')
 chrome_path = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
 edge_path = 'C:\\Program Files (x86)\\Microsoft\\edge\\Application\\msedge.exe'
+notepad_path = os.path.join(get_open_source_app_dir(), 'Notepad++64', 'notepad++.exe')
 browser_mapping = {
     'c': 'chrome',
     'ch': 'chrome',
@@ -123,7 +124,7 @@ def _is_int(s) -> bool:
 
 def _handle_input(command, info_path, line_number=1, title=None, topic=None, sub_topic=None):
     if command == 'i':
-        subprocess.Popen(['start', 'notepad++', f'{info_path}', f'-n{line_number}'], shell=True)
+        subprocess.Popen(['start', notepad_path, f'{info_path}', f'-n{line_number}'], shell=True)
         exit()
     elif command == 'exit' or command == 'quit' or command == 'q' or command == 'e':
         exit()
