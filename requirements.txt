@@ -9,4 +9,5 @@ windows-curses
 pytz
 validators
 pyvda
+psutil
 pyperclip==1.8.1
