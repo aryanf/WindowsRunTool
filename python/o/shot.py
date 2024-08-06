@@ -1,15 +1,27 @@
-from message import (MainCommandMessage, SubCommandMessage)
+from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_dir)
 import subprocess
-import pyautogui
+import os
+
+qdir_path = os.path.join(get_open_source_app_dir(), 'Q-Dir', 'Q-Dir_x64.exe')
+app_dir_path = os.path.join(get_open_source_app_dir(), 'ShareX')
+app_path = os.path.join(get_open_source_app_dir(), 'ShareX', 'ShareX.exe')
+shot_dir_path = os.path.join(get_open_source_app_dir(), 'ShareX', 'ShareX', 'Screenshots')
 
 def main(message: MainCommandMessage):
     '''
-Crop image of snipping tool, it is copied to clipboard
+Take a screenshot
 '''
-    pyautogui.hotkey('win', 'shift', 's')
+    subprocess.Popen([app_path, '-RectangleRegion'])
 
-def edit(message:SubCommandMessage):
+def long(message: SubCommandMessage):
     '''
-Open snipping tool, you can edit it later
+Take a long screenshot
 '''
-    subprocess.Popen(['snippingtool.exe'])
+    print('long screenshot')
+    subprocess.Popen([app_path, '-ScrollingCapture'])
+
+def dir(message: SubCommandMessage):
+    '''
+Open the directory of the screenshot
+'''
+    subprocess.Popen([qdir_path, shot_dir_path, app_dir_path], shell=True)    

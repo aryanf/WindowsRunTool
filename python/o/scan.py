@@ -1,24 +1,15 @@
-from time import sleep
-from message import (MainCommandMessage, SubCommandMessage)
-import pyautogui
-import win32gui
-import win32con
-import psutil
+from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_dir)
+import subprocess
+import os
 
-def _is_powertoys_running():
-    for process in psutil.process_iter(['name']):
-        if 'PowerToys' in process.info['name']:
-            return True
-    return False
+qdir_path = os.path.join(get_open_source_app_dir(), 'Q-Dir', 'Q-Dir_x64.exe')
+app_dir_path = os.path.join(get_open_source_app_dir(), 'ShareX')
+app_path = os.path.join(get_open_source_app_dir(), 'ShareX', 'ShareX.exe')
+shot_dir_path = os.path.join(get_open_source_app_dir(), 'ShareX', 'ShareX', 'Screenshots')
 
 def main(message: MainCommandMessage):
     '''
-This need PowerToys to run in background
-Get text from screen (run PowerToy Text Extractor)
+Scan text from image
 '''
-    if not _is_powertoys_running():
-        input("PowerToys is running in the background. Run PowerToys ...")
-        return
-    hwnd = win32gui.GetForegroundWindow()
-    win32gui.SetWindowPos(hwnd,win32con.HWND_BOTTOM,1,1,500,300,0)
-    pyautogui.hotkey('win', 'shift', 't')
+    print('scan')
+    subprocess.Popen([app_path, '-OCR'])
