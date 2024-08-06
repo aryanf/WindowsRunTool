@@ -266,7 +266,7 @@
         "ZoomToFitOnOpen": false,
         "EditorAutoCopyImage": false,
         "AutoCloseEditorOnTask": false,
-        "ShowEditorPanTip": true,
+        "ShowEditorPanTip": false,
         "ImageEditorResizeInterpolationMode": "Bicubic",
         "EditorNewImageSize": "800, 600",
         "EditorNewImageTransparent": false,
@@ -431,16 +431,16 @@
         "CreateParseableJson": true
       },
       "ImageBeautifierOptions": {
-        "Margin": 81,
-        "Padding": 40,
+        "Margin": 13,
+        "Padding": 18,
         "SmartPadding": true,
-        "RoundedCorner": 20,
-        "ShadowRadius": 30,
+        "RoundedCorner": 30,
+        "ShadowRadius": 40,
         "ShadowOpacity": 80,
         "ShadowDistance": 10,
         "ShadowAngle": 180,
         "ShadowColor": "Black",
-        "BackgroundType": "Gradient",
+        "BackgroundType": "Desktop",
         "BackgroundGradient": {
           "Type": "ForwardDiagonal",
           "Colors": [
@@ -910,7 +910,7 @@
   "AutoCaptureRepeatTime": 60.0,
   "AutoCaptureMinimizeToTray": true,
   "AutoCaptureWaitUpload": true,
-  "ScreenRecordRegion": "0, 0, 1920, 1020",
+  "ScreenRecordRegion": "474, 272, 548, 253",
   "ActionsToolbarList": [
     "RectangleRegion",
     "PrintScreen",
