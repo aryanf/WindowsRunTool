@@ -1,8 +1,55 @@
-from message import (RunUrlMessage, get_all_env)
+from message import (RunUrlMessage, get_all_env, get_user_name)
 import json
 import shutil
 import sqlite3
 import subprocess
+import os
+
+def _get_app_path(app_path, app_name):
+    if not os.path.exists(app_path):
+        if app_name == 'Chrome':
+            if os.path.exists('C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'):
+                return 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+            elif os.path.exists('C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'):
+                return 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+            else:
+                input('Cannot find Chrome browser, update app path in user_configuration.json ...')
+                return None
+        elif app_name == 'Edge':
+            if os.path.exists('C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'):
+                return 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'
+            elif os.path.exists('C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe'):
+                return 'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe'
+            else:
+                input('Cannot find Microsoft Edge browser, update app path in user_configuration.json ...')
+                return None
+        else:
+            input(f'Cannot find {app_name} browser, update app path in user_configuration.json ...')
+    else:
+        return app_path
+
+def _get_history_path(history_path, app_name):
+    if not os.path.exists(history_path):
+        username = get_user_name()
+        if app_name == 'Chrome':
+            if os.path.exists(f'C:\\Users\\{username}\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\\History'):
+                return f'C:\\Users\\{username}\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\\History'
+            elif os.path.exists(f'C:\\Users\\{username}\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History'):
+                return f'C:\\Users\\{username}\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History'
+            else:
+                input(f'Cannot find {app_name} browser history, update history path in user_configuration.json ...')
+                return None
+        elif app_name == 'Edge':
+            if os.path.exists(f'C:\\Users\\{username}\\AppData\\Local\\Microsoft\\Edge\\User Data\\Profile 1\\History'):
+                return f'C:\\Users\\{username}\\AppData\\Local\\Microsoft\\Edge\\User Data\\Profile 1\\History'
+            elif os.path.exists(f'C:\\Users\\{username}\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History'):
+                return f'C:\\Users\\{username}\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History'
+            else:
+                input(f'Cannot find {app_name} browser history, update history path in user_configuration.json ...')
+        else:
+            input(f'Cannot find {app_name} browser history, update history path in user_configuration.json ...')
+    else:
+        return history_path
 
 def main(message: RunUrlMessage, url_path: str, user_path: str):
     with open(url_path, 'r') as url_file:
@@ -14,8 +61,9 @@ def main(message: RunUrlMessage, url_path: str, user_path: str):
     operator = message.operator
     browser = _get_browser(user_config, message.env)
     browser_debug_port = browser['debug_port']
-    browser_app_path = browser['app_path']
-    browser_history_path = browser['history_path']
+    browser_name = browser['app_name']
+    browser_app_path = _get_app_path(browser['app_path'], browser_name)
+    browser_history_path = _get_history_path(browser['history_path'], browser_name)
     browser_history_shadow_path = browser_history_path + '-Shadow'
     shutil.copy(browser_history_path, browser_history_shadow_path)
     switches = []

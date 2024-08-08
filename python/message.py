@@ -115,3 +115,19 @@ def get_user_content_dir(content):
             username = os.getenv('USER') or os.getenv('LOGNAME') or os.getenv('USERNAME')
             download_path = f'C:\\Users\\{username}\\{content}\\'
     return download_path
+
+def get_user_name():
+    config_username = get_user_configuration()['username']
+    config_user_path = f'C:\\Users\\{config_username}\\'
+    if not os.path.exists(config_user_path):
+        found_username = os.getenv('USER') or os.getenv('LOGNAME') or os.getenv('USERNAME')
+        found_user_path = f'C:\\Users\\{found_username}\\'
+        found_user_path_lower = f'C:\\Users\\{found_username.lower()}\\'
+        if os.path.exists(found_user_path):
+            return found_username
+        elif os.par.exists(found_user_path_lower):
+            return found_username.lower()
+        else:
+            input(f'username cannot be set, modify user_configuration.json, and then continue ...')
+    else:
+        return config_username

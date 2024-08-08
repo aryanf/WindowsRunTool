@@ -1,5 +1,5 @@
 {
-    "username": "John",
+    "username": "john.snow",
     "env": [
         "dev",
         "staging",
@@ -12,20 +12,23 @@
     },
     "browsers": {
         "chrome": {
+            "app_name": "Chrome",
             "app_path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-            "history_path": "C:\\Users\\aryan.firouzian\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\\History",
+            "history_path": "C:\\Users\\john.snow\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\\History",
             "env_id": 0,
             "debug_port": 9222
         },
         "chrome_staging": {
+            "app_name": "Chrome",
             "app_path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-            "history_path": "C:\\Users\\aryan.firouzian\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\\History",
+            "history_path": "C:\\Users\\john.snow\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\\History",
             "env_id": 1,
             "debug_port": 9223
         },
         "edge": {
+            "app_name": "Edge",
             "app_path": "C:\\Program Files (x86)\\Microsoft\\edge\\Application\\msedge.exe",
-            "history_path": "C:\\Users\\aryan.firouzian\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History",
+            "history_path": "C:\\Users\\john.snow\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History",
             "env_id": 2,
             "debug_port": 9224
         }
