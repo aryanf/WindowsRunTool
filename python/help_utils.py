@@ -75,7 +75,7 @@ def print_functions_in_directory(key_dir, key):
     display(all_module_functions, all_functions_per_module, key, key_dir)
 
 def display(all_module_functions, all_functions_per_module, key, key_dir, default_selected_index=0):
-    i, cmd = curses_terminal.show(all_module_functions, enumerating=False, zero_indexed=False, info='', item_per_col=15, default_selected_index=default_selected_index)
+    i, cmd = curses_terminal.show(all_module_functions, enumerating=False, zero_indexed=False, info='', item_per_col=30, default_selected_index=default_selected_index)
     print(i)
     if cmd in all_module_functions:
         params = cmd.strip().split(' ')
