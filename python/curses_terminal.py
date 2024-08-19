@@ -85,6 +85,10 @@ def get_user_choice(stdscr, options, enumerating, zero_indexed, set_result_conte
         elif key == 8 or key == 127 or key == curses.KEY_BACKSPACE or key == curses.KEY_DC:
             use_arrow = False
             my_input = my_input[:-1]
+        elif key == 27:
+            set_result_content_callback('exit')
+            set_result_index_callback(None)
+            break
         else:
             use_arrow = False
             my_input = my_input + chr(key)

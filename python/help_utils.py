@@ -91,7 +91,7 @@ def display(all_module_functions, all_functions_per_module, key, key_dir, defaul
         input()
         os.system('cls')    
         display(all_module_functions, all_functions_per_module, key, key_dir)
-    elif cmd == 'q' or cmd == 'quit' or cmd == 'exit':
+    elif cmd == 'q' or cmd == 'quit' or cmd == 'exit' or cmd == 'e':
         exit()
     else:
         print_all_commands_help(key_dir, key)

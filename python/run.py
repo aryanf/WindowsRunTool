@@ -258,8 +258,8 @@ def continue_with_command(runMessage: RunOperationMessage, current_dir, key_dir)
 def entry():
     if len(sys.argv) == 1:
         print('key and command are needed, like:')
-        print('p copy ...')
-        print('l send ...')
+        print('o shot ...')
+        print('u git ...')
     elif len(sys.argv) == 2:
         run_command(sys.argv[1])
     elif len(sys.argv) == 3:
