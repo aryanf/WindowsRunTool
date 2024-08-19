@@ -17,7 +17,7 @@ Draw on screen (run ZoomIt)
 Right click or Esc to exit
 '''
     if not _is_zoomit_running():
-        input("PowerToys is running in the background. Run PowerToys ...")
+        input("ZoomIt needs to run in background. Run ZoomIt (o zoomit) ...")
         return
     hwnd = win32gui.GetForegroundWindow()
     win32gui.SetWindowPos(hwnd,win32con.HWND_BOTTOM,1,1,500,300,0)

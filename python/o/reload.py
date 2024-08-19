@@ -4,6 +4,8 @@ import json
 import websockets
 import requests
 
+default_substring_url_to_reload = 'console.aws'
+
 def main(message: MainCommandMessage):
     '''
 Reload browser tabs where url contains the switch string
@@ -13,7 +15,7 @@ By default it reload aws pages if there is no switch string
     if message.switch_1:
         url_sub_string = message.switch_1
     else:
-        url_sub_string = 'console.aws'
+        url_sub_string = default_substring_url_to_reload
     asyncio.get_event_loop().run_until_complete(_reloading(env, url_sub_string))
 
 
