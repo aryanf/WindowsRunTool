@@ -27,7 +27,8 @@ return (index, content)
     return (result_index[0], result_content[0])
 
 def get_user_choice(stdscr, options, enumerating, zero_indexed, set_result_content_callback, set_result_index_callback, enable_input, info, item_per_col, default_selected_index):
-    rows = item_per_col
+    height, width = stdscr.getmaxyx()
+    rows = item_per_col if item_per_col < height - 5 else height - 5
     cols = math.ceil(len(options)/rows)
     curses.curs_set(0)
     curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_WHITE)
@@ -97,7 +98,6 @@ def get_user_choice(stdscr, options, enumerating, zero_indexed, set_result_conte
 
 def draw_menu(stdscr, selected_row, selected_col, options, rows, cols, enable_input, my_input='', info=''):
     stdscr.clear()
-    height, width = stdscr.getmaxyx()
     max_y = 0
     for i, option in enumerate(options):
         col, row = divmod(i, rows)
