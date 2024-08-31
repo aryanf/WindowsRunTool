@@ -11,5 +11,5 @@ def main(message: MainCommandMessage):
     '''
 Pin an area on screen
 '''
-    print('pinning')
+    print('cutting and pinning')
     subprocess.Popen([app_path, '-PinToScreenFromScreen'])

@@ -11,5 +11,4 @@ Open ZoomIt
 '''
     print('zoomit')
     print('use Ctrl+1 to zoom in, Ctrl+2 to draw.')
-    time.sleep(2)
     subprocess.Popen([app_path])
