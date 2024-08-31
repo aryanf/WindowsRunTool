@@ -19,6 +19,7 @@ notepad_app_path = os.path.join(get_open_source_app_dir(), 'Notepad++64', 'notep
 
 HELP = False
 DEBUG = False
+EDIT = False
 
 
 def continue_terminal():
@@ -50,6 +51,16 @@ def find_and_remove_command(input_list):
         return input_list[0], []
     else:
         return None, input_list
+    
+def find_and_remove_edit(input_list):
+    edit_flag = False
+    new_list = []
+    for item in input_list:
+        if item == '-edit':
+            edit_flag = True
+        else:
+            new_list.append(item)
+    return edit_flag, new_list
 
 def find_and_remove_help(input_list):
     help_flag = False
@@ -113,10 +124,12 @@ def find_and_remove_first_int(input_list):
 def parse_args_operation_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunOperationMessage:
     global HELP
     global DEBUG
+    global EDIT
     key = arg1
     params = [arg for arg in [arg2, arg3, arg4, arg5, arg6, arg7] if arg != ""]
     HELP, params = find_and_remove_help(params)
     DEBUG, params = find_and_remove_debug(params)
+    EDIT, params = find_and_remove_edit(params)
     count, params = find_and_remove_first_int(params)
     command, params = find_and_remove_command(params)
     env, params = find_and_remove_env(params)
@@ -129,10 +142,12 @@ def parse_args_operation_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='',
 def parse_args_url_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunUrlMessage:
     global HELP
     global DEBUG
+    global EDIT
     key = arg1
     params = [arg for arg in [arg2, arg3, arg4, arg5, arg6, arg7] if arg != ""]
     HELP, params = find_and_remove_help(params)
     DEBUG, params = find_and_remove_debug(params)
+    EDIT, params = find_and_remove_edit(params)
     command, params = find_and_remove_command(params)
     env, params = find_and_remove_env(params)
     operator, params = find_and_remove_operator(params)
@@ -146,9 +161,11 @@ def parse_args_url_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7=
 def parse_args_info_message(arg1, arg2, arg3='', arg4='', arg5='', arg6='', arg7='') -> RunInfoMessage:
     global HELP
     global DEBUG
+    global EDIT
     key = arg1
     params = [arg for arg in [arg2, arg3, arg4, arg5, arg6, arg7] if arg != ""]
     HELP, params = find_and_remove_help(params)
+    EDIT, params = find_and_remove_edit(params)
     command, params = find_and_remove_command(params)
     debug(f'parameters: {params}')
     switch_1 = params[0] if len(params) > 0 else ''
@@ -180,7 +197,7 @@ def run_command(arg1='', arg2='', arg3='', arg4='', arg5='', arg6='', arg7=''):
 
 
 def run_info(runMessage: RunInfoMessage, current_dir: str, key_dir: str, info_file_path: str, user_file_path: str):
-    if HELP:
+    if HELP or EDIT:
         subprocess.Popen(['start', notepad_app_path, '-ldiff', info_file_path], shell=True)
     else:
         sys.path.append(current_dir)
@@ -194,7 +211,7 @@ def run_info(runMessage: RunInfoMessage, current_dir: str, key_dir: str, info_fi
             sys.path.remove(current_dir)
 
 def run_url(runMessage: RunUrlMessage, current_dir: str, key_dir: str, url_file_path: str, user_file_path: str):
-    if HELP:
+    if HELP or EDIT:
         subprocess.Popen([json_edit_app_path, url_file_path])
     else:
         sys.path.append(current_dir)
@@ -243,6 +260,9 @@ def continue_with_command(runMessage: RunOperationMessage, current_dir, key_dir)
         except ImportError as e:
             print(e)
             continue_terminal()
+        except Exception as e:
+            print(e)
+            continue_terminal()
         finally:
             # Remove the path to directory Y from the system path
             sys.path.remove(current_dir)
@@ -251,8 +271,8 @@ def continue_with_command(runMessage: RunOperationMessage, current_dir, key_dir)
         runMessage.command = '_'
         continue_with_command(runMessage, current_dir, key_dir)
     else:
-        print(f"Error: {runMessage.command} not found in {key_dir}, running default Windows command ...")
-        input("Press Enter ...")
+        print(f"Error: {runMessage.command} not found ...")
+        sleep(2)
         subprocess.Popen([runMessage.command], shell=True)
 
 def entry():
