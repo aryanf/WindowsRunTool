@@ -2,7 +2,7 @@
 I have been using run panel as an easy interface to run different simple or complex tasks for many years.
 It became so handy that I thought that can be defined as separate tool.
 
-This Windows project let you to use run panel to do 5 different things, and you can define your own custom actions:
+This Windows project let you to use run panel to do different things, and you can define your own custom actions:
 1. Operation (run script)
 2. Open URL (from browser history)
 3. Fetch information (from user defined text file)
