@@ -6,50 +6,69 @@ import subprocess
 import os
 
 def _get_app_path(app_path, app_name):
-    if not os.path.exists(app_path):
-        if app_name == 'Chrome':
-            if os.path.exists('C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'):
-                return 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
-            elif os.path.exists('C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'):
-                return 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
-            else:
-                input('Cannot find Chrome browser, update app path in user_configuration.json ...')
-                return None
-        elif app_name == 'Edge':
-            if os.path.exists('C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'):
-                return 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'
-            elif os.path.exists('C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe'):
-                return 'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe'
-            else:
-                input('Cannot find Microsoft Edge browser, update app path in user_configuration.json ...')
-                return None
-        else:
-            input(f'Cannot find {app_name} browser, update app path in user_configuration.json ...')
-    else:
+    if os.path.exists(app_path):
         return app_path
+    username = get_user_name()
+    chrome_paths = [
+        f'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+        f'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+    ]
+    edge_paths = [
+        f'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+        f'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe'
+    ]
+    opera_paths = [
+        f'C:\\Users\\{username}\\AppData\\Local\\Programs\\Opera\\opera.exe'
+    ]
+
+    if app_name == 'Chrome':
+        for path in chrome_paths:
+            if os.path.exists(path):
+                return path
+    elif app_name == 'Edge':
+        for path in edge_paths:
+            if os.path.exists(path):
+                return path    
+    elif app_name == 'Opera':
+        for path in opera_paths:
+            if os.path.exists(path):
+                return path
+
+    input(f'Cannot find {app_name} browser, update app path in user_configuration.json ...')
+    return None
 
 def _get_history_path(history_path, app_name):
-    if not os.path.exists(history_path):
-        username = get_user_name()
-        if app_name == 'Chrome':
-            if os.path.exists(f'C:\\Users\\{username}\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\\History'):
-                return f'C:\\Users\\{username}\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\\History'
-            elif os.path.exists(f'C:\\Users\\{username}\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History'):
-                return f'C:\\Users\\{username}\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History'
-            else:
-                input(f'Cannot find {app_name} browser history, update history path in user_configuration.json ...')
-                return None
-        elif app_name == 'Edge':
-            if os.path.exists(f'C:\\Users\\{username}\\AppData\\Local\\Microsoft\\Edge\\User Data\\Profile 1\\History'):
-                return f'C:\\Users\\{username}\\AppData\\Local\\Microsoft\\Edge\\User Data\\Profile 1\\History'
-            elif os.path.exists(f'C:\\Users\\{username}\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History'):
-                return f'C:\\Users\\{username}\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History'
-            else:
-                input(f'Cannot find {app_name} browser history, update history path in user_configuration.json ...')
-        else:
-            input(f'Cannot find {app_name} browser history, update history path in user_configuration.json ...')
-    else:
+    if os.path.exists(history_path):
         return history_path
+
+    username = get_user_name()
+    chrome_history_paths = [
+        f'C:\\Users\\{username}\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\\History',
+        f'C:\\Users\\{username}\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History'
+    ]
+    edge_history_paths = [
+        f'C:\\Users\\{username}\\AppData\\Local\\Microsoft\\Edge\\User Data\\Profile 1\\History',
+        f'C:\\Users\\{username}\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\History'
+    ]
+    opera_history_paths = [
+        f'C:\\Users\\{username}\\AppData\\Roaming\\Opera Software\\Opera Stable\\Default\\History'
+    ]
+
+    if app_name == 'Chrome':
+        for path in chrome_history_paths:
+            if os.path.exists(path):
+                return path
+    elif app_name == 'Edge':
+        for path in edge_history_paths:
+            if os.path.exists(path):
+                return path
+    elif app_name == 'Opera':
+        for path in opera_history_paths:
+            if os.path.exists(path):
+                return path
+
+    input(f'Cannot find {app_name} browser history, update history path in user_configuration.json ...')
+    return None
 
 def main(message: RunUrlMessage, url_path: str, user_path: str):
     with open(url_path, 'r') as url_file:
@@ -66,15 +85,10 @@ def main(message: RunUrlMessage, url_path: str, user_path: str):
     browser_history_path = _get_history_path(browser['history_path'], browser_name)
     browser_history_shadow_path = browser_history_path + '-Shadow'
     shutil.copy(browser_history_path, browser_history_shadow_path)
-    switches = []
-    if message.switch_1:
-        switches.append(message.switch_1)
-    if message.switch_2:
-        switches.append(message.switch_2)
-    if message.switch_3:
-        switches.append(message.switch_3)
+    switches = [message.switch_1, message.switch_2, message.switch_3]
+    switches = [switch for switch in switches if switch]
 
-    # update mapper and switches
+    # Update mapper and switches
     if message.command in mapper:
         mapper = mapper[message.command]
         existing_switch = next((switch for switch in switches if switch in mapper), None)
@@ -85,49 +99,44 @@ def main(message: RunUrlMessage, url_path: str, user_path: str):
     else:
         switches.append(message.command)
 
-    # find the url
+    # Find the url
     url = ''
     url = find_link(browser_history_shadow_path, mapper[message.env][0], count, operator, switches)
     if url == '':
         url = mapper[message.env][1]
         for switch  in switches:
             url = url.replace('@', switch, 1)
+
     subprocess.Popen([browser_app_path, f'--remote-debugging-port={browser_debug_port}' , url])
 
 
 def find_link(browser_history_shadow_path, base_url, count=1, operator='and', terms=[]):
-    con = sqlite3.connect(browser_history_shadow_path)
-    cursor = con.cursor()
-    if not '@' in base_url:
-        return base_url
-    terms = [base_url.replace('@', f'%{term}%') for term in terms] if terms else [base_url.replace('@', '%')]
-    placeholders = f' {operator} '.join('url LIKE ?' for term in terms)
-    query = f"""
-        SELECT DISTINCT url 
-        FROM urls 
-        WHERE {placeholders}
-        ORDER BY last_visit_time DESC 
-        LIMIT ?"""
-    cursor.execute(query, (*terms, count))
-    urls = cursor.fetchall()
-    return '' if len(urls)==0 else urls[-1][0]
+    with sqlite3.connect(browser_history_shadow_path) as con:
+        cursor = con.cursor()
+        if '@' not in base_url:
+            return base_url
+        terms = [base_url.replace('@', f'%{term}%') for term in terms] if terms else [base_url.replace('@', '%')]
+        placeholders = f' {operator} '.join('url LIKE ?' for term in terms)
+        query = f"""
+            SELECT DISTINCT url 
+            FROM urls 
+            WHERE {placeholders}
+            ORDER BY last_visit_time DESC 
+            LIMIT ?"""
+        cursor.execute(query, (*terms, count))
+        urls = cursor.fetchall()
+        return '' if not urls else urls[-1][0]
 
 def _get_browser(config, env):
     all_env = get_all_env()
     env_index = all_env.index(env)
     browser_list = config.get('browsers', [])
     for key, value in browser_list.items():
-        if value['env_id']==env_index:
+        if value['env_id'] == env_index:
             return value
     print("Cannot read valid env to set the browser")
     input()
     exit()
 
 def convert_nested_dict(d):
-    result = {}
-    for key, value in d.items():
-        if isinstance(value, dict):
-            result[key] = convert_nested_dict(value)
-        else:
-            result[key] = value
-    return result
+    return {key: convert_nested_dict(value) if isinstance(value, dict) else value for key, value in d.items()}

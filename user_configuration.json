@@ -6,7 +6,7 @@
         "prod"
     ],
     "paths": {
-        "Downloads": "C:\\Users\\John\\Downloads\\",
+        "Downloads": "C:\\Users\\john.snow\\Downloads\\",
         "Documents": "",
         "Videos": ""
     },
@@ -18,10 +18,10 @@
             "env_id": 0,
             "debug_port": 9222
         },
-        "chrome_staging": {
-            "app_name": "Chrome",
-            "app_path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-            "history_path": "C:\\Users\\john.snow\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1\\History",
+        "opera": {
+            "app_name": "Opera",
+            "app_path": "C:\\Users\\john.snow\\AppData\\Local\\Programs\\Opera\\opera.exe",
+            "history_path": "C:\\Users\\john.snow\\AppData\\Roaming\\Opera Software\\Opera Stable\\Default\\History",
             "env_id": 1,
             "debug_port": 9223
         },

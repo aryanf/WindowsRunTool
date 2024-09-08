@@ -1,3 +1,7 @@
+1.2.5
+ - Support Opera
+ - Code clean up and performance refactor
+
 1.2.4
  - Let notepad++ to open a new instance
  - Add e key command to open explorer in predefined location using q-dir

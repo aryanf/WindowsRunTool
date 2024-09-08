@@ -6,9 +6,6 @@ import win32con
 import curses_terminal
 import importlib
 
-hwnd = win32gui.GetForegroundWindow()
-win32gui.SetWindowPos(hwnd,win32con.HWND_TOP,1,1,900,800,0)
-
 def convert_nested_dict(d):
     result = {}
     for key, value in d.items():
@@ -51,6 +48,9 @@ def get_terminal_width():
         return 80  # Default value if terminal size cannot be determined
 
 def print_functions_in_directory(key_dir, key):
+
+    hwnd = win32gui.GetForegroundWindow()
+    win32gui.SetWindowPos(hwnd,win32con.HWND_TOP,1,1,900,800,0)
     temp_module_names = []
     all_module_functions = []
     all_functions_per_module = []
