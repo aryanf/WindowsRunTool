@@ -8,8 +8,9 @@ This Windows project let you to use run panel to do 5 different things, and you 
 3. Fetch information (from user defined text file)
 4. Manage and navigate windows desktops
 5. Open file explorer
+6. Copy sth to clipboard
 
-These are defined by key commands o, u, i, d and e by default. But it is pretty simple to customize them.
+These are defined by key commands o, u, i, d, e and cp by default. But it is pretty simple to customize them.
 
 Like example below is running shot operation:
 
@@ -31,7 +32,9 @@ You can also call specific function in the script
 
 This way you can easily create your own scripts and run them quickly.
 
-Let see example of any of these predefined actions in following section
+Let see example of any of these predefined actions in following sections
+
+<br/><br/>
 # 1. Operation Command
 
 ![Alt text](images/operation_1.gif)
@@ -39,25 +42,42 @@ Let see example of any of these predefined actions in following section
 
 [more about operation command](docs/OPERATIONS.md)
 
+<br/><br/>
 # 2. Information Command
 
 ![Alt text](images/information_1.gif)
 
 [more about information command](docs/INFORMATION.md)
 
+<br/><br/>
 # 3. Url Command
 
 ![Alt text](images/url_1.gif)
 
 [more about url command](docs/URLS.md)
 
+<br/><br/>
 # 4. Virtual Desktop Command
 
 ![Alt text](images/desktop_1.gif)
 
+<br/><br/>
 # 5. File Explore Command
 
 ![Alt text](images/explorer_1.gif)
+
+<br/><br/>
+# 6. Copy text to clipboard
+It is mostly up to you, how you want to customize it
+
+`cp aws` => get aws credential 
+
+`cp myip` => get your ip address
+
+try to add sth that is useful for you
+
+<br/><br/>
+<br/><br/>
 
 
 # Installation
