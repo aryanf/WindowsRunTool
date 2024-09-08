@@ -2,11 +2,15 @@
 
 Url commands can be used to query browser history and open a page that match the criteria.
 
+
+Assumption is that env items are `[dev, staging, prod]`. If you use different envs, then this should be modified in `user_configuration.json` and `url.json`
+
+You can associate an env to specific browser in `user_configuration.json`
+
 There is urls.json file that define how it should work, see example below
 
 ![Alt text](../images/urls_examples.png)
 
-Assumption is that env items are `[dev, staging, prod]`. If you use different envs, then this should be considered in urls.json content.
 
 Each env needs to have two items
 ```
@@ -30,3 +34,9 @@ Use `WinKey + r` to open run panel, and then type
 
 
 - `u -help` => to open json file and modify it
+
+<br/><br/>
+<br/><br/>
+
+![Alt text](/images/url_case_1.gif)
+

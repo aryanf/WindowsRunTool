@@ -38,4 +38,10 @@ There are some other scripts that I found useful example to increase productivit
 Open run panel `WinKey+r` and type `p -help` to check all [existing scripts](EXISTING_SCRIPTS.md).
 Check each functionality by specifying the key command like `p -help demo` or `p -help record`
 
-You can create your own python file, and just call it from run panel.
+
+Some other examples
+
+![Alt text](/images/operation_case_1.gif)
+
+
+![Alt text](/images/operation_case_2.gif)

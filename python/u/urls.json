@@ -3,6 +3,14 @@
         "@",
         "https://github.com"
     ],
+	"staging" : [ 
+        "@", 
+        "https://github.com" 
+    ],
+	"prod" : [ 
+        "@", 
+        "https://github.com" 
+    ],
     "github": {
         "dev": [
             "https://github.com/@",

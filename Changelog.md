@@ -1,4 +1,7 @@
 1.2.5
+ - Update documentation
+ 
+ 1.2.5
  - Support Opera
  - Code clean up and performance refactor
 

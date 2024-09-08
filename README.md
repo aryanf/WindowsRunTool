@@ -1,39 +1,64 @@
 # What is WindowsRunTool
 I have been using run panel as an easy interface to run different simple or complex tasks for many years.
-It became so handy that I thought that can be defined as separate tool, and anyone can enjoy this.
+It became so handy that I thought that can be defined as separate tool.
 
-This Windows project let you to use run panel to do 3 different things:
+This Windows project let you to use run panel to do 5 different things, and you can define your own custom actions:
 1. Operation (run script)
 2. Open URL (from browser history)
 3. Fetch information (from user defined text file)
+4. Manage and navigate windows desktops
+5. Open file explorer
 
-These are defined by key commands o, u, and i
+These are defined by key commands o, u, i, d and e by default. But it is pretty simple to customize them.
 
 Like example below is running shot operation:
 
 ![Alt text](images/run_panel.png)
 
-# Operation Command
+You can pass multiple string arguments and an int argument, and some predefined values like env argument. Those are passed to python function and easy to customize.
 
-Demo
-![Alt text](images/operation_case_1.gif)
+Example below to call `demo` script, and pass arguments.
 
-More examples
-![Alt text](images/operation_case_2.gif)
+![Alt text](images/demo_main.png)
+
+![Alt text](images/demo_main_code.png)
+
+You can also call specific function in the script
+
+![Alt text](images/demo_func1.png)
+
+![Alt text](images/demo_func1_code.png)
+
+This way you can easily create your own scripts and run them quickly.
+
+Let see example of any of these predefined actions in following section
+# 1. Operation Command
+
+![Alt text](images/operation_1.gif)
+
 
 [more about operation command](docs/OPERATIONS.md)
 
-# Information Command
+# 2. Information Command
 
-![Alt text](images/info_case_1.gif)
+![Alt text](images/information_1.gif)
 
 [more about information command](docs/INFORMATION.md)
 
-# Url Command
+# 3. Url Command
 
-![Alt text](images/url_case_1.gif)
+![Alt text](images/url_1.gif)
 
 [more about url command](docs/URLS.md)
+
+# 4. Virtual Desktop Command
+
+![Alt text](images/desktop_1.gif)
+
+# 5. File Explore Command
+
+![Alt text](images/explorer_1.gif)
+
 
 # Installation
 `pip install -r requirements.txt` 
