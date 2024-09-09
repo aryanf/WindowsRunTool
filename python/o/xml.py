@@ -2,6 +2,7 @@ from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_
 import os
 from pathlib import Path
 import subprocess
+from explorer_utils import get_selected_file_path
 
 download_path = get_download_dir()
 app_path = os.path.join(get_open_source_app_dir(), 'FirstObjectXmlEditor', 'foxe.exe')
@@ -29,7 +30,10 @@ def main(message: MainCommandMessage):
 Open csv file from default directory, num specify only the nth recent file to open
 '''
     number = 1 if message.num == 0 else message.num
-    file = _get_n_recent_file(int(number))
+    file = get_selected_file_path()
+    if not file:
+        file = _get_n_recent_file(int(number))
+
     if not file :
         subprocess.Popen([app_path])
     else:        

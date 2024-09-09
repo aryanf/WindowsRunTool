@@ -1,4 +1,8 @@
 1.2.5
+ - Add grep function
+ - Get top file explorer directory path and selected file, and pass to other apps
+
+1.2.5
  - Update documentation
  
  1.2.5
