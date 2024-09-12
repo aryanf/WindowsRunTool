@@ -5,6 +5,8 @@ import ctypes
 import pythoncom
 import win32com.client
 import time
+import win32gui
+import win32con
 
 
 def get_directory_path():
@@ -67,6 +69,8 @@ def get_selected_file_path():
 
 
 def get_explorer_window():
+    hwnd = win32gui.GetForegroundWindow()
+    win32gui.SetWindowPos(hwnd,win32con.HWND_BOTTOM,1,1,500,300,0)
     current_desktop = VirtualDesktop.current()
     apps = current_desktop.apps_by_z_order()
     app_filtered = []
@@ -74,8 +78,6 @@ def get_explorer_window():
         try:
             _,pid = win32process.GetWindowThreadProcessId(app.hwnd)
             process = psutil.Process(pid)
-            if(process.name() == 'cmd.exe'):
-                continue
             app_filtered.append([process.name(), app])
         except:
             app_filtered.append(["Unknown", app])
