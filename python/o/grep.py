@@ -4,6 +4,8 @@ import explorer_utils
 import os
 import subprocess
 import re
+import win32gui
+import win32con
 
 
 app_path = os.path.join(get_open_source_app_dir(), 'RipGrep', 'rg.exe')
@@ -72,9 +74,11 @@ JSON Output:
             directory_path = explorer_utils.get_directory_path()
         print(f'path: {directory_path}')
         subprocess.Popen([app_path, *grep_switches, directory_path])
+        print('-----------------')
         input()
-    else:
-        directory_path = explorer_utils.get_directory_path()
+    else:    
+        directory_path, runner_hwnd = explorer_utils.get_directory_path()
+        win32gui.SetWindowPos(runner_hwnd,win32con.HWND_TOP,1,1,500,300,0)
         if not directory_path:
             directory_path = input('Enter search path: ')
         print(f'search path: {directory_path}')
@@ -82,6 +86,7 @@ JSON Output:
         grep_switches = input('Enter switches: ')
         switches = grep_switches.split(' ')
         subprocess.Popen([app_path, *switches, search_pattern, directory_path])
+        print('-----------------')
         input()
 
 def _is_windows_path(path):

@@ -11,7 +11,7 @@ import win32con
 
 def get_directory_path():
     try:
-        explorer = get_explorer_window()
+        explorer, runner_window = get_explorer_window()
         if explorer is None:
             print('No File Explorer window on top found')
         print(get_window_title(explorer))
@@ -28,18 +28,18 @@ def get_directory_path():
             if int(window.HWND) == hwnd:
                 # Return the current directory of the File Explorer window
                 current_path = window.LocationURL.replace('file:///', '').replace('/', '\\')
-                return current_path
-        return None
+                return current_path, runner_window
+        return None, runner_window
     except Exception as e:
         print(e)
         print('Cannot catch explorer window as top window')
         time.sleep(2)
-        return None
+        return None, runner_window
 
 
 def get_selected_file_path():
     try:
-        explorer = get_explorer_window()
+        explorer, runner_window = get_explorer_window()
         if explorer is None:
             print('No File Explorer window on top found')
         print(get_window_title(explorer))
@@ -59,18 +59,18 @@ def get_selected_file_path():
                 if selected_items.Count > 0:
                     # Return the path of the first selected item
                     selected_path = selected_items.Item(0).Path
-                    return selected_path
-        return None
+                    return selected_path, runner_window
+        return None, runner_window
     except Exception as e:
         print(e)
         print('Cannot catch explorer window as top window')
         time.sleep(1)
-        return None
+        return None, runner_window
 
 
 def get_explorer_window():
-    hwnd = win32gui.GetForegroundWindow()
-    win32gui.SetWindowPos(hwnd,win32con.HWND_BOTTOM,1,1,500,300,0)
+    runner_hwnd = win32gui.GetForegroundWindow()
+    win32gui.SetWindowPos(runner_hwnd,win32con.HWND_BOTTOM,1,1,500,300,0)
     current_desktop = VirtualDesktop.current()
     apps = current_desktop.apps_by_z_order()
     app_filtered = []
@@ -83,9 +83,9 @@ def get_explorer_window():
             app_filtered.append(["Unknown", app])
 
     if app_filtered[0][0] == 'explorer.exe':
-        return app_filtered[0][1]
+        return app_filtered[0][1], runner_hwnd
     else:
-        return None
+        return None, runner_hwnd
     
 
 def get_window_title(app):

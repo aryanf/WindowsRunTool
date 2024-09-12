@@ -8,7 +8,7 @@ def main(message: MainCommandMessage):
     '''
 Zip selected file or folder in top file explorer
 '''
-    zip_path = get_selected_file_path()
+    zip_path, _ = get_selected_file_path()
     if not zip_path:
         print('No file or folder selected')
         time.sleep(2)

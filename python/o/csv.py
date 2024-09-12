@@ -30,7 +30,7 @@ def main(message: MainCommandMessage):
 Open csv file from default directory, num specify only the nth recent file to open
 '''
     number = 1 if message.num == 0 else message.num
-    file = get_selected_file_path()
+    file, _ = get_selected_file_path()
     if not file:
         file = _get_n_recent_file(int(number))
 
