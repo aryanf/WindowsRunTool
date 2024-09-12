@@ -1,3 +1,6 @@
+1.2.8
+ - Update grep, zip, unzip and xml
+
 1.2.7
  - Add grep function
  - Get top file explorer directory path and selected file, and pass to other apps

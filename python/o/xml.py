@@ -50,3 +50,31 @@ Open n csv files from default directory, num specify all nth recent files to ope
     else:
         for file in files:
             subprocess.Popen([app_path, file ])
+
+def to(message: SubCommandMessage):
+    '''
+Convert xml message to another type
+Example usage: xml to txt
+'''
+    if message.switch_1 == 'txt' or message.switch_1 == 'text':
+        create_text_flag = True
+        file = get_selected_file_path()
+        if not file:
+            xml_content = input('Enter xml content: ')
+            create_text_flag = False
+        else:
+            with open(file, 'r') as f:
+                xml_content = f.read()
+        txt_content = xml_content.replace('\n', '').replace('\r', '').replace('\t', '').replace('"', '\\"')
+        if create_text_flag:
+            with open(file.replace('.xml', '.txt'), 'w') as f:
+                f.write(txt_content)
+        else:
+            print()
+            print('Text content:')
+            print()
+            print(txt_content)
+            print('')
+            input('Press any key to exit ...')
+            
+        
