@@ -3,6 +3,9 @@ import os
 from pathlib import Path
 import subprocess
 from explorer_utils import get_selected_file_path
+import pyperclip
+import win32gui
+import win32con
 
 download_path = get_download_dir()
 app_path = os.path.join(get_open_source_app_dir(), 'FirstObjectXmlEditor', 'foxe.exe')
@@ -51,30 +54,29 @@ Open n csv files from default directory, num specify all nth recent files to ope
         for file in files:
             subprocess.Popen([app_path, file ])
 
-def to(message: SubCommandMessage):
+def txt(message: SubCommandMessage):
     '''
 Convert xml message to another type
 Example usage: xml to txt
 '''
-    if message.switch_1 == 'txt' or message.switch_1 == 'text':
-        create_text_flag = True
-        file, _ = get_selected_file_path()
-        if not file:
-            xml_content = input('Enter xml content: ')
-            create_text_flag = False
-        else:
-            with open(file, 'r') as f:
-                xml_content = f.read()
-        txt_content = xml_content.replace('\n', '').replace('\r', '').replace('\t', '').replace('"', '\\"')
-        if create_text_flag:
-            with open(file.replace('.xml', '.txt'), 'w') as f:
-                f.write(txt_content)
-        else:
-            print()
-            print('Text content:')
-            print()
-            print(txt_content)
-            print('')
-            input('Press any key to exit ...')
+    create_text_file = True
+    file, runner_hwnd = get_selected_file_path()
+    if not file:
+        xml_content = pyperclip.paste()
+        win32gui.SetWindowPos(runner_hwnd,win32con.HWND_TOP,1,1,500,300,0)
+        create_text_file = False
+    else:
+        with open(file, 'r') as f:
+            xml_content = f.read()
+    txt_content = xml_content.replace('\n', '').replace('\r', '').replace('\t', '').replace('"', '\\"')
+    if create_text_file:
+        with open(file.replace('.xml', '.txt'), 'w') as f:
+            f.write(txt_content)
+    else:
+        pyperclip.copy(txt_content)
+        print()
+        print('Text content stored in clipboard')
+        print()
+        input('Press any key to exit ...')
             
         

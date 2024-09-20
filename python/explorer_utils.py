@@ -70,23 +70,28 @@ def get_selected_file_path():
 
 def get_explorer_window():
     runner_hwnd = win32gui.GetForegroundWindow()
+    _, pid = win32process.GetWindowThreadProcessId(runner_hwnd)
     win32gui.SetWindowPos(runner_hwnd,win32con.HWND_BOTTOM,1,1,500,300,0)
     current_desktop = VirtualDesktop.current()
     apps = current_desktop.apps_by_z_order()
     app_filtered = []
     for app in apps:
         try:
-            _,pid = win32process.GetWindowThreadProcessId(app.hwnd)
+            _, pid = win32process.GetWindowThreadProcessId(app.hwnd)
             process = psutil.Process(pid)
-            app_filtered.append([process.name(), app])
+            if not process.name() == 'ms-teams.exe' and app.hwnd != runner_hwnd:
+                app_filtered.append([process.name(), app])
         except:
             app_filtered.append(["Unknown", app])
 
+    win32gui.SetWindowPos(runner_hwnd,win32con.HWND_TOP,1,1,500,300,0)
+    print(app_filtered[0][0])
     if app_filtered[0][0] == 'explorer.exe':
         return app_filtered[0][1], runner_hwnd
     else:
         return None, runner_hwnd
-    
+
+
 
 def get_window_title(app):
     explorer = app.hwnd
