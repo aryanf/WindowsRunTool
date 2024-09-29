@@ -2,7 +2,7 @@ from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_
 import os
 from pathlib import Path
 import subprocess
-from explorer_utils import get_selected_file_path
+from window_utils import get_selected_files_path_in_top_file_explorer
 import pyperclip
 import win32gui
 import win32con
@@ -33,7 +33,8 @@ def main(message: MainCommandMessage):
 Open csv file from default directory, num specify only the nth recent file to open
 '''
     number = 1 if message.num == 0 else message.num
-    file, _ = get_selected_file_path()
+    files, _ = get_selected_files_path_in_top_file_explorer()
+    file = files[0] if files else None
     if not file:
         file = _get_n_recent_file(int(number))
 
@@ -60,7 +61,8 @@ Convert xml message to another type
 Example usage: xml to txt
 '''
     create_text_file = True
-    file, runner_hwnd = get_selected_file_path()
+    files, runner_hwnd = get_selected_files_path_in_top_file_explorer()
+    file = files[0] if files else None
     if not file:
         xml_content = pyperclip.paste()
         win32gui.SetWindowPos(runner_hwnd,win32con.HWND_TOP,1,1,500,300,0)

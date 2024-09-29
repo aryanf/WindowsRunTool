@@ -1,6 +1,6 @@
 from message import (MainCommandMessage, SubCommandMessage)
 from message import (MainCommandMessage, get_open_source_app_dir)
-import explorer_utils
+import window_utils as window_utils
 import os
 import subprocess
 import re
@@ -71,13 +71,13 @@ JSON Output:
                     grep_switches.append(switch)
             
         if not directory_path:
-            directory_path = explorer_utils.get_directory_path()
+            directory_path = window_utils.get_directory_path_in_top_file_explorer()
         print(f'path: {directory_path}')
         subprocess.Popen([app_path, *grep_switches, directory_path])
         print('-----------------')
         input()
     else:    
-        directory_path, runner_hwnd = explorer_utils.get_directory_path()
+        directory_path, runner_hwnd = window_utils.get_directory_path_in_top_file_explorer()
         win32gui.SetWindowPos(runner_hwnd,win32con.HWND_TOP,1,1,500,300,0)
         if not directory_path:
             directory_path = input('Enter search path: ')

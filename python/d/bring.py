@@ -33,8 +33,12 @@ The number of the desktop is the message.num, the default value is 1
     if switch:
         app = _find_app(switch)
         if app:
-            app.move(current_desktop)
-            app.set_focus()
+            app.move(current_desktop)       
+            try:
+                win32gui.SetWindowPos(app.hwnd,win32con.HWND_TOP,0,0,0,0,win32con.SWP_NOMOVE | win32con.SWP_NOSIZE)
+                win32gui.SetForegroundWindow(app.hwnd)
+            except Exception as e:
+                print(f"Failed to set focus: {e}")
         else:
             print('App not found')
     else:

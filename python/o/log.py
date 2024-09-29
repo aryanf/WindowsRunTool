@@ -2,7 +2,7 @@ from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_
 import os
 from pathlib import Path
 import subprocess
-from explorer_utils import get_selected_file_path
+from window_utils import get_selected_files_path_in_top_file_explorer
 
 
 download_path = get_download_dir()
@@ -31,7 +31,8 @@ def main(message: MainCommandMessage):
 Open log file from default directory, num specify only the nth recent file to open
 '''
     number = 1 if message.num == 0 else message.num
-    file, _ = get_selected_file_path()
+    files, _ = get_selected_files_path_in_top_file_explorer()
+    file = files[0] if files else None
     if not file:
         file = _get_n_recent_file(int(number))
         
