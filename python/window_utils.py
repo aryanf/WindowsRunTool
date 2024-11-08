@@ -9,7 +9,7 @@ import win32gui
 import win32con
 
 
-def get_directory_path_in_top_file_explorer():
+def get_directory_path_of_top_file_explorer():
     '''Get the current directory of the top File Explorer window
     Returns:
     current_path (str): The path of the current directory
@@ -18,7 +18,9 @@ def get_directory_path_in_top_file_explorer():
     try:
         explorer, runner_window = get_top_file_explorer_window()
         if explorer is None:
-            print('No File Explorer window on top found')
+            print('Cannot catch File Explorer.')
+            time.sleep(3)
+            return None, runner_window
         print(_get_window_title(explorer))
         hwnd = explorer.hwnd
         # Initialize COM library for the thread
@@ -52,7 +54,8 @@ def get_selected_files_path_in_top_file_explorer():
         explorer, runner_window = get_top_file_explorer_window()
         file_paths = []
         if explorer is None:
-            input('No File Explorer window on top found or cannot catch File Explorer. Press Enter to continue')
+            print('Cannot catch File Explorer.')
+            time.sleep(3)
             return file_paths, runner_window
         print(_get_window_title(explorer))
         hwnd = explorer.hwnd
@@ -102,7 +105,7 @@ def get_top_file_explorer_window():
         except:
             app_filtered.append(["Unknown", app])
     win32gui.SetWindowPos(runner_hwnd,win32con.HWND_TOP,1,1,500,300,0)
-    print('Top windows is ', app_filtered[0][0], ' with title ', _get_window_title(app_filtered[0][1]))
+    print(f'Top windows is {app_filtered[0][0]} with title {_get_window_title(app_filtered[0][1])}')
     if app_filtered[0][0] == 'explorer.exe':
         return app_filtered[0][1], runner_hwnd
     else:
@@ -113,15 +116,12 @@ def get_top_window():
     '''Get the top window
     Returns:
     top_window (int): The handle of the top window
+    process_name (str): The process name of the top window
+    title (str): The title of the top window
     runner_window (int): The handle of the runner window
     '''
-    return ''
-
-def get_top_window_title():
-    '''Get the title of the top window
-    Returns:
-    title (str): The title of the top window
-    '''
+    runner_hwnd = win32gui.GetForegroundWindow()
+    win32gui.SetWindowPos(runner_hwnd, win32con.HWND_BOTTOM, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE)
     current_desktop = VirtualDesktop.current()
     apps = current_desktop.apps_by_z_order()
     app_filtered = []
@@ -129,30 +129,92 @@ def get_top_window_title():
         try:
             _, pid = win32process.GetWindowThreadProcessId(app.hwnd)
             process = psutil.Process(pid)
-            if _is_overlay_window(app, process, 0):
+            if _is_overlay_window(app, process, runner_hwnd):
                 continue
             app_filtered.append([process.name(), app])
         except:
             app_filtered.append(["Unknown", app])
-    return _get_window_title(app_filtered[0][1])
+    win32gui.SetWindowPos(runner_hwnd,win32con.HWND_TOP,1,1,500,300,0)
+    title = _get_window_title(app_filtered[0][1])
+    print('Top windows is ', app_filtered[0][0], ' with title ', title)
+    return app_filtered[0][1].hwnd, app_filtered[0][0], title, runner_hwnd
 
 
-def get_window_by_process_name(process_name):
-    '''Get the top most window by process name
-    Args:
-    process_name (str): The process name
-    Returns:
-    top_window (int): The handle of the top most window of the process
-    '''
-    return ''
-
-
-def get_top_window_process_name():
-    '''Get the process name of the top window
-    Returns:
+def get_most_top_window_of_process_name(process_name):
+    '''Get the top window
+    Input:
     process_name (str): The process name of the top window
+    Returns:
+    top_window (int): The handle of the top window
+    process_name (str): The process name of the top window
+    title (str): The title of the top window
+    runner_window (int): The handle of the runner window
     '''
-    return ''
+    runner_hwnd = win32gui.GetForegroundWindow()
+    current_desktop = VirtualDesktop.current()
+    apps = current_desktop.apps_by_z_order()
+    app_filtered = []
+    for app in apps:
+        try:
+            _, pid = win32process.GetWindowThreadProcessId(app.hwnd)
+            process = psutil.Process(pid)
+            print(process.name())
+            if process.name() == process_name:
+                app_filtered.append([process.name(), app])
+        except:
+            app_filtered.append(["Unknown", app])
+    print('app_filtered', app_filtered)
+    title = _get_window_title(app_filtered[0][1])
+    print('Top windows is ', app_filtered[0][0], ' with title ', title)
+    return app_filtered[0][1].hwnd, app_filtered[0][0], title, runner_hwnd
+
+
+def get_all_windows_of_process_name(process_name):
+    '''Get all windows of a process by name.
+    Input:
+    process_name (str): The process name of the windows to find.
+    Returns:
+    list of tuples: A list where each tuple contains:
+        - top_window (int): The handle of the top window.
+        - process_name (str): The process name of the top window.
+        - title (str): The title of the top window.
+        - runner_window (int): The handle of the runner window.
+    '''
+    runner_hwnd = win32gui.GetForegroundWindow()
+    win32gui.SetWindowPos(runner_hwnd, win32con.HWND_BOTTOM, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE)
+    current_desktop = VirtualDesktop.current()
+    apps = current_desktop.apps_by_z_order()
+    app_filtered = []
+    for app in apps:
+        try:
+            _, pid = win32process.GetWindowThreadProcessId(app.hwnd)
+            process = psutil.Process(pid)
+            if _is_overlay_window(app, process, runner_hwnd):
+                continue
+            if process.name() == process_name:
+                app_filtered.append([process.name(), app])
+        except:
+            app_filtered.append(["Unknown", app])
+    win32gui.SetWindowPos(runner_hwnd,win32con.HWND_TOP,1,1,500,300,0)
+    return [(app[1].hwnd, app[0], _get_window_title(app[1]), runner_hwnd) for app in app_filtered]
+
+
+def top_window_to_bottom():
+    '''Move the top window to the bottom of the window stack'''
+    top_hwnd = win32gui.GetForegroundWindow()
+    win32gui.SetWindowPos(top_hwnd, win32con.HWND_BOTTOM, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE)
+
+
+def get_process_name_of_hwnd_window(hwnd):
+    '''Get the process name of a window by its handle
+    Input:
+    hwnd (int): The handle of the window
+    Returns:
+    process_name (str): The process name of the window
+    '''
+    _, pid = win32process.GetWindowThreadProcessId(hwnd)
+    process = psutil.Process(pid)
+    return process.name()
 
 
 def _get_window_title(app):

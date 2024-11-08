@@ -3,7 +3,6 @@
 
 from os import system, environ
 import ctypes
-import win32con
 from win32gui import SendMessage
 from winreg import (
     CloseKey, OpenKey, QueryValueEx, SetValueEx,

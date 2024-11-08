@@ -71,13 +71,13 @@ JSON Output:
                     grep_switches.append(switch)
             
         if not directory_path:
-            directory_path = window_utils.get_directory_path_in_top_file_explorer()
+            directory_path = window_utils.get_directory_path_of_top_file_explorer()
         print(f'path: {directory_path}')
         subprocess.Popen([app_path, *grep_switches, directory_path])
         print('-----------------')
         input()
     else:    
-        directory_path, runner_hwnd = window_utils.get_directory_path_in_top_file_explorer()
+        directory_path, runner_hwnd = window_utils.get_directory_path_of_top_file_explorer()
         win32gui.SetWindowPos(runner_hwnd,win32con.HWND_TOP,1,1,500,300,0)
         if not directory_path:
             directory_path = input('Enter search path: ')

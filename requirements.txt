@@ -13,7 +13,9 @@ psutil
 pyperclip==1.8.1
 websockets
 requests
-zipfile
-tarfile
 py7zr
 rarfile
+boto3
+selenium
+telegram
+python-telegram-bot
