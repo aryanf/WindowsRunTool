@@ -230,7 +230,7 @@ def _show_content(info_path, title, topic, sub_topic, browser='chrome'):
     elif i == 0:
         _show_titles(info_path)
     else:
-        if validators.url(cmd):
+        if _is_valid_url(cmd):
             if browser == 'chrome':
                 subprocess.Popen([f'{chrome_path}', f'{cmd}'], shell=True)
             elif browser == 'edge':
@@ -238,3 +238,10 @@ def _show_content(info_path, title, topic, sub_topic, browser='chrome'):
         else:
             pyperclip.copy(cmd)
         _show_content(info_path, title, topic, sub_topic, browser=browser)
+
+
+
+def _is_valid_url(url):
+    if url.startswith("http://localhost") or url.startswith("https://localhost"):
+        return True
+    return validators.url(url)

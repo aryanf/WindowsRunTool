@@ -8,4 +8,8 @@ def main(message: MainCommandMessage):
     '''
 Copy AWS credentials to clipboard
 '''
-    get_aws_cred(message.env)
+    if message.switch_1 and message.switch_1 not in ['admin', 'readonly', 'developer']:
+        print(f"Invalid role: {message.switch_1}")
+        return
+    else:
+        get_aws_cred(message.env, message.switch_1)

@@ -4,6 +4,7 @@ import shutil
 import sqlite3
 import subprocess
 import os
+from win10toast import ToastNotifier
 
 def _get_app_path(app_path, app_name):
     if os.path.exists(app_path):
@@ -110,6 +111,23 @@ def main(message: RunUrlMessage, url_path: str, user_path: str):
     subprocess.Popen([browser_app_path, f'--remote-debugging-port={browser_debug_port}' , url])
 
 
+def remove_common_parts(strings):
+    if not strings:
+        return []
+    # Find the common prefix
+    common_prefix = os.path.commonprefix(strings)
+    # Remove the common prefix from each string
+    result = [s[len(common_prefix):] for s in strings]
+    return result
+
+def move_index_to_start(lst, number):
+    index = number - 1  # Calculate the desired index (number - 1)
+    if 0 <= index < len(lst):  # Check if the index is valid
+        # Remove the item at the index and insert it at the start
+        item = lst.pop(index)
+        lst.insert(0, item)
+    return lst
+
 def find_link(browser_history_shadow_path, base_url, count=1, operator='and', terms=[]):
     with sqlite3.connect(browser_history_shadow_path) as con:
         cursor = con.cursor()
@@ -121,11 +139,14 @@ def find_link(browser_history_shadow_path, base_url, count=1, operator='and', te
             SELECT DISTINCT url 
             FROM urls 
             WHERE {placeholders}
-            ORDER BY last_visit_time DESC 
-            LIMIT ?"""
-        cursor.execute(query, (*terms, count))
+            ORDER BY last_visit_time DESC"""
+        cursor.execute(query, (terms))
         urls = cursor.fetchall()
-        return '' if not urls else urls[-1][0]
+        output = remove_common_parts([x[0] for x in urls])
+        output = move_index_to_start(output, int(count))
+        toaster = ToastNotifier()
+        toaster.show_toast(f'{len(urls)} urls', '\n'.join([x[:40] for x in output]) , duration=10, threaded=True)
+        return '' if not urls else urls[int(count)-1][0]
 
 def _get_browser(config, env):
     all_env = get_all_env()

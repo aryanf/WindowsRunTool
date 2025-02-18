@@ -19,3 +19,4 @@ boto3
 selenium
 telegram
 python-telegram-bot
+win10toast

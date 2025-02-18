@@ -1,18 +1,24 @@
 from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_dir)
-from aws_utils import get_aws_cred, _get_cached_cred
+from aws_utils import _get_cached_cred
 import time
 import pyperclip
-import subprocess
-from datetime import datetime
-import pytz
-import json
+import chrome_utils
+
+
+timer_list_title_mouse_dic = { 'timer': 20, 'title_mouse': [
+    { 'title': 'Sign in to your account', 'mouse': (1119, 652) },
+    { 'title': 'Amazon Web Services (AWS)', 'mouse': (973, 850) },
+    { 'title': 'AWS access portal', 'mouse': (1257, 777) }
+    ] 
+} 
 
 
 def main(message: MainCommandMessage):
     '''
 Copy AWS credentials to clipboard as bash variables
 '''
-    success, access_key_id, secret_access_key, session_token = _get_cached_cred(message.env)
+    chrome_utils.auto_chrome(timer_list_title_mouse_dic)
+    success, access_key_id, secret_access_key, session_token = _get_cached_cred(message.env, message.switch_1)
     if success:
         region = 'export AWS_DEFAULT_REGION=eu-west-1'
         pyperclip.copy(region)
@@ -29,7 +35,8 @@ def csharp(message: SubCommandMessage):
     '''
 Copy AWS credentials to clipboard as csharp variable
 '''
-    success, access_key_id, secret_access_key, session_token = _get_cached_cred(message.env)
+    chrome_utils.auto_chrome(timer_list_title_mouse_dic)
+    success, access_key_id, secret_access_key, session_token = _get_cached_cred(message.env, message.switch_1)
     if success:
         region = 'Environment.SetEnvironmentVariable("AWS_REGION", "eu-west-1");'
         pyperclip.copy(region)
@@ -45,7 +52,8 @@ def python(message: SubCommandMessage):
     '''
 Copy AWS credentials to clipboard as python variable
 '''
-    success, access_key_id, secret_access_key, session_token = _get_cached_cred(message.env)
+    chrome_utils.auto_chrome(timer_list_title_mouse_dic)
+    success, access_key_id, secret_access_key, session_token = _get_cached_cred(message.env, message.switch_1)
     if success:
         region = "os.environ['AWS_DEFAULT_REGION'] = 'eu-west-1'"
         pyperclip.copy(region)
@@ -61,7 +69,8 @@ def vscode(message: SubCommandMessage):
     '''
 Copy AWS credentials to clipboard as python variable
 '''
-    success, access_key_id, secret_access_key, session_token = _get_cached_cred(message.env)
+    chrome_utils.auto_chrome(timer_list_title_mouse_dic)
+    success, access_key_id, secret_access_key, session_token = _get_cached_cred(message.env, message.switch_1)
     if success:
         region = '"AWS_DEFAULT_REGION":"eu-west-1"'
         pyperclip.copy(region)

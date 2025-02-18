@@ -5,13 +5,9 @@ from datetime import datetime
 import pytz
 import json
 
-aws_profiles = {
-    'dev': 'dev-admin',
-    'prod': 'prod-admin'
-}
 
-def get_aws_cred(env):
-    success, access_key_id, secret_access_key, session_token = _get_cached_cred(env)
+def get_aws_cred(env, role):
+    success, access_key_id, secret_access_key, session_token = _get_cached_cred(env, role)
     if success:
         region = 'export AWS_DEFAULT_REGION=eu-west-1'
         pyperclip.copy(region)
@@ -24,8 +20,13 @@ export AWS_SESSION_TOKEN="{session_token}" """
         time.sleep(1)
 
 
-def _get_cached_cred(env):
-    profile = aws_profiles[env]
+def _get_cached_cred(env, role):
+    if not role:
+        role = 'admin'
+    if role not in ['admin', 'readonly', 'developer']:
+        print(f"Invalid role: {role}")
+        return False, '', '', ''
+    profile = f'{env}-{role}'
     print(profile)
     aws_command = f"aws configure export-credentials --profile {profile}"
     try:

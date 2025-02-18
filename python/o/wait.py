@@ -10,7 +10,7 @@ def main(message: MainCommandMessage):
 Mouse clicking on screen repeatedly. Coordination, printed message and time interval can be changed in wait.main()
 '''
     hwnd = win32gui.GetForegroundWindow()
-    win32gui.SetWindowPos(hwnd,win32con.HWND_TOP,1,1,500,300,0)
+    win32gui.SetWindowPos(hwnd,win32con.HWND_TOP,1,1,150,130,0)
     _mouse_move()
 
 def no_resize(message: SubCommandMessage):
