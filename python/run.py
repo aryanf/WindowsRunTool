@@ -37,6 +37,9 @@ def get_target_path(lnk_file_path):
     print(shortcut.Targetpath)
     return shortcut.Targetpath
 
+def has_python_file(directory):
+    return any(entry.name.endswith('.py') for entry in os.scandir(directory) if entry.is_file())
+
 def is_int(s):
     try:
         int(s)
@@ -103,37 +106,32 @@ def run_command(arg1='', arg2='', arg3='', arg4='', arg5='', arg6='', arg7=''):
     root_dir = os.path.abspath(os.path.join(current_dir, '..'))
     key_dir = os.path.join(current_dir, arg1)
     user_file_path = os.path.join(root_dir, 'user_configuration.json')
+    # looking for urls.json
     url_file_path = os.path.join(key_dir, 'urls.json')
-    info_file_path = os.path.join(key_dir, 'info.diff')
-    info_link_file_path = os.path.join(key_dir, 'info.lnk')
-    if os.path.exists(info_file_path):
-        runMessage = parse_args_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7, RunInfoMessage)
-        run_info(runMessage, current_dir, key_dir, info_file_path, user_file_path)
-    elif os.path.exists(info_link_file_path):
-        runMessage = parse_args_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7, RunInfoMessage)
-        info_file_path = get_target_path(info_link_file_path)
-        run_info(runMessage, current_dir, key_dir, info_file_path, user_file_path)
-    elif os.path.exists(url_file_path):
+    is_operational = has_python_file(key_dir)
+    
+    if os.path.exists(url_file_path):
         runMessage = parse_args_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7, RunUrlMessage)
         run_url(runMessage, current_dir, key_dir, url_file_path, user_file_path)
-    else:
+    elif is_operational:
         runMessage = parse_args_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7, RunOperationMessage)
         run_operation(runMessage, current_dir, key_dir, user_file_path)
-
-
-def run_info(runMessage, current_dir, key_dir, info_file_path, user_file_path):
-    if HELP or EDIT:
-        subprocess.Popen(['start', notepad_app_path, '-ldiff', info_file_path], shell=True)
     else:
-        sys.path.append(current_dir)
-        try:
-            x_module = importlib.import_module('parse_info')
-            x_module.main(runMessage, info_file_path, user_file_path)
-        except ImportError as e:
-            print(e)
-            continue_terminal()
-        finally:
-            sys.path.remove(current_dir)
+        runMessage = parse_args_message(arg1, arg2, arg3, arg4, arg5, arg6, arg7, RunInfoMessage)
+        run_info(runMessage, current_dir, key_dir, user_file_path)
+    
+
+
+def run_info(runMessage, current_dir, key_dir, user_file_path):
+    sys.path.append(current_dir)
+    try:
+        x_module = importlib.import_module('parse_info')
+        x_module.main(runMessage, key_dir, user_file_path)
+    except ImportError as e:
+        print(e)
+        continue_terminal()
+    finally:
+        sys.path.remove(current_dir)
 
 def run_url(runMessage, current_dir, key_dir, url_file_path, user_file_path):
     if HELP or EDIT:

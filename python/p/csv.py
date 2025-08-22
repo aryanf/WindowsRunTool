@@ -27,6 +27,13 @@ def _get_n_recent_file(num):
 
 def main(message: MainCommandMessage):
     '''
+Open csv viewer application
+'''
+    subprocess.Popen([app_path])
+
+
+def download(message: SubCommandMessage):
+    '''
 Open csv file from default directory, num specify only the nth recent file to open
 '''
     number = 1 if message.num == 0 else message.num

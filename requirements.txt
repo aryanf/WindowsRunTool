@@ -20,3 +20,4 @@ selenium
 telegram
 python-telegram-bot
 win10toast
+codename

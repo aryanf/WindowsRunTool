@@ -36,8 +36,8 @@ Zip selected file or folder in top file explorer
             print("Failed to extract 7z file")
     else:
         print("Unsupported archive format")
-    delete_confirmation = ['yes', 'no']
-    i, _ = curses_terminal.show(delete_confirmation, enumerating=True, zero_indexed=True, info='Delete zip file?')
+    delete_options = ['Yes', 'No']
+    i, _ = curses_terminal.show(options=delete_options, enumerating=True, zero_indexed=True, info='Delete zip file?')
     if i == 0:
         os.remove(file_path)
     

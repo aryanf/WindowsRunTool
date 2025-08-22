@@ -31,12 +31,13 @@ def _get_desktop(current_desktop: VirtualDesktop = None):
     if current_desktop is None:
         current_desktop = VirtualDesktop.current()
     desktops = get_virtual_desktops()
-    desktop_names = [d.name for d in get_virtual_desktops()]
-    desktop_names.append('--- create new desktop ---')
-    i, cmd = curses_terminal.show(options=desktop_names, enumerating=True, zero_indexed=False, info=f'Current Desktop: {current_desktop.name}')
+    desktop_options = [d.name for d in get_virtual_desktops()]
+    desktop_commands = [('create new desktop', curses_terminal.COLOR_GREEN)]
+    i, cmd = curses_terminal.show(options=desktop_options, commands_colors=desktop_commands, enumerating=True, zero_indexed=False,
+                                  info=f'Current Desktop: {current_desktop.name}')
     if cmd == 'exit' or cmd == 'q' or cmd == 'quit' or cmd == 'e':
         exit()
-    elif cmd == '--- create new desktop ---':
+    elif cmd == 'create new desktop':
         name = input('Enter new desktop name: ')
         os.system('cls' if os.name == 'nt' else 'clear')
         new_desktop = VirtualDesktop.create()
@@ -49,20 +50,23 @@ def _get_desktop(current_desktop: VirtualDesktop = None):
         _get_apps(selected_desktop)
 
 def _get_apps(selected_desktop: VirtualDesktop):
-    app_names = ['..']
+    app_options = ['..']
     apps = selected_desktop.apps_by_z_order()
     for app in apps:
         try:
             _,pid = win32process.GetWindowThreadProcessId(app.hwnd)
             process = psutil.Process(pid)
-            app_names.append(process.name())
+            app_options.append(process.name())
         except:
-            app_names.append("Unknown")
-    app_names.extend(['--- rename ---', '--- remove ---'])
-    i, cmd = curses_terminal.show(options=app_names, enumerating=True, zero_indexed=False, info=f'Selected Desktop: {selected_desktop.name}')
+            app_options.append("Unknown")
+    app_commands = [
+        ('rename', curses_terminal.COLOR_BLUE),
+        ('remove', curses_terminal.COLOR_RED)]
+    i, cmd = curses_terminal.show(options=app_options, commands_colors=app_commands, enumerating=True, zero_indexed=False,
+                                  info=f'Selected Desktop: {selected_desktop.name}')
     if cmd == 'exit' or cmd == 'q' or cmd == 'quit' or cmd == 'e':
         exit()
-    elif cmd == '--- remove ---':
+    elif cmd == 'remove':
         if len(apps) > 0:
             response = input('There are open apps in this desktop. Removing this desktop, close the apps or move them to other desktop. \nAre you sure you want to remove this desktop?')
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -74,7 +78,7 @@ def _get_apps(selected_desktop: VirtualDesktop):
         else:
             selected_desktop.remove()
             _get_desktop(None)
-    elif cmd == '--- rename ---':
+    elif cmd == 'rename':
         name = input('Enter new desktop name: ')
         os.system('cls' if os.name == 'nt' else 'clear')
         selected_desktop.rename(name)
@@ -83,8 +87,8 @@ def _get_apps(selected_desktop: VirtualDesktop):
         _get_desktop(selected_desktop)
     else:
         desktops = get_virtual_desktops()
-        desktop_names = [d.name for d in get_virtual_desktops()]
-        j, cmd = curses_terminal.show(options=desktop_names, enumerating=True, zero_indexed=False, info=f'Move {app_names[i]} to other desktop')
+        desktop_options = [d.name for d in get_virtual_desktops()]
+        j, cmd = curses_terminal.show(options=desktop_options, enumerating=True, zero_indexed=False, info=f'Move {app_options[i]} to other desktop')
         target_desktop = desktops[j]
         selected_window = apps[i-1]
         selected_window.move(target_desktop)

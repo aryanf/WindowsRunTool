@@ -6,17 +6,17 @@ from window_utils import get_selected_files_path_in_top_file_explorer
 
 
 download_path = get_download_dir()
-app_path = os.path.join(get_open_source_app_dir(), 'JsonEdit', 'JSONedit.exe')
+app_path = os.path.join(get_open_source_app_dir(), 'LogExpert', 'LogExpert.exe')
 
 def _get_n_recent_files(num):
-    files = [file for file in Path(download_path).glob(f'*.json') if file.is_file()]
+    files = [file for file in Path(download_path).glob(f'*.log') if file.is_file()]
     sorted_files = sorted(files, key=lambda x: os.path.getmtime(x), reverse=True)
     if not sorted_files:
         return None
     return sorted_files[:num]
 
 def _get_n_recent_file(num):
-    files = [file for file in Path(download_path).glob(f'*.json') if file.is_file()]
+    files = [file for file in Path(download_path).glob(f'*.log') if file.is_file()]
     sorted_files = sorted(files, key=lambda x: os.path.getmtime(x), reverse=True)
     if not sorted_files:
         return None
@@ -28,14 +28,21 @@ def _get_n_recent_file(num):
 
 def main(message: MainCommandMessage):
     '''
-Open json file from default directory, num specify only the nth recent file to open
+Open log file viewer application
+'''
+    subprocess.Popen([app_path])
+
+
+def download(message: SubCommandMessage):
+    '''
+Open log file from default directory, num specify only the nth recent file to open
 '''
     number = 1 if message.num == 0 else message.num
     files, _ = get_selected_files_path_in_top_file_explorer()
     file = files[0] if files else None
     if not file:
         file = _get_n_recent_file(int(number))
-
+        
     if not file :
         subprocess.Popen([app_path])
     else:        
@@ -43,10 +50,10 @@ Open json file from default directory, num specify only the nth recent file to o
 
 def all(message: SubCommandMessage):
     '''
-Open n json files from default directory, num specify all nth recent files to open
+Open n log files from default directory, num specify all nth recent files to open
 '''
     number = 1 if message.num == 0 else message.num
-    files = _get_n_recent_files(int(number))
+    files = _get_n_recent_file(int(number))
     if not files :
         subprocess.Popen([app_path ])
     else:

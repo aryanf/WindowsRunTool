@@ -106,6 +106,9 @@ def get_document_dir():
 def get_video_dir():
     return get_user_content_dir('Videos')
 
+def get_my_run_data_dir():
+    return f'C:\\MyRunData\\'
+
 def get_user_content_dir(content):
     download_path =  get_user_configuration()['paths'].get(content, '')
     if not os.path.exists(download_path):

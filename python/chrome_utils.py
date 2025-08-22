@@ -7,22 +7,19 @@ import threading
 
 
 def auto_chrome(timer_list_title_mouse_dic):
-    print('Starting background thread')
     background_thread = threading.Thread(target=run_background_chrome_check, args=(timer_list_title_mouse_dic,))
     background_thread.daemon = True  # This makes the thread exit when the main program exits
-    print('Starting background thread')
     background_thread.start()
     return
 
 
 def run_background_chrome_check(timer_list_title_mouse_dic):
-    print('Running background thread')
     timer = timer_list_title_mouse_dic['timer']
     for i in range(timer):
         time.sleep(1)
         try:
             target_hwnd, process_nam, title, runner_hwnd = get_most_top_window_of_process_name('chrome.exe')
-            print(target_hwnd, process_nam, title, runner_hwnd)
+            #print(target_hwnd, process_nam, title, runner_hwnd)
         except Exception as e:
             print(e)
             title = ''

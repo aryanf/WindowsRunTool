@@ -1,4 +1,4 @@
-from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_dir)
+from message import (MainCommandMessage, SubCommandMessage, get_open_source_app_dir, get_my_run_data_dir)
 import subprocess
 import os
 import pygetwindow as gw
@@ -11,15 +11,17 @@ import ctypes
 from PIL import Image
 import win32clipboard
 from io import BytesIO
+import curses_terminal
+import pyperclip
+import codename
 
 
 # Constants for getting extended window attributes
 DWMWA_EXTENDED_FRAME_BOUNDS = 9
 
-qdir_path = os.path.join(get_open_source_app_dir(), 'Q-Dir', 'Q-Dir_x64.exe')
 app_dir_path = os.path.join(get_open_source_app_dir(), 'ShareX')
 app_path = os.path.join(get_open_source_app_dir(), 'ShareX', 'ShareX.exe')
-pinned_dir_path = os.path.join(get_open_source_app_dir(), 'ShareX', 'ShareX', 'Pinned')
+base_pinned_dir_path = os.path.join(get_my_run_data_dir(), 'Pinned')
 # Load the DWM API
 dwmapi = ctypes.windll.dwmapi
 
@@ -40,6 +42,36 @@ def toggle(message:SubCommandMessage):
             hide(message)
         else:
             show(message)
+
+def min(message:SubCommandMessage):
+    '''
+Clean all ShareX pinned windows.
+'''
+    windows = _get_sharex_windows()
+    if windows:
+        for window in windows:
+            hwnd = window._hWnd
+            # Store original position
+            rect = win32gui.GetWindowRect(hwnd)
+            # close the window
+            win32gui.CloseWindow(hwnd)
+    else:
+        print("No ShareX pinned windows found.")
+
+def clean(message:SubCommandMessage):
+    '''
+Clean all ShareX pinned windows.
+'''
+    windows = _get_sharex_windows()
+    if windows:
+        for window in windows:
+            hwnd = window._hWnd
+            # Store original position
+            rect = win32gui.GetWindowRect(hwnd)
+            # close the window
+            win32gui.PostMessage(hwnd, win32con.WM_CLOSE, 0, 0)
+    else:
+        print("No ShareX pinned windows found.")
 
 
 def hide(message:SubCommandMessage):
@@ -77,11 +109,52 @@ Restore all hidden windows to their original positions.'
             y_offset += 50
 
 
+def list(message:SubCommandMessage):
+    '''
+List all saved labels.
+'''
+    # get all directories in pinned_dir_path
+    if not os.path.exists(base_pinned_dir_path):
+        print("No pinned windows found.")
+        return
+    pinned_files = os.listdir(base_pinned_dir_path)
+    # sort directories based on their creation time
+    pinned_files.sort(key=lambda x: os.path.getctime(os.path.join(base_pinned_dir_path, x)), reverse=True)
+    directory_names = [f for f in pinned_files if os.path.isdir(os.path.join(base_pinned_dir_path, f))]
+    commands = [('Load', curses_terminal.COLOR_GREEN), ('Delete', curses_terminal.COLOR_RED)]
+    if directory_names:
+        _, option = curses_terminal.show(options=directory_names, scrollable=True, default_selected_index=1)
+        _, command = curses_terminal.show(commands, scrollable=True, default_selected_index=1)
+        if command == 'Load':
+            # copy to clipboard and load the selected pinned window
+            pyperclip.copy(option)
+            load(SubCommandMessage(env='dev', num=0, switch_1=option, switch_2=None))
+        elif command == 'Delete':
+            # Delete the selected pinned window
+            dir_to_delete = os.path.join(base_pinned_dir_path, option)
+            if os.path.exists(dir_to_delete):
+                for file in os.listdir(dir_to_delete):
+                    os.remove(os.path.join(dir_to_delete, file))
+                os.rmdir(dir_to_delete)
+                print(f"Deleted pinned window: {option}")
+            else:
+                print(f"Directory {dir_to_delete} does not exist.")
+            list (message)  # Refresh the list after deletion
+    else:
+        print("No pinned windows found.")
+        time.sleep(3)
+
+
 def save(message:SubCommandMessage):
     '''
 Save the current cut screens to a local directory.'
 '''
     # Check directory exist
+    if message.switch_1 == '':
+        # random meaningful name
+        pinned_dir_path = os.path.join(base_pinned_dir_path, codename.codename(separator='_'))
+    else:
+        pinned_dir_path = os.path.join(base_pinned_dir_path, message.switch_1)
     if not os.path.exists(pinned_dir_path):
         os.makedirs(pinned_dir_path)
     # Remove all files in directory before saving
@@ -102,13 +175,17 @@ def load(message:SubCommandMessage):
     '''
 Load the saved cut screen from a local directory.'
 '''
+    if message.switch_1 == '':
+        # lis all saved pinned windows
+        list(message)
+    pinned_dir_path = os.path.join(base_pinned_dir_path, message.switch_1)
     for i, file in enumerate(os.listdir(pinned_dir_path)):
         # save image file to clipboard
         load_path = os.path.join(pinned_dir_path, file)
         _copy_image_to_clipboard(load_path)
-        time.sleep(3)
+        #time.sleep(2)
         subprocess.Popen([app_path, '-PinToScreenFromClipboard'])
-        time.sleep(3)
+        time.sleep(1)
     else:
         print("No ShareX pinned windows found.")
 
