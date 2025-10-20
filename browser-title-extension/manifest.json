@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Title Enhancer",
+  "version": "1.0",
+  "description": "Shows informative names in tab titles",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.console.aws.amazon.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
