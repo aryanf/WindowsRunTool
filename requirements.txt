@@ -19,5 +19,9 @@ boto3
 selenium
 telegram
 python-telegram-bot
-win10toast
+windows-toasts
 codename
+O365
+msgraph-core
+msal
+Pillow

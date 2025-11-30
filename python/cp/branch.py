@@ -4,6 +4,8 @@ import os
 import pyperclip
 import time
 import curses_terminal
+from windows_toasts import Toast, WindowsToaster
+from windows_toasts.wrappers import ToastDuration
 
 username = os.getenv('USER') or os.getenv('LOGNAME') or os.getenv('USERNAME')
 
@@ -44,11 +46,12 @@ def main(message: MainCommandMessage):
         time.sleep(0.5)
         git_commands = f'git checkout -b {new_branch}'
         pyperclip.copy(git_commands)
-        _confirmed_copy()
+        _complete_toast()
     except Exception as e:
         print(f"Error: {e}")
         time.sleep(10)
 
-def _confirmed_copy():
-    print("commands copied")
-    time.sleep(0.5)
+def _complete_toast():
+    toaster = WindowsToaster('Git Commands')
+    newToast = Toast(['in clipboard'], duration=ToastDuration.Short)
+    toaster.show_toast(newToast)

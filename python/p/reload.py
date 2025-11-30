@@ -36,7 +36,8 @@ async def _reload_tab(tab):
         # Send reload command to the tab
         await websocket.send(json.dumps({
             "id": 1,
-            "method": "Page.reload"
+            "method": "Page.reload",
+                "params": {"ignoreCache": False} 
         }))
         print(f"Reloaded tab: {tab['url']}")
 

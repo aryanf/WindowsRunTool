@@ -158,14 +158,14 @@ def get_most_top_window_of_process_name(process_name):
         try:
             _, pid = win32process.GetWindowThreadProcessId(app.hwnd)
             process = psutil.Process(pid)
-            print(process.name())
+            #print(process.name())
             if process.name() == process_name:
                 app_filtered.append([process.name(), app])
         except:
             app_filtered.append(["Unknown", app])
-    print('app_filtered', app_filtered)
+    #print('app_filtered', app_filtered)
     title = _get_window_title(app_filtered[0][1])
-    print('Top windows is ', app_filtered[0][0], ' with title ', title)
+    #print('Top windows is ', app_filtered[0][0], ' with title ', title)
     return app_filtered[0][1].hwnd, app_filtered[0][0], title, runner_hwnd
 
 

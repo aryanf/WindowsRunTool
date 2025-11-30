@@ -1,12 +1,14 @@
 from message import (MainCommandMessage, SubCommandMessage)
-from win10toast import ToastNotifier
 import pyautogui
+from windows_toasts import Toast, WindowsToaster
+from windows_toasts.wrappers import ToastDuration
 
 def main(message: MainCommandMessage):
     '''
 Show the current mouse position by x and y
 '''
     print(pyautogui. position())
-    toaster = ToastNotifier()
-    toaster.show_toast("Mouse", str(pyautogui.position()), duration=5)
+    toaster = WindowsToaster('Mouse Position')
+    newToast = Toast([str(pyautogui.position())], duration=ToastDuration.Short)
+    toaster.show_toast(newToast)
     input()
