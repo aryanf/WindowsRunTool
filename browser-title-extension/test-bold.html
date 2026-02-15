@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Bold Title Parsing</title>
+    <script src="tab-navigator.js"></script>
+</head>
+<body>
+    <h1>Test Bold Title Parsing</h1>
+    
+    <div id="test-output"></div>
+    
+    <script>
+        // Helper function to extract the meaningful part of a resource name
+        const formatResourceName = (name) => {
+            if (!name) return name;
+            
+            const original = name;
+            let prefix = '';
+            let core = name;
+            let suffix = '';
+            
+            // Common environment/namespace prefixes to strip
+            const prefixPatterns = [
+                /^(Prod|Production|Dev|Development|Staging|Stg|Test|Tst)[-_]/i,
+                /^(ME|INA|InA)[-_]/i,
+                /^(Prod|Dev|Staging|Test)[-_](ME|INA|InA)[-_]/i,
+            ];
+            
+            // Strip prefixes
+            for (const pattern of prefixPatterns) {
+                const match = core.match(pattern);
+                if (match) {
+                    prefix += match[0];
+                    core = core.substring(match[0].length);
+                }
+            }
+            
+            // Common suffixes to strip (including random IDs/hashes)
+            const suffixPatterns = [
+                /[-_]([a-z0-9]{12,}|[A-Z0-9]{12,}|[a-zA-Z0-9]*[0-9][a-zA-Z0-9]*[0-9][a-zA-Z0-9]{8,})$/,  // Random hash/ID at end (lowercase only, uppercase only, or mixed with multiple numbers)
+                /[-_](Queue|DLQ|DeadLetter)(\.fifo)?$/i,
+                /[-_](Lambda|Function)$/i,
+                /[-_](Service|Worker|Api|API|Handler)$/i,
+                /[-_](Stack|Cluster|Bucket|Table|Group)$/i,
+                /\.fifo$/i,
+            ];
+            
+            // Strip suffixes iteratively until no more matches
+            let foundSuffix = true;
+            while (foundSuffix) {
+                foundSuffix = false;
+                for (const pattern of suffixPatterns) {
+                    const match = core.match(pattern);
+                    if (match) {
+                        suffix = match[0] + suffix;
+                        core = core.substring(0, core.length - match[0].length);
+                        foundSuffix = true;
+                        break; // Start over with the shortened core
+                    }
+                }
+            }
+            
+            // Strip common connector terms in the middle (like -Service- between meaningful parts)
+            const middleTerms = /^(Service|Worker|Api|API|Handler|App|Application)[-_]/i;
+            const middleMatch = core.match(middleTerms);
+            if (middleMatch) {
+                prefix += middleMatch[0];
+                core = core.substring(middleMatch[0].length);
+            }
+            
+            // If we stripped everything, use original
+            if (!core || core.length < 2) {
+                return `**${original}**`;
+            }
+            
+            // Return formatted with bold markers around core
+            return `${prefix}**${core}**${suffix}`;
+        };
+        
+        // Test the bold parsing logic
+        const testTitles = [
+            "[SQS] Prod-ME-InA-Event-Operation-Queue.fifo",
+            "[SQS] Prod-ME-InA-Event-Operations-Queue-DeadLetter.fifo",
+            "[SQS] Prod-ME-Service-InA-Event-InaEventOperationsConsum-58YrwwE7kXII",
+            "[SQS] Prod-ME-Service-InA-Event-PutMeasurementValueProce-2VhEJPCK8mFx",
+            "[Lambda] Dev-ME-Estimation-WorkerLambda",
+            "[CF] Prod-ME-Service-Stack",
+            "[ECS] me-cluster / staging-api-service",
+            "[S3] prod-data-bucket/files",
+            "INA datahub dh-21x e66export",
+            "[DynamoDB]", // No bold
+            "[Log Group] Prod-InA-Forwarder-Lambda"
+        ];
+        
+        const output = document.getElementById('test-output');
+        
+        testTitles.forEach(inputTitle => {
+            const container = document.createElement('div');
+            container.style.marginBottom = '20px';
+            container.style.padding = '10px';
+            container.style.border = '1px solid #ddd';
+            
+            const label = document.createElement('div');
+            label.textContent = 'Input: ' + inputTitle;
+            label.style.color = '#666';
+            label.style.fontSize = '12px';
+            label.style.marginBottom = '5px';
+            container.appendChild(label);
+            
+            // Process the title: extract service tag and resource name
+            let title = inputTitle;
+            const serviceMatch = inputTitle.match(/^(\[[^\]]+\])\s+(.+)/) || inputTitle.match(/^([A-Z]+)\s+(.+)/);
+            
+            if (serviceMatch) {
+                const serviceTag = serviceMatch[1];
+                const resourceName = serviceMatch[2];
+                title = `${serviceTag} ${formatResourceName(resourceName)}`;
+            }
+            
+            const result = document.createElement('div');
+            result.style.fontSize = '16px';
+            
+            // Apply the same parsing logic for bold markers
+            const boldPattern = /\*\*(.+?)\*\*/g;
+            
+            if (boldPattern.test(title)) {
+                let lastIndex = 0;
+                const fragments = [];
+                const tempPattern = /\*\*(.+?)\*\*/g;
+                let match;
+                
+                while ((match = tempPattern.exec(title)) !== null) {
+                    if (match.index > lastIndex) {
+                        const textNode = document.createTextNode(title.substring(lastIndex, match.index));
+                        fragments.push(textNode);
+                    }
+                    
+                    const boldSpan = document.createElement('span');
+                    boldSpan.style.fontWeight = '700';
+                    boldSpan.textContent = match[1];
+                    fragments.push(boldSpan);
+                    
+                    lastIndex = tempPattern.lastIndex;
+                }
+                
+                if (lastIndex < title.length) {
+                    const textNode = document.createTextNode(title.substring(lastIndex));
+                    fragments.push(textNode);
+                }
+                
+                fragments.forEach(fragment => result.appendChild(fragment));
+            } else {
+                result.textContent = title;
+            }
+            
+            container.appendChild(result);
+            output.appendChild(container);
+        });
+    </script>
+</body>
+</html>

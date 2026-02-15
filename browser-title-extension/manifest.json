@@ -3,13 +3,45 @@
   "name": "Title Enhancer",
   "version": "1.0",
   "description": "Shows informative names in tab titles",
+  "permissions": [
+    "tabs",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "open-tab-navigator": {
+      "suggested_key": {
+        "default": "Alt+Down"
+      },
+      "description": "Open tab navigator"
+    }
+  },
   "content_scripts": [
     {
       "matches": [
-        "https://*.console.aws.amazon.com/*"
+        "https://*.console.aws.amazon.com/*",
+        "https://*.utilytics.com/*",
+        "https://*.atlassian.net/*"
       ],
       "js": ["content.js"],
       "run_at": "document_end"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-tab-navigator.js", "tab-navigator.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["tab-navigator.html", "tab-navigator.css", "icons/jenkins/jenkins.png", "icons/aws/aws.ico", "bold-patterns.json"],
+      "matches": ["<all_urls>"]
     }
   ]
 }

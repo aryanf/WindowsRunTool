@@ -3,6 +3,9 @@
 from message import (MainCommandMessage, SubCommandMessage)
 import requests
 import time
+import uuid
+from windows_toasts import Toast, WindowsToaster
+from windows_toasts.wrappers import ToastDuration
 
 def main(message: MainCommandMessage):
     '''
@@ -12,19 +15,26 @@ def main(message: MainCommandMessage):
 '''
     case_id = message.switch_1
     print(case_id)
-    _post_case_id_to_storage(case_id=case_id)
+    # Generate UUID using uuid4 (random UUID)
+    case_uuid = str(uuid.uuid4())
+    print(case_uuid)
+    # Filter to only numeric digits and take first 18
+    case_18digits = ''.join(c for c in case_uuid.replace('-', '') if c.isdigit())[:18]
+    print(case_18digits)
+    _post_case_id_to_storage(case_id=case_id, case_uuid=case_uuid, case_18digits=case_18digits)
 
 
-def _post_case_id_to_storage(case_id):
+def _post_case_id_to_storage(case_id, case_uuid, case_18digits):
     url = 'http://localhost:3000/set-clipboard-case-id'
     content_data = {
         "case_id": case_id,
+        "case_uuid": case_uuid,
+        "case_18digits": case_18digits,
     }
     try:
         response = requests.post(url, json=content_data)
         if response.status_code == 200:
-            print("Case stored")
-            time.sleep(1)
+            _complete_toast(f"Stored case id: {case_id}")
         else:
             print(f"Failed to store. Status not success.")
             time.sleep(2)
@@ -32,3 +42,12 @@ def _post_case_id_to_storage(case_id):
         print(f"Failed to post.")
         time.sleep(2)
     return
+
+def _complete_toast(message):
+    try:
+        toaster = WindowsToaster('Token')
+        newToast = Toast([message], duration=ToastDuration.Short)
+        toaster.show_toast(newToast)
+    except Exception as e:
+        # Silently handle toast notification errors
+        pass

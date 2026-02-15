@@ -1,0 +1,11 @@
+{
+  "boldPatterns": [
+    "InA-Event-Operation",
+    "InA-Event-Operations",
+    "InA-Event-InaEventOperationsConsum",
+    "InA-Event-PutMeasurementValueProce",
+    "InA-Forwarder",
+    "Estimation-Worker"
+  ],
+  "description": "List of substring patterns that should be bold in tab titles. Add your patterns here over time."
+}
