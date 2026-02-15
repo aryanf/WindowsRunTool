@@ -1,3 +1,17 @@
+1.2.9
+ - Add CloudWatch Log Group, EC2, Load Balancer, Security Group, CloudFormation, and Secrets Manager support to browser title extension
+ - Enhance Lambda function name extraction with path-style hash support
+ - Add ECS and title element observation to prevent AWS console title override
+ - Add AutoHotkey shortcuts: Alt+D for DoubleCmd, Alt+X for cut toggle, Alt+F for fix
+ - Add browser-specific Alt+Down shortcuts (minimize on Chrome/Edge, pass-through on VS Code)
+ - Replace win10toast with windows-toasts for modern Windows 11 notifications
+ - Add Windows toast notifications for git branch, mouse position, and host file cleanup
+ - Improve URL parsing with AWS service extraction and smart display (SQS, DynamoDB, S3, Lambda, ECS, etc.)
+ - Add indexed output and duplicate removal for browser history URLs
+ - Add page reload cache control parameter
+ - Reduce debug output in window utility functions
+ - Add O365, msgraph-core, msal, and Pillow dependencies
+
 1.2.8
  - Update grep, zip, unzip and xml
 
@@ -8,7 +22,7 @@
 1.2.6
  - Update documentation
  
- 1.2.5
+1.2.5
  - Support Opera
  - Code clean up and performance refactor
 
