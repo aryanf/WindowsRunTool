@@ -1,0 +1,1010 @@
+﻿2026-06-01 07.23.33.941 - ShareX starting.
+2026-06-01 07.23.33.945 - Version: 19.0.2 Portable
+2026-06-01 07.23.33.945 - Build: Release
+2026-06-01 07.23.33.946 - Command line: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX.dll -silent
+2026-06-01 07.23.33.946 - Personal path: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX
+2026-06-01 07.23.33.946 - Personal path detection method: Portable file (C:\code\WindowsRunTool\portable_open_source_apps\ShareX\Portable)
+2026-06-01 07.23.33.947 - Operating system: Windows 10 Enterprise (64-bit)
+2026-06-01 07.23.33.948 - .NET version: 9.0.12
+2026-06-01 07.23.33.948 - Running as elevated process: False
+2026-06-01 07.23.33.951 - Flags: Portable, SilentRun
+2026-06-01 07.23.33.981 - ApplicationConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-01 07.23.34.520 - ApplicationConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-01 07.23.34.785 - UploadersConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-01 07.23.34.788 - Language changed to: English (Finland)
+2026-06-01 07.23.34.788 - MainForm init started.
+2026-06-01 07.23.34.836 - UploadersConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-01 07.23.34.837 - HotkeysConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-01 07.23.34.860 - HotkeysConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-01 07.23.35.269 - MainForm init finished.
+2026-06-01 07.23.35.387 - Hotkey registered: Hotkey: Ctrl + Print Screen, Description: Capture region, Job: RectangleRegion
+2026-06-01 07.23.35.388 - Hotkey registered: Hotkey: Print Screen, Description: Capture entire screen, Job: PrintScreen
+2026-06-01 07.23.35.388 - Hotkey registered: Hotkey: Alt + Print Screen, Description: Capture active window, Job: ActiveWindow
+2026-06-01 07.23.35.388 - Hotkey registered: Hotkey: Shift + Print Screen, Description: Start/Stop screen recording, Job: ScreenRecorder
+2026-06-01 07.23.35.388 - Hotkey registered: Hotkey: Ctrl + Shift + Print Screen, Description: Start/Stop screen recording (GIF), Job: ScreenRecorderGIF
+2026-06-01 07.23.35.388 - HotkeyManager started.
+2026-06-01 07.23.35.388 - WatchFolderManager started.
+2026-06-01 07.23.35.396 - Startup time: 1667 ms
+2026-06-01 07.23.35.397 - CommandLine: -silent
+2026-06-01 11.44.42.764 - Arguments received: "-PinToScreenFromScreen"
+2026-06-01 11.44.42.768 - CommandLine: -PinToScreenFromScreen
+2026-06-01 11.44.42.773 - Executing: Pin to screen (From screen)
+2026-06-01 11.44.55.385 - Arguments received: "-PinToScreenFromScreen"
+2026-06-01 11.44.55.386 - CommandLine: -PinToScreenFromScreen
+2026-06-01 11.44.55.386 - Executing: Pin to screen (From screen)
+2026-06-01 13.24.55.944 - Arguments received: "-PinToScreenFromScreen"
+2026-06-01 13.24.55.945 - CommandLine: -PinToScreenFromScreen
+2026-06-01 13.24.55.945 - Executing: Pin to screen (From screen)
+2026-06-01 14.08.17.111 - Arguments received: "-PinToScreenFromScreen"
+2026-06-01 14.08.17.112 - CommandLine: -PinToScreenFromScreen
+2026-06-01 14.08.17.113 - Executing: Pin to screen (From screen)
+2026-06-01 15.23.40.517 - Arguments received: "-PinToScreenFromScreen"
+2026-06-01 15.23.40.519 - CommandLine: -PinToScreenFromScreen
+2026-06-01 15.23.40.519 - Executing: Pin to screen (From screen)
+2026-06-01 15.23.49.121 - Arguments received: "-PinToScreenFromScreen"
+2026-06-01 15.23.49.122 - CommandLine: -PinToScreenFromScreen
+2026-06-01 15.23.49.122 - Executing: Pin to screen (From screen)
+2026-06-01 15.23.59.367 - Arguments received: "-PinToScreenFromScreen"
+2026-06-01 15.23.59.367 - CommandLine: -PinToScreenFromScreen
+2026-06-01 15.23.59.368 - Executing: Pin to screen (From screen)
+2026-06-01 15.31.14.646 - Arguments received: "-PinToScreenFromScreen"
+2026-06-01 15.31.14.646 - CommandLine: -PinToScreenFromScreen
+2026-06-01 15.31.14.646 - Executing: Pin to screen (From screen)
+2026-06-01 16.23.32.156 - GitHub update check failed.:
+System.Net.Http.HttpRequestException: No such host is known. (api.github.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at ShareX.HelpersLib.WebHelpers.DownloadStringAsync(String url)
+   at ShareX.HelpersLib.GitHubUpdateChecker.GetLatestRelease()
+   at ShareX.HelpersLib.GitHubUpdateChecker.GetLatestRelease(Boolean includePreRelease)
+   at ShareX.HelpersLib.GitHubUpdateChecker.CheckUpdateAsync()
+2026-06-02 11.41.56.292 - ShareX closing.
+2026-06-02 11.41.56.411 - ApplicationConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-02 11.41.56.967 - ApplicationConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-02 11.41.56.969 - UploadersConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-02 11.41.57.149 - UploadersConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-02 11.41.57.151 - HotkeysConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-02 11.52.06.301 - ShareX starting.
+2026-06-02 11.52.06.308 - Version: 19.0.2 Portable
+2026-06-02 11.52.06.308 - Build: Release
+2026-06-02 11.52.06.308 - Command line: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX.dll -silent
+2026-06-02 11.52.06.309 - Personal path: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX
+2026-06-02 11.52.06.309 - Personal path detection method: Portable file (C:\code\WindowsRunTool\portable_open_source_apps\ShareX\Portable)
+2026-06-02 11.52.06.310 - Operating system: Windows 10 Enterprise (64-bit)
+2026-06-02 11.52.06.312 - .NET version: 9.0.12
+2026-06-02 11.52.06.312 - Running as elevated process: False
+2026-06-02 11.52.06.318 - Flags: Portable, SilentRun
+2026-06-02 11.52.06.357 - ApplicationConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-02 11.52.07.215 - ApplicationConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-02 11.52.07.675 - UploadersConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-02 11.52.07.677 - Language changed to: English (Finland)
+2026-06-02 11.52.07.677 - MainForm init started.
+2026-06-02 11.52.07.782 - UploadersConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-02 11.52.07.784 - HotkeysConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-02 11.52.07.812 - HotkeysConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-02 11.52.08.455 - MainForm init finished.
+2026-06-02 11.52.08.765 - Hotkey registered: Hotkey: Ctrl + Print Screen, Description: Capture region, Job: RectangleRegion
+2026-06-02 11.52.08.765 - Hotkey registered: Hotkey: Print Screen, Description: Capture entire screen, Job: PrintScreen
+2026-06-02 11.52.08.765 - Hotkey registered: Hotkey: Alt + Print Screen, Description: Capture active window, Job: ActiveWindow
+2026-06-02 11.52.08.765 - Hotkey registered: Hotkey: Shift + Print Screen, Description: Start/Stop screen recording, Job: ScreenRecorder
+2026-06-02 11.52.08.765 - Hotkey registered: Hotkey: Ctrl + Shift + Print Screen, Description: Start/Stop screen recording (GIF), Job: ScreenRecorderGIF
+2026-06-02 11.52.08.766 - HotkeyManager started.
+2026-06-02 11.52.08.767 - WatchFolderManager started.
+2026-06-02 11.52.08.793 - Startup time: 2683 ms
+2026-06-02 11.52.08.795 - CommandLine: -silent
+2026-06-02 13.42.24.849 - Arguments received: "-PinToScreenFromScreen"
+2026-06-02 13.42.24.854 - CommandLine: -PinToScreenFromScreen
+2026-06-02 13.42.24.857 - Executing: Pin to screen (From screen)
+2026-06-02 13.48.06.937 - Arguments received: "-PinToScreenFromScreen"
+2026-06-02 13.48.06.940 - CommandLine: -PinToScreenFromScreen
+2026-06-02 13.48.06.940 - Executing: Pin to screen (From screen)
+2026-06-03 08.36.42.117 - ShareX closing.
+2026-06-03 08.36.42.222 - ApplicationConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-03 08.36.42.550 - ApplicationConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-03 08.36.42.551 - UploadersConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-03 08.36.42.632 - UploadersConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-03 08.36.42.636 - HotkeysConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-03 08.44.53.774 - ShareX starting.
+2026-06-03 08.44.53.780 - Version: 19.0.2 Portable
+2026-06-03 08.44.53.780 - Build: Release
+2026-06-03 08.44.53.780 - Command line: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX.dll -silent
+2026-06-03 08.44.53.781 - Personal path: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX
+2026-06-03 08.44.53.781 - Personal path detection method: Portable file (C:\code\WindowsRunTool\portable_open_source_apps\ShareX\Portable)
+2026-06-03 08.44.53.782 - Operating system: Windows 10 Enterprise (64-bit)
+2026-06-03 08.44.53.783 - .NET version: 9.0.12
+2026-06-03 08.44.53.783 - Running as elevated process: False
+2026-06-03 08.44.53.786 - Flags: Portable, SilentRun
+2026-06-03 08.44.53.813 - ApplicationConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-03 08.44.54.230 - ApplicationConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-03 08.44.54.495 - UploadersConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-03 08.44.54.498 - Language changed to: English (Finland)
+2026-06-03 08.44.54.498 - MainForm init started.
+2026-06-03 08.44.54.545 - UploadersConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-03 08.44.54.546 - HotkeysConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-03 08.44.54.568 - HotkeysConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-03 08.44.54.991 - MainForm init finished.
+2026-06-03 08.44.55.121 - Hotkey registered: Hotkey: Ctrl + Print Screen, Description: Capture region, Job: RectangleRegion
+2026-06-03 08.44.55.121 - Hotkey registered: Hotkey: Print Screen, Description: Capture entire screen, Job: PrintScreen
+2026-06-03 08.44.55.121 - Hotkey registered: Hotkey: Alt + Print Screen, Description: Capture active window, Job: ActiveWindow
+2026-06-03 08.44.55.121 - Hotkey registered: Hotkey: Shift + Print Screen, Description: Start/Stop screen recording, Job: ScreenRecorder
+2026-06-03 08.44.55.121 - Hotkey registered: Hotkey: Ctrl + Shift + Print Screen, Description: Start/Stop screen recording (GIF), Job: ScreenRecorderGIF
+2026-06-03 08.44.55.121 - HotkeyManager started.
+2026-06-03 08.44.55.122 - WatchFolderManager started.
+2026-06-03 08.44.55.127 - Startup time: 1491 ms
+2026-06-03 08.44.55.128 - CommandLine: -silent
+2026-06-03 09.14.24.704 - Arguments received: "-PinToScreenFromScreen"
+2026-06-03 09.14.24.707 - CommandLine: -PinToScreenFromScreen
+2026-06-03 09.14.24.711 - Executing: Pin to screen (From screen)
+2026-06-03 09.53.21.588 - Arguments received: "-PinToScreenFromScreen"
+2026-06-03 09.53.21.590 - CommandLine: -PinToScreenFromScreen
+2026-06-03 09.53.21.590 - Executing: Pin to screen (From screen)
+2026-06-03 16.58.57.325 - GitHub update check failed.:
+System.Net.Http.HttpRequestException: No such host is known. (api.github.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at ShareX.HelpersLib.WebHelpers.DownloadStringAsync(String url)
+   at ShareX.HelpersLib.GitHubUpdateChecker.GetLatestRelease()
+   at ShareX.HelpersLib.GitHubUpdateChecker.GetLatestRelease(Boolean includePreRelease)
+   at ShareX.HelpersLib.GitHubUpdateChecker.CheckUpdateAsync()
+2026-06-04 13.02.22.363 - Arguments received: "-PinToScreenFromScreen"
+2026-06-04 13.02.22.370 - CommandLine: -PinToScreenFromScreen
+2026-06-04 13.02.22.375 - Executing: Pin to screen (From screen)
+2026-06-04 13.07.09.781 - Arguments received: "-PinToScreenFromScreen"
+2026-06-04 13.07.09.781 - CommandLine: -PinToScreenFromScreen
+2026-06-04 13.07.09.781 - Executing: Pin to screen (From screen)
+2026-06-04 14.59.42.442 - Arguments received: "-PinToScreenFromScreen"
+2026-06-04 14.59.42.443 - CommandLine: -PinToScreenFromScreen
+2026-06-04 14.59.42.443 - Executing: Pin to screen (From screen)
+2026-06-04 15.03.10.799 - Arguments received: "-PinToScreenFromScreen"
+2026-06-04 15.03.10.799 - CommandLine: -PinToScreenFromScreen
+2026-06-04 15.03.10.799 - Executing: Pin to screen (From screen)
+2026-06-04 15.03.32.166 - Arguments received: "-PinToScreenFromScreen"
+2026-06-04 15.03.32.166 - CommandLine: -PinToScreenFromScreen
+2026-06-04 15.03.32.166 - Executing: Pin to screen (From screen)
+2026-06-04 15.03.50.030 - Arguments received: "-PinToScreenFromScreen"
+2026-06-04 15.03.50.032 - CommandLine: -PinToScreenFromScreen
+2026-06-04 15.03.50.032 - Executing: Pin to screen (From screen)
+2026-06-04 16.38.46.234 - ShareX closing.
+2026-06-04 16.38.46.300 - ApplicationConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-04 16.38.49.396 - ApplicationConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-04 16.38.49.398 - UploadersConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-04 16.38.49.553 - UploadersConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-04 16.38.49.556 - HotkeysConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-04 16.38.49.609 - HotkeysConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-05 09.13.49.431 - ShareX starting.
+2026-06-05 09.13.49.438 - Version: 19.0.2 Portable
+2026-06-05 09.13.49.439 - Build: Release
+2026-06-05 09.13.49.440 - Command line: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX.dll -silent
+2026-06-05 09.13.49.441 - Personal path: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX
+2026-06-05 09.13.49.441 - Personal path detection method: Portable file (C:\code\WindowsRunTool\portable_open_source_apps\ShareX\Portable)
+2026-06-05 09.13.49.443 - Operating system: Windows 10 Enterprise (64-bit)
+2026-06-05 09.13.49.445 - .NET version: 9.0.12
+2026-06-05 09.13.49.446 - Running as elevated process: False
+2026-06-05 09.13.49.451 - Flags: Portable, SilentRun
+2026-06-05 09.13.49.498 - ApplicationConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-05 09.13.50.211 - ApplicationConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-05 09.13.50.559 - UploadersConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-05 09.13.50.561 - Language changed to: English (Finland)
+2026-06-05 09.13.50.562 - MainForm init started.
+2026-06-05 09.13.50.773 - UploadersConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-05 09.13.50.775 - HotkeysConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-05 09.13.50.867 - HotkeysConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-05 09.13.52.206 - MainForm init finished.
+2026-06-05 09.13.52.437 - Hotkey registered: Hotkey: Ctrl + Print Screen, Description: Capture region, Job: RectangleRegion
+2026-06-05 09.13.52.437 - Hotkey registered: Hotkey: Print Screen, Description: Capture entire screen, Job: PrintScreen
+2026-06-05 09.13.52.438 - Hotkey registered: Hotkey: Alt + Print Screen, Description: Capture active window, Job: ActiveWindow
+2026-06-05 09.13.52.438 - Hotkey registered: Hotkey: Shift + Print Screen, Description: Start/Stop screen recording, Job: ScreenRecorder
+2026-06-05 09.13.52.438 - Hotkey registered: Hotkey: Ctrl + Shift + Print Screen, Description: Start/Stop screen recording (GIF), Job: ScreenRecorderGIF
+2026-06-05 09.13.52.438 - HotkeyManager started.
+2026-06-05 09.13.52.439 - WatchFolderManager started.
+2026-06-05 09.13.52.457 - Startup time: 3323 ms
+2026-06-05 09.13.52.459 - CommandLine: -silent
+2026-06-05 09.47.15.770 - Arguments received: "-PinToScreenFromScreen"
+2026-06-05 09.47.15.772 - CommandLine: -PinToScreenFromScreen
+2026-06-05 09.47.15.776 - Executing: Pin to screen (From screen)
+2026-06-05 09.53.25.901 - Arguments received: "-PinToScreenFromScreen"
+2026-06-05 09.53.25.903 - CommandLine: -PinToScreenFromScreen
+2026-06-05 09.53.25.903 - Executing: Pin to screen (From screen)
+2026-06-05 14.56.44.624 - Arguments received: "-PinToScreenFromScreen"
+2026-06-05 14.56.44.625 - CommandLine: -PinToScreenFromScreen
+2026-06-05 14.56.44.626 - Executing: Pin to screen (From screen)
+2026-06-08 12.35.14.962 - ShareX closing.
+2026-06-08 12.35.15.286 - ApplicationConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-08 12.35.15.804 - ApplicationConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-08 12.35.15.806 - UploadersConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-08 12.35.15.938 - UploadersConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-08 12.35.15.944 - HotkeysConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-08 12.44.06.932 - ShareX starting.
+2026-06-08 12.44.06.939 - Version: 19.0.2 Portable
+2026-06-08 12.44.06.939 - Build: Release
+2026-06-08 12.44.06.940 - Command line: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX.dll -silent
+2026-06-08 12.44.06.941 - Personal path: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX
+2026-06-08 12.44.06.942 - Personal path detection method: Portable file (C:\code\WindowsRunTool\portable_open_source_apps\ShareX\Portable)
+2026-06-08 12.44.06.943 - Operating system: Windows 10 Enterprise (64-bit)
+2026-06-08 12.44.06.945 - .NET version: 9.0.12
+2026-06-08 12.44.06.945 - Running as elevated process: False
+2026-06-08 12.44.06.955 - Flags: Portable, SilentRun
+2026-06-08 12.44.07.023 - ApplicationConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-08 12.44.07.480 - ApplicationConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-08 12.44.07.721 - UploadersConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-08 12.44.07.722 - Language changed to: English (Finland)
+2026-06-08 12.44.07.723 - MainForm init started.
+2026-06-08 12.44.07.786 - UploadersConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-08 12.44.07.787 - HotkeysConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-08 12.44.07.810 - HotkeysConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-08 12.44.08.402 - MainForm init finished.
+2026-06-08 12.44.08.541 - Hotkey registered: Hotkey: Ctrl + Print Screen, Description: Capture region, Job: RectangleRegion
+2026-06-08 12.44.08.542 - Hotkey registered: Hotkey: Print Screen, Description: Capture entire screen, Job: PrintScreen
+2026-06-08 12.44.08.542 - Hotkey registered: Hotkey: Alt + Print Screen, Description: Capture active window, Job: ActiveWindow
+2026-06-08 12.44.08.542 - Hotkey registered: Hotkey: Shift + Print Screen, Description: Start/Stop screen recording, Job: ScreenRecorder
+2026-06-08 12.44.08.542 - Hotkey registered: Hotkey: Ctrl + Shift + Print Screen, Description: Start/Stop screen recording (GIF), Job: ScreenRecorderGIF
+2026-06-08 12.44.08.543 - HotkeyManager started.
+2026-06-08 12.44.08.544 - WatchFolderManager started.
+2026-06-08 12.44.08.551 - Startup time: 1845 ms
+2026-06-08 12.44.08.552 - CommandLine: -silent
+2026-06-15 08.40.13.853 - ShareX closing.
+2026-06-15 08.40.13.872 - ApplicationConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-15 08.51.06.434 - ShareX starting.
+2026-06-15 08.51.06.440 - Version: 19.0.2 Portable
+2026-06-15 08.51.06.441 - Build: Release
+2026-06-15 08.51.06.442 - Command line: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX.dll -silent
+2026-06-15 08.51.06.442 - Personal path: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX
+2026-06-15 08.51.06.443 - Personal path detection method: Portable file (C:\code\WindowsRunTool\portable_open_source_apps\ShareX\Portable)
+2026-06-15 08.51.06.443 - Operating system: Windows 10 Enterprise (64-bit)
+2026-06-15 08.51.06.444 - .NET version: 9.0.12
+2026-06-15 08.51.06.445 - Running as elevated process: False
+2026-06-15 08.51.06.450 - Flags: Portable, SilentRun
+2026-06-15 08.51.06.483 - ApplicationConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-15 08.51.07.041 - ApplicationConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-15 08.51.07.319 - UploadersConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-15 08.51.07.321 - Language changed to: English (Finland)
+2026-06-15 08.51.07.321 - MainForm init started.
+2026-06-15 08.51.07.432 - UploadersConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-15 08.51.07.435 - HotkeysConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-15 08.51.07.476 - HotkeysConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-15 08.51.08.168 - MainForm init finished.
+2026-06-15 08.51.08.320 - Hotkey registered: Hotkey: Ctrl + Print Screen, Description: Capture region, Job: RectangleRegion
+2026-06-15 08.51.08.321 - Hotkey registered: Hotkey: Print Screen, Description: Capture entire screen, Job: PrintScreen
+2026-06-15 08.51.08.321 - Hotkey registered: Hotkey: Alt + Print Screen, Description: Capture active window, Job: ActiveWindow
+2026-06-15 08.51.08.321 - Hotkey registered: Hotkey: Shift + Print Screen, Description: Start/Stop screen recording, Job: ScreenRecorder
+2026-06-15 08.51.08.321 - Hotkey registered: Hotkey: Ctrl + Shift + Print Screen, Description: Start/Stop screen recording (GIF), Job: ScreenRecorderGIF
+2026-06-15 08.51.08.321 - HotkeyManager started.
+2026-06-15 08.51.08.322 - WatchFolderManager started.
+2026-06-15 08.51.08.335 - Startup time: 2162 ms
+2026-06-15 08.51.08.337 - CommandLine: -silent
+2026-06-15 09.10.40.667 - Arguments received: "-PinToScreenFromScreen"
+2026-06-15 09.10.40.672 - CommandLine: -PinToScreenFromScreen
+2026-06-15 09.10.40.677 - Executing: Pin to screen (From screen)
+2026-06-15 09.23.14.330 - Arguments received: "-PinToScreenFromScreen"
+2026-06-15 09.23.14.331 - CommandLine: -PinToScreenFromScreen
+2026-06-15 09.23.14.331 - Executing: Pin to screen (From screen)
+2026-06-15 09.23.57.745 - Arguments received: "-PinToScreenFromScreen"
+2026-06-15 09.23.57.746 - CommandLine: -PinToScreenFromScreen
+2026-06-15 09.23.57.746 - Executing: Pin to screen (From screen)
+2026-06-15 10.05.56.756 - Arguments received: "-PinToScreenFromScreen"
+2026-06-15 10.05.56.757 - CommandLine: -PinToScreenFromScreen
+2026-06-15 10.05.56.757 - Executing: Pin to screen (From screen)
+2026-06-15 10.35.31.413 - Arguments received: "-PinToScreenFromScreen"
+2026-06-15 10.35.31.414 - CommandLine: -PinToScreenFromScreen
+2026-06-15 10.35.31.414 - Executing: Pin to screen (From screen)
+2026-06-15 12.27.34.739 - Arguments received: "-PinToScreenFromScreen"
+2026-06-15 12.27.34.741 - CommandLine: -PinToScreenFromScreen
+2026-06-15 12.27.34.744 - Executing: Pin to screen (From screen)
+2026-06-15 12.36.55.358 - Arguments received: "-PinToScreenFromScreen"
+2026-06-15 12.36.55.358 - CommandLine: -PinToScreenFromScreen
+2026-06-15 12.36.55.359 - Executing: Pin to screen (From screen)
+2026-06-15 13.54.56.978 - Arguments received: "-PinToScreenFromScreen"
+2026-06-15 13.54.56.979 - CommandLine: -PinToScreenFromScreen
+2026-06-15 13.54.56.979 - Executing: Pin to screen (From screen)
+2026-06-15 13.56.29.858 - Arguments received: "-PinToScreenFromScreen"
+2026-06-15 13.56.29.859 - CommandLine: -PinToScreenFromScreen
+2026-06-15 13.56.29.859 - Executing: Pin to screen (From screen)
+2026-06-15 15.13.21.370 - Arguments received: "-PinToScreenFromScreen"
+2026-06-15 15.13.21.371 - CommandLine: -PinToScreenFromScreen
+2026-06-15 15.13.21.371 - Executing: Pin to screen (From screen)
+2026-06-15 16.40.15.846 - Arguments received: "-PinToScreenFromScreen"
+2026-06-15 16.40.15.847 - CommandLine: -PinToScreenFromScreen
+2026-06-15 16.40.15.847 - Executing: Pin to screen (From screen)
+2026-06-15 17.15.15.631 - ShareX closing.
+2026-06-15 17.15.15.724 - ApplicationConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-15 17.15.16.023 - ApplicationConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-15 17.15.16.025 - UploadersConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-15 17.15.16.116 - UploadersConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-15 17.15.16.118 - HotkeysConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-15 19.37.45.605 - ShareX starting.
+2026-06-15 19.37.45.612 - Version: 19.0.2 Portable
+2026-06-15 19.37.45.613 - Build: Release
+2026-06-15 19.37.45.614 - Command line: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX.dll -silent
+2026-06-15 19.37.45.615 - Personal path: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX
+2026-06-15 19.37.45.615 - Personal path detection method: Portable file (C:\code\WindowsRunTool\portable_open_source_apps\ShareX\Portable)
+2026-06-15 19.37.45.617 - Operating system: Windows 10 Enterprise (64-bit)
+2026-06-15 19.37.45.619 - .NET version: 9.0.12
+2026-06-15 19.37.45.619 - Running as elevated process: False
+2026-06-15 19.37.45.624 - Flags: Portable, SilentRun
+2026-06-15 19.37.45.667 - ApplicationConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-15 19.37.46.418 - ApplicationConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-15 19.37.46.715 - UploadersConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-15 19.37.46.715 - Language changed to: English (Finland)
+2026-06-15 19.37.46.716 - MainForm init started.
+2026-06-15 19.37.46.841 - UploadersConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-15 19.37.46.845 - HotkeysConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-15 19.37.46.899 - HotkeysConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-15 19.37.47.544 - MainForm init finished.
+2026-06-15 19.37.47.762 - Hotkey registered: Hotkey: Ctrl + Print Screen, Description: Capture region, Job: RectangleRegion
+2026-06-15 19.37.47.762 - Hotkey registered: Hotkey: Print Screen, Description: Capture entire screen, Job: PrintScreen
+2026-06-15 19.37.47.762 - Hotkey registered: Hotkey: Alt + Print Screen, Description: Capture active window, Job: ActiveWindow
+2026-06-15 19.37.47.762 - Hotkey registered: Hotkey: Shift + Print Screen, Description: Start/Stop screen recording, Job: ScreenRecorder
+2026-06-15 19.37.47.762 - Hotkey registered: Hotkey: Ctrl + Shift + Print Screen, Description: Start/Stop screen recording (GIF), Job: ScreenRecorderGIF
+2026-06-15 19.37.47.763 - HotkeyManager started.
+2026-06-15 19.37.47.763 - WatchFolderManager started.
+2026-06-15 19.37.47.779 - Startup time: 2398 ms
+2026-06-15 19.37.47.781 - CommandLine: -silent
+2026-06-16 09.18.32.497 - GitHub update check failed.:
+System.Net.Http.HttpRequestException: No such host is known. (api.github.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at ShareX.HelpersLib.WebHelpers.DownloadStringAsync(String url)
+   at ShareX.HelpersLib.GitHubUpdateChecker.GetLatestRelease()
+   at ShareX.HelpersLib.GitHubUpdateChecker.GetLatestRelease(Boolean includePreRelease)
+   at ShareX.HelpersLib.GitHubUpdateChecker.CheckUpdateAsync()
+2026-06-16 11.28.44.821 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 11.28.44.825 - CommandLine: -PinToScreenFromScreen
+2026-06-16 11.28.44.829 - Executing: Pin to screen (From screen)
+2026-06-16 11.29.17.978 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 11.29.17.979 - CommandLine: -PinToScreenFromScreen
+2026-06-16 11.29.17.980 - Executing: Pin to screen (From screen)
+2026-06-16 11.29.52.531 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 11.29.52.532 - CommandLine: -PinToScreenFromScreen
+2026-06-16 11.29.52.532 - Executing: Pin to screen (From screen)
+2026-06-16 11.31.10.897 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 11.31.10.897 - CommandLine: -PinToScreenFromScreen
+2026-06-16 11.31.10.897 - Executing: Pin to screen (From screen)
+2026-06-16 13.24.02.334 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 13.24.02.336 - CommandLine: -PinToScreenFromScreen
+2026-06-16 13.24.02.337 - Executing: Pin to screen (From screen)
+2026-06-16 14.02.22.432 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 14.02.22.432 - CommandLine: -PinToScreenFromScreen
+2026-06-16 14.02.22.432 - Executing: Pin to screen (From screen)
+2026-06-16 14.03.06.361 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 14.03.06.363 - CommandLine: -PinToScreenFromScreen
+2026-06-16 14.03.06.363 - Executing: Pin to screen (From screen)
+2026-06-16 14.03.16.865 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 14.03.16.865 - CommandLine: -PinToScreenFromScreen
+2026-06-16 14.03.16.866 - Executing: Pin to screen (From screen)
+2026-06-16 14.03.34.464 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 14.03.34.465 - CommandLine: -PinToScreenFromScreen
+2026-06-16 14.03.34.465 - Executing: Pin to screen (From screen)
+2026-06-16 16.34.51.327 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 16.34.51.327 - CommandLine: -PinToScreenFromScreen
+2026-06-16 16.34.51.328 - Executing: Pin to screen (From screen)
+2026-06-16 16.36.06.034 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 16.36.06.035 - CommandLine: -PinToScreenFromScreen
+2026-06-16 16.36.06.035 - Executing: Pin to screen (From screen)
+2026-06-16 17.11.08.612 - GitHub update check failed.:
+System.Net.Http.HttpRequestException: No such host is known. (api.github.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at ShareX.HelpersLib.WebHelpers.DownloadStringAsync(String url)
+   at ShareX.HelpersLib.GitHubUpdateChecker.GetLatestRelease()
+   at ShareX.HelpersLib.GitHubUpdateChecker.GetLatestRelease(Boolean includePreRelease)
+   at ShareX.HelpersLib.GitHubUpdateChecker.CheckUpdateAsync()
+2026-06-16 18.38.41.876 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 18.38.41.877 - CommandLine: -PinToScreenFromScreen
+2026-06-16 18.38.41.878 - Executing: Pin to screen (From screen)
+2026-06-16 18.38.59.510 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 18.38.59.511 - CommandLine: -PinToScreenFromScreen
+2026-06-16 18.38.59.511 - Executing: Pin to screen (From screen)
+2026-06-16 20.04.11.245 - ShareX closing.
+2026-06-16 20.04.11.408 - ApplicationConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-16 20.04.11.971 - ApplicationConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-16 20.04.11.972 - UploadersConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-16 20.04.12.168 - UploadersConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-16 20.04.12.171 - HotkeysConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-16 20.04.12.231 - HotkeysConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-16 20.04.12.231 - ShareX closed.
+2026-06-16 20.22.27.052 - ShareX starting.
+2026-06-16 20.22.27.065 - Version: 19.0.2 Portable
+2026-06-16 20.22.27.065 - Build: Release
+2026-06-16 20.22.27.067 - Command line: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX.dll -silent
+2026-06-16 20.22.27.069 - Personal path: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX
+2026-06-16 20.22.27.070 - Personal path detection method: Portable file (C:\code\WindowsRunTool\portable_open_source_apps\ShareX\Portable)
+2026-06-16 20.22.27.072 - Operating system: Windows 10 Enterprise (64-bit)
+2026-06-16 20.22.27.076 - .NET version: 9.0.12
+2026-06-16 20.22.27.076 - Running as elevated process: False
+2026-06-16 20.22.27.086 - Flags: Portable, SilentRun
+2026-06-16 20.22.27.218 - ApplicationConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-16 20.22.28.803 - ApplicationConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-16 20.22.31.457 - UploadersConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-16 20.22.31.469 - Language changed to: English (Finland)
+2026-06-16 20.22.31.471 - MainForm init started.
+2026-06-16 20.22.33.049 - UploadersConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-16 20.22.33.093 - HotkeysConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-16 20.22.33.563 - HotkeysConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-16 20.22.37.748 - MainForm init finished.
+2026-06-16 20.22.38.121 - Hotkey registered: Hotkey: Ctrl + Print Screen, Description: Capture region, Job: RectangleRegion
+2026-06-16 20.22.38.121 - Hotkey registered: Hotkey: Print Screen, Description: Capture entire screen, Job: PrintScreen
+2026-06-16 20.22.38.122 - Hotkey registered: Hotkey: Alt + Print Screen, Description: Capture active window, Job: ActiveWindow
+2026-06-16 20.22.38.122 - Hotkey registered: Hotkey: Shift + Print Screen, Description: Start/Stop screen recording, Job: ScreenRecorder
+2026-06-16 20.22.38.122 - Hotkey registered: Hotkey: Ctrl + Shift + Print Screen, Description: Start/Stop screen recording (GIF), Job: ScreenRecorderGIF
+2026-06-16 20.22.38.122 - HotkeyManager started.
+2026-06-16 20.22.38.123 - WatchFolderManager started.
+2026-06-16 20.22.38.146 - Startup time: 11600 ms
+2026-06-16 20.22.38.149 - CommandLine: -silent
+2026-06-16 21.20.57.066 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 21.20.57.071 - CommandLine: -PinToScreenFromScreen
+2026-06-16 21.20.57.075 - Executing: Pin to screen (From screen)
+2026-06-16 21.21.22.364 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 21.21.22.365 - CommandLine: -PinToScreenFromScreen
+2026-06-16 21.21.22.365 - Executing: Pin to screen (From screen)
+2026-06-16 23.23.20.029 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 23.23.20.031 - CommandLine: -PinToScreenFromScreen
+2026-06-16 23.23.20.032 - Executing: Pin to screen (From screen)
+2026-06-16 23.25.17.867 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 23.25.17.867 - CommandLine: -PinToScreenFromScreen
+2026-06-16 23.25.17.868 - Executing: Pin to screen (From screen)
+2026-06-16 23.27.03.778 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 23.27.03.779 - CommandLine: -PinToScreenFromScreen
+2026-06-16 23.27.03.779 - Executing: Pin to screen (From screen)
+2026-06-16 23.39.57.219 - Arguments received: "-PinToScreenFromScreen"
+2026-06-16 23.39.57.220 - CommandLine: -PinToScreenFromScreen
+2026-06-16 23.39.57.220 - Executing: Pin to screen (From screen)
+2026-06-17 00.21.37.178 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 00.21.37.180 - CommandLine: -PinToScreenFromScreen
+2026-06-17 00.21.37.180 - Executing: Pin to screen (From screen)
+2026-06-17 08.37.56.099 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 08.37.56.099 - CommandLine: -PinToScreenFromScreen
+2026-06-17 08.37.56.101 - Executing: Pin to screen (From screen)
+2026-06-17 08.45.41.916 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 08.45.41.917 - CommandLine: -PinToScreenFromScreen
+2026-06-17 08.45.41.917 - Executing: Pin to screen (From screen)
+2026-06-17 08.55.20.839 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 08.55.20.840 - CommandLine: -PinToScreenFromScreen
+2026-06-17 08.55.20.841 - Executing: Pin to screen (From screen)
+2026-06-17 08.56.37.419 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 08.56.37.419 - CommandLine: -PinToScreenFromScreen
+2026-06-17 08.56.37.420 - Executing: Pin to screen (From screen)
+2026-06-17 09.09.58.235 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 09.09.58.236 - CommandLine: -PinToScreenFromScreen
+2026-06-17 09.09.58.236 - Executing: Pin to screen (From screen)
+2026-06-17 09.30.12.310 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 09.30.12.311 - CommandLine: -PinToScreenFromScreen
+2026-06-17 09.30.12.311 - Executing: Pin to screen (From screen)
+2026-06-17 12.21.44.153 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 12.21.44.153 - CommandLine: -PinToScreenFromScreen
+2026-06-17 12.21.44.154 - Executing: Pin to screen (From screen)
+2026-06-17 12.22.10.402 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 12.22.10.403 - CommandLine: -PinToScreenFromScreen
+2026-06-17 12.22.10.403 - Executing: Pin to screen (From screen)
+2026-06-17 12.24.00.727 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 12.24.00.728 - CommandLine: -PinToScreenFromScreen
+2026-06-17 12.24.00.728 - Executing: Pin to screen (From screen)
+2026-06-17 12.25.19.931 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 12.25.19.931 - CommandLine: -PinToScreenFromScreen
+2026-06-17 12.25.19.932 - Executing: Pin to screen (From screen)
+2026-06-17 12.26.30.987 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 12.26.30.987 - CommandLine: -PinToScreenFromScreen
+2026-06-17 12.26.30.987 - Executing: Pin to screen (From screen)
+2026-06-17 12.34.09.576 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 12.34.09.577 - CommandLine: -PinToScreenFromScreen
+2026-06-17 12.34.09.577 - Executing: Pin to screen (From screen)
+2026-06-17 12.43.28.766 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 12.43.28.766 - CommandLine: -PinToScreenFromScreen
+2026-06-17 12.43.28.767 - Executing: Pin to screen (From screen)
+2026-06-17 13.51.14.154 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 13.51.14.155 - CommandLine: -PinToScreenFromScreen
+2026-06-17 13.51.14.156 - Executing: Pin to screen (From screen)
+2026-06-17 14.10.08.644 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 14.10.08.645 - CommandLine: -PinToScreenFromScreen
+2026-06-17 14.10.08.645 - Executing: Pin to screen (From screen)
+2026-06-17 17.26.20.192 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 17.26.20.194 - CommandLine: -PinToScreenFromScreen
+2026-06-17 17.26.20.195 - Executing: Pin to screen (From screen)
+2026-06-17 17.32.40.521 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 17.32.40.522 - CommandLine: -PinToScreenFromScreen
+2026-06-17 17.32.40.522 - Executing: Pin to screen (From screen)
+2026-06-17 17.33.20.333 - Arguments received: "-PinToScreenFromScreen"
+2026-06-17 17.33.20.334 - CommandLine: -PinToScreenFromScreen
+2026-06-17 17.33.20.335 - Executing: Pin to screen (From screen)
+2026-06-22 10.18.22.316 - Arguments received: "-PinToScreenFromScreen"
+2026-06-22 10.18.22.320 - CommandLine: -PinToScreenFromScreen
+2026-06-22 10.18.22.322 - Executing: Pin to screen (From screen)
+2026-06-22 10.18.48.091 - Arguments received: "-PinToScreenFromScreen"
+2026-06-22 10.18.48.091 - CommandLine: -PinToScreenFromScreen
+2026-06-22 10.18.48.091 - Executing: Pin to screen (From screen)
+2026-06-22 10.45.28.475 - Arguments received: "-PinToScreenFromScreen"
+2026-06-22 10.45.28.476 - CommandLine: -PinToScreenFromScreen
+2026-06-22 10.45.28.476 - Executing: Pin to screen (From screen)
+2026-06-22 12.07.25.823 - Arguments received: "-PinToScreenFromScreen"
+2026-06-22 12.07.25.824 - CommandLine: -PinToScreenFromScreen
+2026-06-22 12.07.25.825 - Executing: Pin to screen (From screen)
+2026-06-22 13.53.56.357 - Arguments received: "-PinToScreenFromScreen"
+2026-06-22 13.53.56.361 - CommandLine: -PinToScreenFromScreen
+2026-06-22 13.53.56.363 - Executing: Pin to screen (From screen)
+2026-06-22 13.55.10.836 - Arguments received: "-PinToScreenFromScreen"
+2026-06-22 13.55.10.836 - CommandLine: -PinToScreenFromScreen
+2026-06-22 13.55.10.837 - Executing: Pin to screen (From screen)
+2026-06-22 13.56.27.749 - Arguments received: "-PinToScreenFromScreen"
+2026-06-22 13.56.27.749 - CommandLine: -PinToScreenFromScreen
+2026-06-22 13.56.27.749 - Executing: Pin to screen (From screen)
+2026-06-22 14.37.34.753 - Arguments received: "-PinToScreenFromScreen"
+2026-06-22 14.37.34.755 - CommandLine: -PinToScreenFromScreen
+2026-06-22 14.37.34.757 - Executing: Pin to screen (From screen)
+2026-06-22 14.39.39.265 - Arguments received: "-PinToScreenFromScreen"
+2026-06-22 14.39.39.266 - CommandLine: -PinToScreenFromScreen
+2026-06-22 14.39.39.266 - Executing: Pin to screen (From screen)
+2026-06-22 14.39.51.418 - Arguments received: "-PinToScreenFromScreen"
+2026-06-22 14.39.51.418 - CommandLine: -PinToScreenFromScreen
+2026-06-22 14.39.51.418 - Executing: Pin to screen (From screen)
+2026-06-22 14.40.22.064 - Arguments received: "-PinToScreenFromScreen"
+2026-06-22 14.40.22.064 - CommandLine: -PinToScreenFromScreen
+2026-06-22 14.40.22.065 - Executing: Pin to screen (From screen)
+2026-06-22 15.06.29.480 - Arguments received: "-PinToScreenFromScreen"
+2026-06-22 15.06.29.481 - CommandLine: -PinToScreenFromScreen
+2026-06-22 15.06.29.481 - Executing: Pin to screen (From screen)
+2026-06-22 15.06.34.693 - Arguments received: "-PinToScreenFromScreen"
+2026-06-22 15.06.34.693 - CommandLine: -PinToScreenFromScreen
+2026-06-22 15.06.34.693 - Executing: Pin to screen (From screen)
+2026-06-22 16.09.56.747 - Arguments received: "-PinToScreenFromScreen"
+2026-06-22 16.09.56.751 - CommandLine: -PinToScreenFromScreen
+2026-06-22 16.09.56.752 - Executing: Pin to screen (From screen)
+2026-06-23 09.31.13.606 - ShareX closing.
+2026-06-23 09.31.13.761 - ApplicationConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-23 09.31.14.280 - ApplicationConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-23 09.31.14.282 - UploadersConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-23 09.31.14.388 - UploadersConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-23 09.31.14.393 - HotkeysConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-23 09.57.24.012 - ShareX starting.
+2026-06-23 09.57.24.020 - Version: 19.0.2 Portable
+2026-06-23 09.57.24.021 - Build: Release
+2026-06-23 09.57.24.023 - Command line: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX.dll -silent
+2026-06-23 09.57.24.024 - Personal path: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX
+2026-06-23 09.57.24.026 - Personal path detection method: Portable file (C:\code\WindowsRunTool\portable_open_source_apps\ShareX\Portable)
+2026-06-23 09.57.24.028 - Operating system: Windows 10 Enterprise (64-bit)
+2026-06-23 09.57.24.030 - .NET version: 9.0.12
+2026-06-23 09.57.24.030 - Running as elevated process: False
+2026-06-23 09.57.24.040 - Flags: Portable, SilentRun
+2026-06-23 09.57.24.144 - ApplicationConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-23 09.57.25.464 - ApplicationConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-23 09.57.25.913 - UploadersConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-23 09.57.25.923 - Language changed to: English (Finland)
+2026-06-23 09.57.25.924 - MainForm init started.
+2026-06-23 09.57.26.100 - UploadersConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-23 09.57.26.104 - HotkeysConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-23 09.57.26.245 - HotkeysConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-23 09.57.29.601 - MainForm init finished.
+2026-06-23 09.57.30.005 - Hotkey registered: Hotkey: Ctrl + Print Screen, Description: Capture region, Job: RectangleRegion
+2026-06-23 09.57.30.005 - Hotkey registered: Hotkey: Print Screen, Description: Capture entire screen, Job: PrintScreen
+2026-06-23 09.57.30.005 - Hotkey registered: Hotkey: Alt + Print Screen, Description: Capture active window, Job: ActiveWindow
+2026-06-23 09.57.30.005 - Hotkey registered: Hotkey: Shift + Print Screen, Description: Start/Stop screen recording, Job: ScreenRecorder
+2026-06-23 09.57.30.005 - Hotkey registered: Hotkey: Ctrl + Shift + Print Screen, Description: Start/Stop screen recording (GIF), Job: ScreenRecorderGIF
+2026-06-23 09.57.30.007 - HotkeyManager started.
+2026-06-23 09.57.30.025 - WatchFolderManager started.
+2026-06-23 09.57.30.060 - Startup time: 6397 ms
+2026-06-23 09.57.30.066 - CommandLine: -silent
+2026-06-23 12.08.04.100 - Arguments received: "-PinToScreenFromScreen"
+2026-06-23 12.08.04.103 - CommandLine: -PinToScreenFromScreen
+2026-06-23 12.08.04.105 - Executing: Pin to screen (From screen)
+2026-06-23 12.10.34.911 - Arguments received: "-PinToScreenFromScreen"
+2026-06-23 12.10.34.912 - CommandLine: -PinToScreenFromScreen
+2026-06-23 12.10.34.912 - Executing: Pin to screen (From screen)
+2026-06-23 12.11.07.415 - Arguments received: "-PinToScreenFromScreen"
+2026-06-23 12.11.07.415 - CommandLine: -PinToScreenFromScreen
+2026-06-23 12.11.07.416 - Executing: Pin to screen (From screen)
+2026-06-23 13.07.21.227 - Arguments received: "-PinToScreenFromScreen"
+2026-06-23 13.07.21.227 - CommandLine: -PinToScreenFromScreen
+2026-06-23 13.07.21.229 - Executing: Pin to screen (From screen)
+2026-06-23 13.41.05.526 - Arguments received: "-PinToScreenFromScreen"
+2026-06-23 13.41.05.527 - CommandLine: -PinToScreenFromScreen
+2026-06-23 13.41.05.527 - Executing: Pin to screen (From screen)
+2026-06-23 14.15.36.655 - Arguments received: "-PinToScreenFromScreen"
+2026-06-23 14.15.36.656 - CommandLine: -PinToScreenFromScreen
+2026-06-23 14.15.36.656 - Executing: Pin to screen (From screen)
+2026-06-23 14.15.47.366 - Arguments received: "-PinToScreenFromScreen"
+2026-06-23 14.15.47.366 - CommandLine: -PinToScreenFromScreen
+2026-06-23 14.15.47.366 - Executing: Pin to screen (From screen)
+2026-06-23 14.16.33.483 - Arguments received: "-PinToScreenFromClipboard"
+2026-06-23 14.16.33.484 - CommandLine: -PinToScreenFromClipboard
+2026-06-23 14.16.33.484 - Executing: Pin to screen (From clipboard)
+2026-06-23 14.17.00.474 - Arguments received: "-PinToScreenFromScreen"
+2026-06-23 14.17.00.475 - CommandLine: -PinToScreenFromScreen
+2026-06-23 14.17.00.475 - Executing: Pin to screen (From screen)
+2026-06-23 14.17.16.308 - Arguments received: "-PinToScreenFromClipboard"
+2026-06-23 14.17.16.309 - CommandLine: -PinToScreenFromClipboard
+2026-06-23 14.17.16.309 - Executing: Pin to screen (From clipboard)
+2026-06-23 14.17.25.976 - Arguments received: "-PinToScreenFromScreen"
+2026-06-23 14.17.25.976 - CommandLine: -PinToScreenFromScreen
+2026-06-23 14.17.25.976 - Executing: Pin to screen (From screen)
+2026-06-23 14.17.50.397 - Arguments received: "-PinToScreenFromClipboard"
+2026-06-23 14.17.50.397 - CommandLine: -PinToScreenFromClipboard
+2026-06-23 14.17.50.398 - Executing: Pin to screen (From clipboard)
+2026-06-23 14.52.40.370 - Arguments received: "-PinToScreenFromScreen"
+2026-06-23 14.52.40.370 - CommandLine: -PinToScreenFromScreen
+2026-06-23 14.52.40.371 - Executing: Pin to screen (From screen)
+2026-06-23 15.09.07.616 - Arguments received: "-PinToScreenFromScreen"
+2026-06-23 15.09.07.616 - CommandLine: -PinToScreenFromScreen
+2026-06-23 15.09.07.617 - Executing: Pin to screen (From screen)
+2026-06-23 15.09.22.271 - Arguments received: "-PinToScreenFromScreen"
+2026-06-23 15.09.22.272 - CommandLine: -PinToScreenFromScreen
+2026-06-23 15.09.22.272 - Executing: Pin to screen (From screen)
+2026-06-23 16.29.50.579 - Arguments received: "-PinToScreenFromScreen"
+2026-06-23 16.29.50.580 - CommandLine: -PinToScreenFromScreen
+2026-06-23 16.29.50.580 - Executing: Pin to screen (From screen)
+2026-06-23 16.57.30.418 - GitHub update check failed.:
+System.Net.Http.HttpRequestException: No such host is known. (api.github.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at ShareX.HelpersLib.WebHelpers.DownloadStringAsync(String url)
+   at ShareX.HelpersLib.GitHubUpdateChecker.GetLatestRelease()
+   at ShareX.HelpersLib.GitHubUpdateChecker.GetLatestRelease(Boolean includePreRelease)
+   at ShareX.HelpersLib.GitHubUpdateChecker.CheckUpdateAsync()
+2026-06-24 10.26.43.335 - Arguments received: "-PinToScreenFromScreen"
+2026-06-24 10.26.43.344 - CommandLine: -PinToScreenFromScreen
+2026-06-24 10.26.43.346 - Executing: Pin to screen (From screen)
+2026-06-24 13.35.35.052 - Arguments received: "-PinToScreenFromScreen"
+2026-06-24 13.35.35.054 - CommandLine: -PinToScreenFromScreen
+2026-06-24 13.35.35.055 - Executing: Pin to screen (From screen)
+2026-06-24 13.39.06.111 - Arguments received: "-PinToScreenFromScreen"
+2026-06-24 13.39.06.112 - CommandLine: -PinToScreenFromScreen
+2026-06-24 13.39.06.115 - Executing: Pin to screen (From screen)
+2026-06-24 14.40.41.857 - Arguments received: "-PinToScreenFromScreen"
+2026-06-24 14.40.41.858 - CommandLine: -PinToScreenFromScreen
+2026-06-24 14.40.41.858 - Executing: Pin to screen (From screen)
+2026-06-25 11.31.03.002 - Arguments received: "-PinToScreenFromScreen"
+2026-06-25 11.31.03.008 - CommandLine: -PinToScreenFromScreen
+2026-06-25 11.31.03.014 - Executing: Pin to screen (From screen)
+2026-06-25 12.37.30.432 - Arguments received: "-PinToScreenFromScreen"
+2026-06-25 12.37.30.434 - CommandLine: -PinToScreenFromScreen
+2026-06-25 12.37.30.434 - Executing: Pin to screen (From screen)
+2026-06-25 13.04.18.620 - Arguments received: "-PinToScreenFromScreen"
+2026-06-25 13.04.18.620 - CommandLine: -PinToScreenFromScreen
+2026-06-25 13.04.18.621 - Executing: Pin to screen (From screen)
+2026-06-25 13.04.35.474 - Arguments received: "-PinToScreenFromScreen"
+2026-06-25 13.04.35.475 - CommandLine: -PinToScreenFromScreen
+2026-06-25 13.04.35.475 - Executing: Pin to screen (From screen)
+2026-06-25 13.04.47.330 - Arguments received: "-PinToScreenFromScreen"
+2026-06-25 13.04.47.334 - CommandLine: -PinToScreenFromScreen
+2026-06-25 13.04.47.334 - Executing: Pin to screen (From screen)
+2026-06-25 14.13.59.707 - Arguments received: "-PinToScreenFromScreen"
+2026-06-25 14.13.59.708 - CommandLine: -PinToScreenFromScreen
+2026-06-25 14.13.59.710 - Executing: Pin to screen (From screen)
+2026-06-25 14.18.19.862 - Arguments received: "-PinToScreenFromScreen"
+2026-06-25 14.18.19.863 - CommandLine: -PinToScreenFromScreen
+2026-06-25 14.18.19.863 - Executing: Pin to screen (From screen)
+2026-06-25 15.04.50.731 - Arguments received: "-PinToScreenFromScreen"
+2026-06-25 15.04.50.732 - CommandLine: -PinToScreenFromScreen
+2026-06-25 15.04.50.733 - Executing: Pin to screen (From screen)
+2026-06-25 15.30.42.321 - Arguments received: "-PinToScreenFromScreen"
+2026-06-25 15.30.42.321 - CommandLine: -PinToScreenFromScreen
+2026-06-25 15.30.42.321 - Executing: Pin to screen (From screen)
+2026-06-25 15.31.00.304 - Arguments received: "-PinToScreenFromScreen"
+2026-06-25 15.31.00.305 - CommandLine: -PinToScreenFromScreen
+2026-06-25 15.31.00.305 - Executing: Pin to screen (From screen)
+2026-06-25 15.59.45.602 - Arguments received: "-PinToScreenFromScreen"
+2026-06-25 15.59.45.602 - CommandLine: -PinToScreenFromScreen
+2026-06-25 15.59.45.603 - Executing: Pin to screen (From screen)
+2026-06-26 09.06.31.353 - ShareX closing.
+2026-06-26 09.06.31.462 - ApplicationConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-26 09.06.32.058 - ApplicationConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-26 09.06.32.060 - UploadersConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-26 09.06.32.191 - UploadersConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-26 09.06.32.194 - HotkeysConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-26 09.06.32.233 - HotkeysConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-26 09.18.37.562 - ShareX starting.
+2026-06-26 09.18.37.566 - Version: 19.0.2 Portable
+2026-06-26 09.18.37.566 - Build: Release
+2026-06-26 09.18.37.567 - Command line: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX.dll -silent
+2026-06-26 09.18.37.567 - Personal path: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX
+2026-06-26 09.18.37.567 - Personal path detection method: Portable file (C:\code\WindowsRunTool\portable_open_source_apps\ShareX\Portable)
+2026-06-26 09.18.37.568 - Operating system: Windows 10 Enterprise (64-bit)
+2026-06-26 09.18.37.569 - .NET version: 9.0.12
+2026-06-26 09.18.37.569 - Running as elevated process: False
+2026-06-26 09.18.37.572 - Flags: Portable, SilentRun
+2026-06-26 09.18.37.603 - ApplicationConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-26 09.18.38.148 - ApplicationConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-26 09.18.38.554 - UploadersConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-26 09.18.38.557 - Language changed to: English (Finland)
+2026-06-26 09.18.38.557 - MainForm init started.
+2026-06-26 09.18.38.712 - UploadersConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-26 09.18.38.715 - HotkeysConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-26 09.18.38.748 - HotkeysConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-26 09.18.39.138 - MainForm init finished.
+2026-06-26 09.18.39.311 - Hotkey registered: Hotkey: Ctrl + Print Screen, Description: Capture region, Job: RectangleRegion
+2026-06-26 09.18.39.311 - Hotkey registered: Hotkey: Print Screen, Description: Capture entire screen, Job: PrintScreen
+2026-06-26 09.18.39.312 - Hotkey registered: Hotkey: Alt + Print Screen, Description: Capture active window, Job: ActiveWindow
+2026-06-26 09.18.39.312 - Hotkey registered: Hotkey: Shift + Print Screen, Description: Start/Stop screen recording, Job: ScreenRecorder
+2026-06-26 09.18.39.312 - Hotkey registered: Hotkey: Ctrl + Shift + Print Screen, Description: Start/Stop screen recording (GIF), Job: ScreenRecorderGIF
+2026-06-26 09.18.39.312 - HotkeyManager started.
+2026-06-26 09.18.39.313 - WatchFolderManager started.
+2026-06-26 09.18.39.320 - Startup time: 1940 ms
+2026-06-26 09.18.39.321 - CommandLine: -silent
+2026-06-26 16.18.39.683 - GitHub update check failed.:
+System.Net.Http.HttpRequestException: No such host is known. (api.github.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at ShareX.HelpersLib.WebHelpers.DownloadStringAsync(String url)
+   at ShareX.HelpersLib.GitHubUpdateChecker.GetLatestRelease()
+   at ShareX.HelpersLib.GitHubUpdateChecker.GetLatestRelease(Boolean includePreRelease)
+   at ShareX.HelpersLib.GitHubUpdateChecker.CheckUpdateAsync()
+2026-06-29 09.47.26.328 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 09.47.26.339 - CommandLine: -PinToScreenFromScreen
+2026-06-29 09.47.26.346 - Executing: Pin to screen (From screen)
+2026-06-29 09.51.54.568 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 09.51.54.568 - CommandLine: -PinToScreenFromScreen
+2026-06-29 09.51.54.569 - Executing: Pin to screen (From screen)
+2026-06-29 09.52.03.639 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 09.52.03.639 - CommandLine: -PinToScreenFromScreen
+2026-06-29 09.52.03.639 - Executing: Pin to screen (From screen)
+2026-06-29 10.18.39.455 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 10.18.39.456 - CommandLine: -PinToScreenFromScreen
+2026-06-29 10.18.39.456 - Executing: Pin to screen (From screen)
+2026-06-29 10.24.50.749 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 10.24.50.749 - CommandLine: -PinToScreenFromScreen
+2026-06-29 10.24.50.749 - Executing: Pin to screen (From screen)
+2026-06-29 10.24.59.038 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 10.24.59.039 - CommandLine: -PinToScreenFromScreen
+2026-06-29 10.24.59.039 - Executing: Pin to screen (From screen)
+2026-06-29 10.25.14.646 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 10.25.14.647 - CommandLine: -PinToScreenFromScreen
+2026-06-29 10.25.14.647 - Executing: Pin to screen (From screen)
+2026-06-29 10.59.52.001 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 10.59.52.002 - CommandLine: -PinToScreenFromScreen
+2026-06-29 10.59.52.002 - Executing: Pin to screen (From screen)
+2026-06-29 11.00.11.875 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 11.00.11.875 - CommandLine: -PinToScreenFromScreen
+2026-06-29 11.00.11.875 - Executing: Pin to screen (From screen)
+2026-06-29 13.48.15.774 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 13.48.15.775 - CommandLine: -PinToScreenFromScreen
+2026-06-29 13.48.15.776 - Executing: Pin to screen (From screen)
+2026-06-29 13.52.52.529 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 13.52.52.530 - CommandLine: -PinToScreenFromScreen
+2026-06-29 13.52.52.530 - Executing: Pin to screen (From screen)
+2026-06-29 13.55.15.416 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 13.55.15.416 - CommandLine: -PinToScreenFromScreen
+2026-06-29 13.55.15.416 - Executing: Pin to screen (From screen)
+2026-06-29 13.56.38.642 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 13.56.38.643 - CommandLine: -PinToScreenFromScreen
+2026-06-29 13.56.38.643 - Executing: Pin to screen (From screen)
+2026-06-29 13.58.09.295 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 13.58.09.296 - CommandLine: -PinToScreenFromScreen
+2026-06-29 13.58.09.297 - Executing: Pin to screen (From screen)
+2026-06-29 14.02.06.430 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 14.02.06.431 - CommandLine: -PinToScreenFromScreen
+2026-06-29 14.02.06.431 - Executing: Pin to screen (From screen)
+2026-06-29 14.10.52.229 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 14.10.52.229 - CommandLine: -PinToScreenFromScreen
+2026-06-29 14.10.52.230 - Executing: Pin to screen (From screen)
+2026-06-29 14.34.13.606 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 14.34.13.607 - CommandLine: -PinToScreenFromScreen
+2026-06-29 14.34.13.607 - Executing: Pin to screen (From screen)
+2026-06-29 14.35.37.082 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 14.35.37.082 - CommandLine: -PinToScreenFromScreen
+2026-06-29 14.35.37.083 - Executing: Pin to screen (From screen)
+2026-06-29 14.45.06.817 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 14.45.06.818 - CommandLine: -PinToScreenFromScreen
+2026-06-29 14.45.06.819 - Executing: Pin to screen (From screen)
+2026-06-29 15.00.56.986 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 15.00.56.987 - CommandLine: -PinToScreenFromScreen
+2026-06-29 15.00.56.988 - Executing: Pin to screen (From screen)
+2026-06-29 15.01.43.507 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 15.01.43.507 - CommandLine: -PinToScreenFromScreen
+2026-06-29 15.01.43.508 - Executing: Pin to screen (From screen)
+2026-06-29 15.18.21.141 - Arguments received: "-PinToScreenFromScreen"
+2026-06-29 15.18.21.142 - CommandLine: -PinToScreenFromScreen
+2026-06-29 15.18.21.142 - Executing: Pin to screen (From screen)
+2026-06-30 09.17.39.658 - ShareX closing.
+2026-06-30 09.35.10.868 - ShareX starting.
+2026-06-30 09.35.10.873 - Version: 19.0.2 Portable
+2026-06-30 09.35.10.873 - Build: Release
+2026-06-30 09.35.10.874 - Command line: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX.dll -silent
+2026-06-30 09.35.10.875 - Personal path: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX
+2026-06-30 09.35.10.875 - Personal path detection method: Portable file (C:\code\WindowsRunTool\portable_open_source_apps\ShareX\Portable)
+2026-06-30 09.35.10.876 - Operating system: Windows 10 Enterprise (64-bit)
+2026-06-30 09.35.10.877 - .NET version: 9.0.12
+2026-06-30 09.35.10.877 - Running as elevated process: False
+2026-06-30 09.35.10.881 - Flags: Portable, SilentRun
+2026-06-30 09.35.10.932 - ApplicationConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-30 09.35.12.001 - ApplicationConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-06-30 09.35.12.416 - UploadersConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-30 09.35.12.423 - Language changed to: English (Finland)
+2026-06-30 09.35.12.423 - MainForm init started.
+2026-06-30 09.35.12.524 - UploadersConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-06-30 09.35.12.527 - HotkeysConfig load started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-30 09.35.12.655 - HotkeysConfig load finished: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
+2026-06-30 09.35.15.687 - MainForm init finished.
+2026-06-30 09.35.15.979 - Hotkey registered: Hotkey: Ctrl + Print Screen, Description: Capture region, Job: RectangleRegion
+2026-06-30 09.35.15.979 - Hotkey registered: Hotkey: Print Screen, Description: Capture entire screen, Job: PrintScreen
+2026-06-30 09.35.15.979 - Hotkey registered: Hotkey: Alt + Print Screen, Description: Capture active window, Job: ActiveWindow
+2026-06-30 09.35.15.979 - Hotkey registered: Hotkey: Shift + Print Screen, Description: Start/Stop screen recording, Job: ScreenRecorder
+2026-06-30 09.35.15.979 - Hotkey registered: Hotkey: Ctrl + Shift + Print Screen, Description: Start/Stop screen recording (GIF), Job: ScreenRecorderGIF
+2026-06-30 09.35.15.981 - HotkeyManager started.
+2026-06-30 09.35.15.982 - WatchFolderManager started.
+2026-06-30 09.35.16.038 - Startup time: 5734 ms
+2026-06-30 09.35.16.046 - CommandLine: -silent
+2026-06-30 11.30.28.953 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 11.30.28.957 - CommandLine: -PinToScreenFromScreen
+2026-06-30 11.30.28.960 - Executing: Pin to screen (From screen)
+2026-06-30 11.34.57.026 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 11.34.57.027 - CommandLine: -PinToScreenFromScreen
+2026-06-30 11.34.57.027 - Executing: Pin to screen (From screen)
+2026-06-30 11.41.15.042 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 11.41.15.042 - CommandLine: -PinToScreenFromScreen
+2026-06-30 11.41.15.042 - Executing: Pin to screen (From screen)
+2026-06-30 11.42.54.828 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 11.42.54.830 - CommandLine: -PinToScreenFromScreen
+2026-06-30 11.42.54.830 - Executing: Pin to screen (From screen)
+2026-06-30 11.57.35.758 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 11.57.35.759 - CommandLine: -PinToScreenFromScreen
+2026-06-30 11.57.35.759 - Executing: Pin to screen (From screen)
+2026-06-30 11.57.53.574 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 11.57.53.574 - CommandLine: -PinToScreenFromScreen
+2026-06-30 11.57.53.574 - Executing: Pin to screen (From screen)
+2026-06-30 11.58.14.175 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 11.58.14.175 - CommandLine: -PinToScreenFromScreen
+2026-06-30 11.58.14.176 - Executing: Pin to screen (From screen)
+2026-06-30 12.02.04.750 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 12.02.04.750 - CommandLine: -PinToScreenFromScreen
+2026-06-30 12.02.04.750 - Executing: Pin to screen (From screen)
+2026-06-30 12.07.12.316 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 12.07.12.317 - CommandLine: -PinToScreenFromScreen
+2026-06-30 12.07.12.317 - Executing: Pin to screen (From screen)
+2026-06-30 12.24.01.526 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 12.24.01.527 - CommandLine: -PinToScreenFromScreen
+2026-06-30 12.24.01.527 - Executing: Pin to screen (From screen)
+2026-06-30 12.24.29.133 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 12.24.29.134 - CommandLine: -PinToScreenFromScreen
+2026-06-30 12.24.29.134 - Executing: Pin to screen (From screen)
+2026-06-30 12.24.43.187 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 12.24.43.187 - CommandLine: -PinToScreenFromScreen
+2026-06-30 12.24.43.187 - Executing: Pin to screen (From screen)
+2026-06-30 12.25.10.732 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 12.25.10.733 - CommandLine: -PinToScreenFromScreen
+2026-06-30 12.25.10.733 - Executing: Pin to screen (From screen)
+2026-06-30 12.42.50.992 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 12.42.50.992 - CommandLine: -PinToScreenFromScreen
+2026-06-30 12.42.50.993 - Executing: Pin to screen (From screen)
+2026-06-30 12.51.35.917 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 12.51.35.917 - CommandLine: -PinToScreenFromScreen
+2026-06-30 12.51.35.919 - Executing: Pin to screen (From screen)
+2026-06-30 12.56.54.221 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 12.56.54.221 - CommandLine: -PinToScreenFromScreen
+2026-06-30 12.56.54.221 - Executing: Pin to screen (From screen)
+2026-06-30 12.57.07.399 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 12.57.07.399 - CommandLine: -PinToScreenFromScreen
+2026-06-30 12.57.07.399 - Executing: Pin to screen (From screen)
+2026-06-30 13.01.48.462 - Arguments received: "-PinToScreenFromScreen"
+2026-06-30 13.01.48.462 - CommandLine: -PinToScreenFromScreen
+2026-06-30 13.01.48.462 - Executing: Pin to screen (From screen)
+2026-06-30 14.35.15.609 - GitHub update check failed.:
+System.Net.Http.HttpRequestException: No such host is known. (api.github.com:443)
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at ShareX.HelpersLib.WebHelpers.DownloadStringAsync(String url)
+   at ShareX.HelpersLib.GitHubUpdateChecker.GetLatestRelease()
+   at ShareX.HelpersLib.GitHubUpdateChecker.GetLatestRelease(Boolean includePreRelease)
+   at ShareX.HelpersLib.GitHubUpdateChecker.CheckUpdateAsync()
+2026-07-01 09.55.23.158 - Arguments received: "-PinToScreenFromScreen"
+2026-07-01 09.55.23.160 - CommandLine: -PinToScreenFromScreen
+2026-07-01 09.55.23.162 - Executing: Pin to screen (From screen)
+2026-07-01 10.03.02.486 - Arguments received: "-PinToScreenFromScreen"
+2026-07-01 10.03.02.486 - CommandLine: -PinToScreenFromScreen
+2026-07-01 10.03.02.487 - Executing: Pin to screen (From screen)
+2026-07-01 10.10.33.660 - Arguments received: "-PinToScreenFromScreen"
+2026-07-01 10.10.33.661 - CommandLine: -PinToScreenFromScreen
+2026-07-01 10.10.33.661 - Executing: Pin to screen (From screen)
+2026-07-01 10.19.42.335 - Arguments received: "-PinToScreenFromScreen"
+2026-07-01 10.19.42.335 - CommandLine: -PinToScreenFromScreen
+2026-07-01 10.19.42.336 - Executing: Pin to screen (From screen)
+2026-07-01 10.23.11.066 - Arguments received: "-PinToScreenFromScreen"
+2026-07-01 10.23.11.068 - CommandLine: -PinToScreenFromScreen
+2026-07-01 10.23.11.068 - Executing: Pin to screen (From screen)
+2026-07-01 10.31.45.533 - Arguments received: "-PinToScreenFromScreen"
+2026-07-01 10.31.45.534 - CommandLine: -PinToScreenFromScreen
+2026-07-01 10.31.45.534 - Executing: Pin to screen (From screen)
+2026-07-01 10.32.20.116 - Arguments received: "-PinToScreenFromScreen"
+2026-07-01 10.32.20.117 - CommandLine: -PinToScreenFromScreen
+2026-07-01 10.32.20.117 - Executing: Pin to screen (From screen)
+2026-07-01 10.42.39.107 - Arguments received: "-PinToScreenFromScreen"
+2026-07-01 10.42.39.107 - CommandLine: -PinToScreenFromScreen
+2026-07-01 10.42.39.107 - Executing: Pin to screen (From screen)
+2026-07-01 10.49.16.927 - Arguments received: "-PinToScreenFromScreen"
+2026-07-01 10.49.16.927 - CommandLine: -PinToScreenFromScreen
+2026-07-01 10.49.16.928 - Executing: Pin to screen (From screen)
+2026-07-01 10.52.38.894 - Arguments received: "-PinToScreenFromScreen"
+2026-07-01 10.52.38.895 - CommandLine: -PinToScreenFromScreen
+2026-07-01 10.52.38.896 - Executing: Pin to screen (From screen)
+2026-07-01 11.35.59.829 - Arguments received: "-PinToScreenFromScreen"
+2026-07-01 11.35.59.829 - CommandLine: -PinToScreenFromScreen
+2026-07-01 11.35.59.830 - Executing: Pin to screen (From screen)
+2026-07-01 11.36.23.991 - Arguments received: "-PinToScreenFromScreen"
+2026-07-01 11.36.23.992 - CommandLine: -PinToScreenFromScreen
+2026-07-01 11.36.23.993 - Executing: Pin to screen (From screen)
+2026-07-02 09.02.55.743 - ShareX closing.
+2026-07-02 09.02.55.850 - ApplicationConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-07-02 09.02.56.133 - ApplicationConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\ApplicationConfig.json
+2026-07-02 09.02.56.133 - UploadersConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-07-02 09.02.56.209 - UploadersConfig save successful: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\UploadersConfig.json
+2026-07-02 09.02.56.212 - HotkeysConfig save started: C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX\HotkeysConfig.json
