@@ -5,7 +5,12 @@
     "InA-Event-InaEventOperationsConsum",
     "InA-Event-PutMeasurementValueProce",
     "InA-Forwarder",
-    "Estimation-Worker"
+    "Estimation-Worker",
+    "InA-Event",
+    "InA-WebService-Retry-DLQ",
+    "RedriveOperation",
+    "WebService-DLQ",
+    "WebService-Retry"
   ],
   "description": "List of substring patterns that should be bold in tab titles. Add your patterns here over time."
 }

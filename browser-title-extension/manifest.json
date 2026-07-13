@@ -27,7 +27,8 @@
       "matches": [
         "https://*.console.aws.amazon.com/*",
         "https://*.utilytics.com/*",
-        "https://*.atlassian.net/*"
+        "https://*.atlassian.net/*",
+        "https://github.com/*"
       ],
       "js": ["content.js"],
       "run_at": "document_end"

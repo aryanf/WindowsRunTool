@@ -1,5 +1,63 @@
+// Bold patterns loaded from config for rendering in navigator
+let _boldPatterns = null;
+
+async function loadBoldPatterns() {
+  if (_boldPatterns !== null) return _boldPatterns;
+  try {
+    const response = await fetch(chrome.runtime.getURL('bold-patterns.json'));
+    const config = await response.json();
+    _boldPatterns = config.boldPatterns || [];
+  } catch (e) {
+    console.error('Failed to load bold patterns:', e);
+    _boldPatterns = [];
+  }
+  return _boldPatterns;
+}
+
+// Apply bold formatting to a title string based on configured patterns
+// Returns an array of DOM nodes (text nodes and bold spans)
+function applyBoldPatterns(titleText, patterns) {
+  if (!titleText || !patterns || patterns.length === 0) {
+    return [document.createTextNode(titleText || '')];
+  }
+
+  // Find the longest matching pattern
+  let bestMatch = null;
+  let bestMatchIndex = -1;
+
+  for (const pattern of patterns) {
+    const index = titleText.indexOf(pattern);
+    if (index !== -1) {
+      if (!bestMatch || pattern.length > bestMatch.length) {
+        bestMatch = pattern;
+        bestMatchIndex = index;
+      }
+    }
+  }
+
+  if (!bestMatch) {
+    return [document.createTextNode(titleText)];
+  }
+
+  const fragments = [];
+  if (bestMatchIndex > 0) {
+    fragments.push(document.createTextNode(titleText.substring(0, bestMatchIndex)));
+  }
+  const boldSpan = document.createElement('span');
+  boldSpan.style.fontWeight = '700';
+  boldSpan.textContent = bestMatch;
+  fragments.push(boldSpan);
+  const afterIndex = bestMatchIndex + bestMatch.length;
+  if (afterIndex < titleText.length) {
+    fragments.push(document.createTextNode(titleText.substring(afterIndex)));
+  }
+  return fragments;
+}
+
 // Create and inject the tab navigator UI
-function createNavigatorUI(tabs, timestamps = {}, previousTabId = null, tabGroups = {}, groupColors = {}) {
+async function createNavigatorUI(tabs, timestamps = {}, previousTabId = null, tabGroups = {}, groupColors = {}) {
+  // Load bold patterns
+  const boldPatterns = await loadBoldPatterns();
   // Check if navigator already exists and remove it
   const existingOverlay = document.getElementById('custom-tab-navigator-overlay');
   if (existingOverlay) {
@@ -349,45 +407,10 @@ function createNavigatorUI(tabs, timestamps = {}, previousTabId = null, tabGroup
       const tabTitle = document.createElement('div');
       tabTitle.className = 'tab-title';
       
-      // Parse bold markers (**text**) and render as HTML
+      // Apply bold formatting from config patterns
       const titleText = tab.title || '';
-      const boldPattern = /\*\*(.+?)\*\*/g;
-      
-      if (boldPattern.test(titleText)) {
-        // Title contains bold markers - parse and render as HTML
-        let lastIndex = 0;
-        const fragments = [];
-        const tempPattern = /\*\*(.+?)\*\*/g;
-        let match;
-        
-        while ((match = tempPattern.exec(titleText)) !== null) {
-          // Add text before the bold part
-          if (match.index > lastIndex) {
-            const textNode = document.createTextNode(titleText.substring(lastIndex, match.index));
-            fragments.push(textNode);
-          }
-          
-          // Add bold part
-          const boldSpan = document.createElement('span');
-          boldSpan.style.fontWeight = '700';
-          boldSpan.textContent = match[1];
-          fragments.push(boldSpan);
-          
-          lastIndex = tempPattern.lastIndex;
-        }
-        
-        // Add remaining text after last bold part
-        if (lastIndex < titleText.length) {
-          const textNode = document.createTextNode(titleText.substring(lastIndex));
-          fragments.push(textNode);
-        }
-        
-        // Append all fragments
-        fragments.forEach(fragment => tabTitle.appendChild(fragment));
-      } else {
-        // No bold markers - use plain text
-        tabTitle.textContent = titleText;
-      }
+      const fragments = applyBoldPatterns(titleText, boldPatterns);
+      fragments.forEach(fragment => tabTitle.appendChild(fragment));
       // Apply age color to font
       tabTitle.style.color = getAgeColor(tab.id);
       

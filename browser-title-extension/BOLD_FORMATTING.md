@@ -22,32 +22,32 @@ Edit this file to add or remove patterns that should be bold:
 ```
 
 ### Pattern Matching
-- The code searches for the **longest matching pattern** in each resource name
-- When a pattern is found, only that substring is wrapped with `**bold markers**`
+- The tab navigator searches for the **longest matching pattern** in each tab title
+- When a pattern is found, only that substring is rendered bold in the navigator list
 - Everything else (prefixes, suffixes, service tags) stays non-bold
+- **Browser tab titles remain clean** — no markers or formatting in the actual title bar
 
-### Title Rendering (tab-navigator.js)
-The tab navigator parses `**markers**` and renders them as bold HTML with `font-weight: 700`
+### Architecture
+- `content.js` sets clean tab titles without any formatting markers
+- `tab-navigator.js` loads `bold-patterns.json` and applies bold formatting only in the navigator UI
+- Bold patterns are cached after first load for performance
 
 ## Examples
 
 **SQS Queue:**
-- Input: `Prod-ME-InA-Event-Operation-Queue.fifo`
+- Tab title: `[SQS] Prod-ME-InA-Event-Operation-Queue.fifo`
 - Pattern: `InA-Event-Operation` (from config)
-- Output: `[SQS] Prod-ME-**InA-Event-Operation**-Queue.fifo`
-- Visual: [SQS] Prod-ME-**InA-Event-Operation**-Queue.fifo
+- Navigator display: [SQS] Prod-ME-**InA-Event-Operation**-Queue.fifo
 
 **Lambda Function:**
-- Input: `Dev-ME-Estimation-WorkerLambda`
+- Tab title: `[Lambda] Dev-ME-Estimation-WorkerLambda`
 - Pattern: `Estimation-Worker` (from config)
-- Output: `[Lambda] Dev-ME-**Estimation-Worker**Lambda`
-- Visual: [Lambda] Dev-ME-**Estimation-Worker**Lambda
+- Navigator display: [Lambda] Dev-ME-**Estimation-Worker**Lambda
 
 **Complex Name:**
-- Input: `Prod-ME-Service-InA-Event-InaEventOperationsConsum-58YrwwE7kXII`
+- Tab title: `[SQS] Prod-ME-Service-InA-Event-InaEventOperationsConsum-58YrwwE7kXII`
 - Pattern: `InA-Event-InaEventOperationsConsum` (from config)
-- Output: `[SQS] Prod-ME-Service-**InA-Event-InaEventOperationsConsum**-58YrwwE7kXII`
-- Visual: [SQS] Prod-ME-Service-**InA-Event-InaEventOperationsConsum**-58YrwwE7kXII
+- Navigator display: [SQS] Prod-ME-Service-**InA-Event-InaEventOperationsConsum**-58YrwwE7kXII
 
 ## How to Add New Patterns
 

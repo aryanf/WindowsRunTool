@@ -1,3 +1,8 @@
+1.2.11
+ - Add GitHub (github.com) support to browser title extension
+ - Load bold tab-title patterns from config in the tab navigator instead of inline **markers**
+ - Add new bold patterns (InA-Event, WebService-Retry, WebService-DLQ, InA-WebService-Retry-DLQ, RedriveOperation)
+
 1.2.10
  - Add cp aws mcp subcommand to copy AWS credentials and update the hansenmcp .env file
  - Change git branch name separator from underscore to hyphen between IP code and description

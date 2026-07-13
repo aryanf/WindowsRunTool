@@ -3,8 +3,6 @@
 
     let lastTitle = document.title;
     let titleUpdateTimer;
-    let boldPatterns = null;
-
     const safeSetTitle = (newTitle) => {
         if (newTitle && newTitle !== document.title) {
             lastTitle = newTitle;
@@ -12,49 +10,8 @@
         }
     };
 
-    // Load bold patterns from config file
-    const loadBoldPatterns = async () => {
-        try {
-            const response = await fetch(chrome.runtime.getURL('bold-patterns.json'));
-            const config = await response.json();
-            boldPatterns = config.boldPatterns || [];
-        } catch (e) {
-            console.error('Failed to load bold patterns:', e);
-            boldPatterns = [];
-        }
-    };
-
-    // Helper function to format resource name with bold markers
-    // Searches for patterns from the config list and wraps them with **markers**
-    const formatResourceName = (name) => {
-        if (!name || !boldPatterns || boldPatterns.length === 0) {
-            return name;
-        }
-        
-        // Find the longest matching pattern (to handle overlapping patterns)
-        let bestMatch = null;
-        let bestMatchIndex = -1;
-        
-        for (const pattern of boldPatterns) {
-            const index = name.indexOf(pattern);
-            if (index !== -1) {
-                // If this is a longer match or we don't have a match yet
-                if (!bestMatch || pattern.length > bestMatch.length) {
-                    bestMatch = pattern;
-                    bestMatchIndex = index;
-                }
-            }
-        }
-        
-        if (bestMatch) {
-            const before = name.substring(0, bestMatchIndex);
-            const after = name.substring(bestMatchIndex + bestMatch.length);
-            return `${before}**${bestMatch}**${after}`;
-        }
-        
-        // No match found, return as-is
-        return name;
-    };
+    // Helper function for resource name (bold formatting is handled by tab-navigator.js)
+    const formatResourceName = (name) => name;
 
     const updateFavicon = (emoji) => {
         if (!emoji) return;
@@ -593,50 +550,78 @@
                 // Check if it's a Confluence page
                 if (url.pathname.includes('/wiki/')) {
                     favicon = '🟦'; // Blue square for Confluence
-                    const currentTitle = document.title;
-                    if (currentTitle && !currentTitle.includes('[Confluence]')) {
-                        newTitle = `[Confluence] **${currentTitle}**`;
-                    }
+                    // Keep the original title as-is (favicon distinguishes it)
                 }
                 // Handle /issues with JQL queries (personal filters, assignee searches, etc.)
                 else if (url.pathname === '/issues' || url.pathname === '/issues/') {
                     favicon = '🟧'; // Orange square for Jira
                     const params = new URLSearchParams(url.search);
-                    const selectedIssue = params.get('selectedIssue');
+                    const jql = params.get('jql');
                     
-                    // If a specific issue is selected, append [JIRA] to existing title
-                    if (selectedIssue) {
-                        const currentTitle = document.title;
-                        // Only append [JIRA] if not already present
-                        if (currentTitle && !currentTitle.includes('[JIRA]')) {
-                            newTitle = `[JIRA] **${currentTitle}**`;
-                        }
-                    } else {
-                        const jql = params.get('jql');
-                        
-                        if (jql) {
-                            // Check for specific user IDs in the URL
-                            if (url.href.includes('63b2ae242c70aae1e6faaa27')) {
-                                newTitle = `[JIRA] **Aryan**`;
+                    if (jql) {
+                        // Helper: try to extract sprint short name from page DOM
+                        const getSprintShort = () => {
+                            // Look for sprint name pattern like "Farsight 2026-13a" in the page
+                            const pageText = document.body ? document.body.innerText : '';
+                            const sprintMatch = pageText.match(/Farsight\s+\d{4}-(\d+[a-z]?)/i);
+                            return sprintMatch ? sprintMatch[1] : null;
+                        };
+
+                        const hasSprint = jql.toLowerCase().includes('sprint');
+                        const sprintShort = hasSprint ? getSprintShort() : null;
+                            const sprintSuffix = sprintShort ? `${sprintShort}` : '';
+
+                            // Check for multiple assignees (IN clause)
+                            if (jql.toLowerCase().includes('assignee in')) {
+                                newTitle = sprintSuffix || 'team';
                             }
-                            // Check if it's a personal assignee filter
+                            // Single assignee
                             else if (jql.toLowerCase().includes('assignee')) {
-                                newTitle = `[JIRA] **me**`;
+                                // Find assignee name from the page DOM
+                                const allEls = document.querySelectorAll('[data-testid]');
+                                let assigneeName = null;
+                                for (const el of allEls) {
+                                    const testId = el.getAttribute('data-testid') || '';
+                                    if (testId.toLowerCase().includes('assignee')) {
+                                        // Look for img alt or nested text
+                                        const img = el.querySelector('img[alt]');
+                                        if (img && img.alt && img.alt.length > 1) {
+                                            assigneeName = img.alt.trim().split(' ')[0].toLowerCase().substring(0, 2);
+                                            break;
+                                        }
+                                        const spans = el.querySelectorAll('span, [role="img"]');
+                                        for (const span of spans) {
+                                            const txt = span.getAttribute('aria-label') || span.textContent || '';
+                                            if (txt.trim().length > 1 && !txt.toLowerCase().includes('assignee')) {
+                                                assigneeName = txt.trim().split(' ')[0].toLowerCase().substring(0, 2);
+                                                break;
+                                            }
+                                        }
+                                        if (assigneeName) break;
+                                    }
+                                }
+                                newTitle = `${assigneeName || 'ot'}${sprintSuffix}`;
                             } else {
-                                newTitle = `[JIRA] **filter**`;
+                                newTitle = sprintSuffix || 'filter';
                             }
                         } else {
-                            newTitle = `[JIRA]`;
+                            newTitle = `JIRA`;
                         }
-                    }
                 } else if (url.pathname.includes('/jira/') || url.pathname.includes('/browse/')) {
                     favicon = '🟧'; // Orange square for Jira
                     
                     if (url.pathname.includes('/browse/')) {
-                        // Direct issue view: append [JIRA] to existing title
-                        const currentTitle = document.title;
-                        if (currentTitle && !currentTitle.includes('[JIRA]')) {
-                            newTitle = `[JIRA] **${currentTitle}**`;
+                        // Extract ticket number from path like /browse/IP1000850-15881
+                        const browseMatch = url.pathname.match(/\/browse\/[^/]+-(\d+)/);
+                        if (browseMatch) {
+                            const ticketNum = browseMatch[1];
+                            // Parse DOM for issue title/summary
+                            const summaryEl = document.querySelector('[data-testid="issue.views.issue-base.foundation.summary.heading"]')
+                                || document.querySelector('h1[data-testid*="summary"]')
+                                || document.querySelector('[data-testid*="summary"] h1')
+                                || document.querySelector('h1');
+                            const summaryText = summaryEl ? summaryEl.textContent.trim() : '';
+                            newTitle = summaryText ? `${ticketNum} ${summaryText}` : ticketNum;
                         }
                     } else {
                         const parts = url.pathname.split('/').filter(p => p);
@@ -647,20 +632,17 @@
                             
                             // If we're on a board view, always show "BOARD"
                             if (parts.includes('boards')) {
-                                newTitle = `[JIRA] **BOARD**`;
+                                newTitle = `BOARD`;
                             } else {
                                 // For other project pages, check if there's a selected issue
                                 const params = new URLSearchParams(url.search);
                                 const selectedIssue = params.get('selectedIssue');
                                 
                                 if (selectedIssue) {
-                                    // Append [JIRA] to existing title for issue detail view
-                                    const currentTitle = document.title;
-                                    if (currentTitle && !currentTitle.includes('[JIRA]')) {
-                                        newTitle = `[JIRA] **${currentTitle}**`;
-                                    }
+                                    // Keep existing title as-is (favicon distinguishes it)
+                                    // No prefix needed - meaningful title is more useful in narrow tabs
                                 } else {
-                                    newTitle = `[JIRA] **${projectKey}**`;
+                                    newTitle = `${projectKey}`;
                                 }
                             }
                         }
@@ -668,6 +650,18 @@
                 }
             } catch (e) {
                 console.error('Jira parsing error:', e);
+            }
+        }
+
+        // --- GitHub ---
+        if (url.hostname === 'github.com') {
+            const currentTitle = document.title;
+            // Strip Jira project prefix (e.g. "IP1000850-16094: ..." -> "16094: ...")
+            const jiraMatch = currentTitle.match(/^#?\s*[A-Z][A-Z0-9]+-\d+-(?=\d)/i)
+                || currentTitle.match(/^#?\s*[A-Z][A-Z0-9]+-(?=\d)/i);
+            if (jiraMatch) {
+                const stripped = currentTitle.substring(jiraMatch[0].length);
+                newTitle = stripped;
             }
         }
 
@@ -700,8 +694,6 @@
     window.addEventListener("hashchange", scheduleUpdate);
     window.addEventListener("popstate", scheduleUpdate);
 
-    // Load patterns and run initial update
-    loadBoldPatterns().then(() => {
-        updateTitle();
-    });
+    // Run initial update
+    updateTitle();
 })();
