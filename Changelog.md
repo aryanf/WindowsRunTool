@@ -1,4 +1,10 @@
+1.2.10
+ - Add cp aws mcp subcommand to copy AWS credentials and update the hansenmcp .env file
+ - Change git branch name separator from underscore to hyphen between IP code and description
+ - Add e subcommands (agent, agents, prompt, prompts) to open agents and prompts folders in Q-Dir
+
 1.2.9
+ - Add big project-name overlay that flashes for ~2s when switching between VS Code windows
  - Add CloudWatch Log Group, EC2, Load Balancer, Security Group, CloudFormation, and Secrets Manager support to browser title extension
  - Enhance Lambda function name extraction with path-style hash support
  - Add ECS and title element observation to prevent AWS console title override

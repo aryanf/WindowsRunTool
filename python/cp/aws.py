@@ -94,6 +94,29 @@ AWS_SESSION_TOKEN={session_token}'''
         pyperclip.copy(aws_cred)
         _complete_toast()
 
+def mcp(message: SubCommandMessage):
+    '''
+Copy AWS credentials to clipboard as env variables and update hansenmcp .env file
+'''
+    chrome_utils.auto_chrome(timer_list_title_mouse_dic)
+    success, access_key_id, secret_access_key, session_token = _get_cached_cred(message.env, message.switch_1)
+    if success:
+        region = 'AWS_DEFAULT_REGION=eu-west-1'
+        pyperclip.copy(region)
+        time.sleep(0.5)
+        aws_cred = f'''AWS_ACCESS_KEY_ID={access_key_id}
+AWS_SECRET_ACCESS_KEY={secret_access_key}
+AWS_SESSION_TOKEN={session_token}'''
+        pyperclip.copy(aws_cred)
+        env_content = f'''AWS_DEFAULT_REGION=eu-west-1
+AWS_ACCESS_KEY_ID={access_key_id}
+AWS_SECRET_ACCESS_KEY={secret_access_key}
+AWS_SESSION_TOKEN={session_token}
+'''
+        with open(r'C:\code\hansenmcp\.env', 'w') as f:
+            f.write(env_content)
+        _complete_toast()
+
 def cmd(message: SubCommandMessage):
     '''
 Copy AWS credentials to clipboard as Windows CMD set commands

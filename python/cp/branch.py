@@ -36,7 +36,7 @@ def main(message: MainCommandMessage):
         current_date = datetime.now()
         formatted_date = current_date.strftime("%Y%m%d")
         if ip_code:
-            new_branch = f'{branch_type}/{username.lower()}/{formatted_date}/{ip_code}_{branch_desc}'
+            new_branch = f'{branch_type}/{username.lower()}/{formatted_date}/{ip_code}-{branch_desc}'
         else:
             new_branch = f'{branch_type}/{username.lower()}/{formatted_date}/{branch_desc}'
         pyperclip.copy(new_branch)
