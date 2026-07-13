@@ -1,3 +1,8 @@
+1.2.12
+ - Add Ctrl+Shift+Click in Chrome/Edge to open the hovered link in Edge (non-default browser)
+ - Add Ctrl/Alt/Win + Numpad 1-3 hotkeys to move the mouse to a mapped monitor's center
+ - Change Alt+F hotkey to send NumpadAdd and Chrome/Edge Alt+Down to send Ctrl+Shift+Space
+
 1.2.11
  - Add GitHub (github.com) support to browser title extension
  - Load bold tab-title patterns from config in the tab navigator instead of inline **markers**
