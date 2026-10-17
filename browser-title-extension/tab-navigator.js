@@ -91,7 +91,7 @@ async function createNavigatorUI(tabs, timestamps = {}, previousTabId = null, ta
       left: 0 !important;
       width: 100% !important;
       height: 100% !important;
-      background: rgba(0, 0, 0, 0.7) !important;
+      background: #020b1c !important;
       z-index: 2147483647 !important;
       display: flex !important;
       align-items: center !important;
@@ -109,7 +109,7 @@ async function createNavigatorUI(tabs, timestamps = {}, previousTabId = null, ta
     }
 
     .tab-navigator-container {
-      background: #1e1e1e !important;
+      background: #06152b !important;
       border-radius: 8px !important;
       width: 1000px !important;
       max-width: calc(100vw - 80px) !important;
@@ -141,7 +141,7 @@ async function createNavigatorUI(tabs, timestamps = {}, previousTabId = null, ta
       transition: border-color 0.2s !important;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
       line-height: normal !important;
-      background: #1e1e1e !important;
+      background: #06152b !important;
       color: #ffffff !important;
     }
 
@@ -150,7 +150,7 @@ async function createNavigatorUI(tabs, timestamps = {}, previousTabId = null, ta
     }
 
     #close-navigator {
-      background: #2a2a2a !important;
+      background: #0c2340 !important;
       border: none !important;
       border-radius: 6px !important;
       width: 44px !important;
@@ -164,7 +164,7 @@ async function createNavigatorUI(tabs, timestamps = {}, previousTabId = null, ta
     }
 
     #close-navigator:hover {
-      background: #3a3a3a !important;
+      background: #12345a !important;
     }
 
     .tab-navigator-list {
@@ -190,11 +190,11 @@ async function createNavigatorUI(tabs, timestamps = {}, previousTabId = null, ta
     }
 
     .tab-item:hover {
-      background: #2a2a2a !important;
+      background: #0c2340 !important;
     }
 
     .tab-item.selected {
-      background: #1a3a5c !important;
+      background: #12345a !important;
       border-color: #4285f4 !important;
     }
 
@@ -203,7 +203,7 @@ async function createNavigatorUI(tabs, timestamps = {}, previousTabId = null, ta
     }
 
     .tab-item.selected.active-tab {
-      background: #2a5a2a !important;
+      background: #17456b !important;
       border-color: #4285f4 !important;
     }
 
@@ -373,6 +373,7 @@ async function createNavigatorUI(tabs, timestamps = {}, previousTabId = null, ta
       // Create favicon element with better error handling
       const favicon = document.createElement('img');
       favicon.className = 'tab-favicon';
+      const hideFavicon = tab.url && (tab.url.includes('chatgpt.com') || tab.title.includes('Reports'));
       
       // Check if this is an AWS sign-in page and use local AWS icon
       const isAwsSignInPage = tab.url && (tab.url.includes('signin.aws.amazon.com') || 
@@ -422,7 +423,9 @@ async function createNavigatorUI(tabs, timestamps = {}, previousTabId = null, ta
       ageIndicator.style.backgroundColor = getAgeColor(tab.id);
       ageIndicator.title = `Last loaded: ${formatAge(tab.id)}`;
       
-      tabItem.appendChild(favicon);
+      if (!hideFavicon) {
+        tabItem.appendChild(favicon);
+      }
       tabItem.appendChild(tabInfo);
       
       // Add group indicator if tab is in a group

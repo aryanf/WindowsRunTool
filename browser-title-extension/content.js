@@ -13,6 +13,25 @@
     // Helper function for resource name (bold formatting is handled by tab-navigator.js)
     const formatResourceName = (name) => name;
 
+    // Rewrite visible "ChatGPT" text to "Reports", skipping editable/script content
+    const replaceBrandingInPageText = () => {
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+            acceptNode: (node) => {
+                if (!node.nodeValue || !node.nodeValue.includes('ChatGPT')) return NodeFilter.FILTER_REJECT;
+                const parent = node.parentElement;
+                if (!parent || parent.closest('script, style, textarea, input, [contenteditable="true"]')) {
+                    return NodeFilter.FILTER_REJECT;
+                }
+                return NodeFilter.FILTER_ACCEPT;
+            }
+        });
+        const nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach(node => {
+            node.nodeValue = node.nodeValue.replace(/ChatGPT/g, 'Reports');
+        });
+    };
+
     const updateFavicon = (emoji) => {
         if (!emoji) return;
         
@@ -37,6 +56,14 @@
         link.rel = 'icon';
         link.href = canvas.toDataURL('image/png');
         document.head.appendChild(link);
+    };
+
+    const removeFavicon = () => {
+        document.querySelectorAll("link[rel*='icon']").forEach(link => link.remove());
+        const transparentIcon = document.createElement('link');
+        transparentIcon.rel = 'icon';
+        transparentIcon.href = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+        document.head.appendChild(transparentIcon);
     };
 
     const updateTitle = () => {
@@ -651,6 +678,13 @@
             } catch (e) {
                 console.error('Jira parsing error:', e);
             }
+        }
+
+        // --- ChatGPT ---
+        if (url.hostname === 'chatgpt.com' || url.hostname.endsWith('.chatgpt.com')) {
+            newTitle = document.title.replace(/ChatGPT/g, 'Reports');
+            removeFavicon();
+            replaceBrandingInPageText();
         }
 
         // --- GitHub ---

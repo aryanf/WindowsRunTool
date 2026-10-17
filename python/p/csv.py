@@ -7,6 +7,11 @@ from window_utils import get_selected_files_path_in_top_file_explorer
 download_path = get_download_dir()
 app_path = os.path.join(get_open_source_app_dir(), 'CsvFileView', 'CSVFileView.exe')
 
+
+def _open(file):
+    subprocess.Popen([app_path, str(file)])
+
+
 def _get_n_recent_files(num):
     files = [file for file in Path(download_path).glob(f'*.csv') if file.is_file()]
     sorted_files = sorted(files, key=lambda x: os.path.getmtime(x), reverse=True)
@@ -44,8 +49,8 @@ Open csv file from default directory, num specify only the nth recent file to op
 
     if not file :
         subprocess.Popen([app_path])
-    else:        
-        subprocess.Popen([app_path, file ])
+    else:
+        _open(file)
 
 def all(message: SubCommandMessage):
     '''
@@ -57,4 +62,4 @@ Open n csv files from default directory, num specify all nth recent files to ope
         subprocess.Popen([app_path ])
     else:
         for file in files:
-            subprocess.Popen([app_path, file ])
+            _open(file)

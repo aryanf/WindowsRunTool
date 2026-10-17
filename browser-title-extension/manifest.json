@@ -28,7 +28,9 @@
         "https://*.console.aws.amazon.com/*",
         "https://*.utilytics.com/*",
         "https://*.atlassian.net/*",
-        "https://github.com/*"
+        "https://github.com/*",
+        "https://chatgpt.com/*",
+        "https://*.chatgpt.com/*"
       ],
       "js": ["content.js"],
       "run_at": "document_end"

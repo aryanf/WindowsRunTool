@@ -16,12 +16,12 @@ def main(message: MainCommandMessage):
     case_id = message.switch_1
     print(case_id)
     # Generate UUID using uuid4 (random UUID)
-    case_uuid = str(uuid.uuid4())
-    print(case_uuid)
-    # Filter to only numeric digits and take first 18
-    case_18digits = ''.join(c for c in case_uuid.replace('-', '') if c.isdigit())[:18]
+    case_uuid = uuid.uuid4()
+    print(str(case_uuid))
+    # Decimal form of the UUID is always 39 digits after padding, so 18 digits are guaranteed
+    case_18digits = str(case_uuid.int).zfill(39)[:18]
     print(case_18digits)
-    _post_case_id_to_storage(case_id=case_id, case_uuid=case_uuid, case_18digits=case_18digits)
+    _post_case_id_to_storage(case_id=case_id, case_uuid=str(case_uuid), case_18digits=case_18digits)
 
 
 def _post_case_id_to_storage(case_id, case_uuid, case_18digits):

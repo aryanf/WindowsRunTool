@@ -1,8 +1,11 @@
 ﻿
 !c::
 {
-	Run "cmd.exe /c p cut"
+	HideProjectOverlayNow()
+    ;Run "cmd.exe /c p cut"
 	;Run "C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX.exe -PinToScreenFromScreen"
+	;Run 'cmd.exe /c start "" "C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX.exe" -PinToScreenFromScreen',, "Hide"
+    Run "cmd.exe /c p cut",, "Hide"
 }
 
 !p::
@@ -18,6 +21,7 @@
 
 !s::
 {
+	HideProjectOverlayNow()
 	Run "cmd.exe /c p shot"
 	;Run "C:\code\WindowsRunTool\portable_open_source_apps\ShareX\ShareX.exe -RectangleRegion"
 }
@@ -146,6 +150,11 @@ MoveMouseMapped(userNumber) {
 #Numpad2::MoveMouseMapped(2)
 #Numpad3::MoveMouseMapped(3)
 
+; Alt + number row (left hand)
+!1::MoveMouseMapped(1)
+!2::MoveMouseMapped(2)
+!3::MoveMouseMapped(3)
+
 
 
 ; ============================================================
@@ -196,6 +205,10 @@ GetProjectNameFromTitle(title)
     name := Trim(RegExReplace(name, "^[\x{25CF}\x{2022}\*]+\s*", ""))
     if (name == "")
         name := t
+    ; Replace a trailing WSL remote tag, e.g. "[WSL: Ubuntu-22.04]", with "wsl"
+    name := Trim(RegExReplace(name, "\s*\[WSL:[^\]]*\]\s*$", " wsl"))
+    ; Trim common repo prefixes
+    name := RegExReplace(name, "^(mdm-me-svc-|en-g-)", "")
     return name
 }
 
@@ -216,26 +229,26 @@ ShowProjectOverlay(name, hwnd := 0)
     g.SetFont("s48 bold", "Segoe UI")
     g.AddText("cF5F5F5 Center", name)
 
-    ; Size the overlay first (kept hidden), then center it on the monitor
-    ; that holds the target VS Code window rather than the primary screen.
+    ; Size the overlay first (kept hidden), then place it near the bottom
+    ; (about 15% up from the bottom edge) of the monitor that holds the
+    ; target VS Code window, horizontally centered.
     g.Show("NoActivate AutoSize Hide")
     g.GetPos(, , &gw, &gh)
-    GetMonitorCenterForWindow(hwnd, &cx, &cy)
+    GetMonitorWorkAreaForWindow(hwnd, &wl, &wt, &wr, &wb)
+    cx := (wl + wr) // 2
     tx := cx - (gw // 2)
-    ty := cy - (gh // 2)
+    ty := Round(wt + (wb - wt) * 0.85) - (gh // 2)
     g.Show("NoActivate x" tx " y" ty)
     WinSetTransparent(235, g)
 
     _projectOverlayGui := g
-    SetTimer(HideProjectOverlay, -2200)
+    SetTimer(HideProjectOverlay, -350)
 }
 
-GetMonitorCenterForWindow(hwnd, &cx, &cy)
+GetMonitorWorkAreaForWindow(hwnd, &wl, &wt, &wr, &wb)
 {
-    ; Default to the primary monitor's center as a fallback
-    MonitorGetWorkArea(MonitorGetPrimary(), &l, &t, &r, &b)
-    cx := (l + r) // 2
-    cy := (t + b) // 2
+    ; Default to the primary monitor's work area as a fallback
+    MonitorGetWorkArea(MonitorGetPrimary(), &wl, &wt, &wr, &wb)
 
     if (!hwnd)
         return
@@ -252,8 +265,6 @@ GetMonitorCenterForWindow(hwnd, &cx, &cy)
         if (winCx >= ml && winCx < mr && winCy >= mt && winCy < mb)
         {
             MonitorGetWorkArea(A_Index, &wl, &wt, &wr, &wb)
-            cx := (wl + wr) // 2
-            cy := (wt + wb) // 2
             return
         }
     }
@@ -266,4 +277,15 @@ HideProjectOverlay()
     {
         try _projectOverlayGui.Hide()
     }
+}
+
+HideProjectOverlayNow()
+{
+    global _projectOverlayGui
+    if (_projectOverlayGui)
+    {
+        try _projectOverlayGui.Destroy()
+        _projectOverlayGui := 0
+    }
+    SetTimer(HideProjectOverlay, 0)  ; cancel any pending hide timer
 }
