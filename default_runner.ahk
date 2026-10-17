@@ -289,3 +289,6 @@ HideProjectOverlayNow()
     }
     SetTimer(HideProjectOverlay, 0)  ; cancel any pending hide timer
 }
+
+; Win + R launches Windows Terminal
+#r::Run "sr.exe"
