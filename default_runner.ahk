@@ -99,6 +99,8 @@
 }
 #HotIf
 
+#UseHook
+
 ; Get monitor center and move mouse
 DllCall("SetProcessDpiAwarenessContext", "ptr", -4)
 CoordMode("Mouse", "Screen")
