@@ -2,7 +2,11 @@
 *.bat
 !install.bat
 *.lnk
-portable_open_source_apps/*
-portable_open_source_apps/**/*
+portable_open_source_apps/
+python/l/
+python/cp/
+python/i/
+python/ii/
+python/t/
 python/__pycache__/*.pyc
 python/**/__pycache__/*.pyc
