@@ -115,8 +115,11 @@ def _show_dir(current_dir, scrollable=True):
                                   zero_indexed=True, scrollable=scrollable, default_selected_index=1)
 
     # Handle user commands
+    remote = not curses_terminal.is_console()  # e.g. from the MercuryServer Telegram bot: show, don't open
     if cmd in index_content:
-        if _is_valid_url(cmd):
+        if remote:
+            print(f"\n{cmd}\n(copied to the PC clipboard)\n", flush=True)
+        elif _is_valid_url(cmd):
             browser = browser_mapping.get(cmd, 'chrome')
             subprocess.Popen([chrome_path if browser == 'chrome' else edge_path, cmd], shell=True)
         pyperclip.copy(cmd)
@@ -126,7 +129,10 @@ def _show_dir(current_dir, scrollable=True):
         _show_dir(os.path.dirname(current_dir))
     elif cmd in files:
         file_path = os.path.join(current_dir, cmd)
-        if cmd.lower().endswith(('.diff', '.txt')):
+        if remote and cmd.lower().endswith(('.diff', '.txt')):
+            with open(file_path, encoding='utf-8', errors='replace') as f:
+                print(f"\n--- {cmd} ---\n{f.read()}\n---\n", flush=True)
+        elif cmd.lower().endswith(('.diff', '.txt')):
             subprocess.Popen(['start', notepad_path, file_path], shell=True)
         else:
             os.startfile(file_path)

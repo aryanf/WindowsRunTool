@@ -1,5 +1,6 @@
 import curses
 import math
+import sys
 from typing import List, Tuple
 import time
 
@@ -34,6 +35,50 @@ def is_int(s):
     except ValueError:
         return False
 
+
+def is_console():
+    """False when input and output are pipes (e.g. run from the MercuryServer Telegram bot),
+    where curses cannot draw; menus are then shown as numbered text instead."""
+    try:
+        return sys.stdin.isatty() and sys.stdout.isatty()
+    except (AttributeError, ValueError):
+        return False
+
+
+def _show_plain(options_colors, commands_colors, zero_indexed, info, default_selected_index, scrollable):
+    """The menu as numbered lines; the answer is one line of input (a number, an item, or a shortcut).
+    Returns (index, content) like the curses menu."""
+    try:
+        sys.stdout.reconfigure(errors='replace')
+    except AttributeError:
+        pass
+    options = [o[0] for o in options_colors]
+    items = options + [c[0] for c in commands_colors]
+    start = 0 if zero_indexed else 1
+    lines = [info] if info else []
+    for n, item in enumerate(items, start=start):
+        if n - start == len(options) and options and len(items) > len(options):
+            lines.append('')
+        lines.append(item if item.strip('-') == '' else f"{n}: {item}")
+    default = items[default_selected_index] if 0 <= default_selected_index < len(items) else None
+    lines.append(f"Type a number or text, empty = {default}, e or exit = leave" if default
+                 else "Type a number or text, e or exit = leave")
+    print('\n'.join(lines), flush=True)
+    try:
+        answer = input().strip()
+    except EOFError:
+        return None, 'exit'
+    if answer == '':
+        return (default_selected_index, default) if default is not None else (None, '')
+    if is_int(answer) and 0 <= int(answer) - start < len(items):
+        index = int(answer) - start
+        if scrollable and index >= len(options):
+            return -1, items[index]  # a command, as the scrollable menu reports it
+        return index, items[index]
+    if answer in items:
+        return items.index(answer), answer
+    return None, answer
+
 def show(
         options_colors: List[tuple] =[], commands_colors: List[tuple]=[], options: List[str]=[], commands: List[str]=[],
         enumerating=True, zero_indexed=False, enable_input=True, info='',
@@ -51,6 +96,9 @@ return (index, content)
         options_colors = [(option, COLOR_WHITE) for option in options]
     if commands and not commands_colors:
         commands_colors = [(command, COLOR_WHITE) for command in commands]
+
+    if not is_console():
+        return _show_plain(options_colors, commands_colors, zero_indexed, info, default_selected_index, scrollable)
 
     temp_default_selected_index = default_selected_index
     if scrollable:
