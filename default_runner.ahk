@@ -292,5 +292,4 @@ HideProjectOverlayNow()
     SetTimer(HideProjectOverlay, 0)  ; cancel any pending hide timer
 }
 
-; Win + R launches Windows Terminal
-#r::Run "sr.exe"
+; Win + R is handled natively by SlickRun (toggle with `p run` / python\p\run.py)

@@ -2,133 +2,127 @@ from message import (MainCommandMessage, SubCommandMessage)
 import winreg as reg
 import psutil
 import subprocess
+import time
 import os
 
-username = os.getenv('USER') or os.getenv('LOGNAME') or os.getenv('USERNAME')
 key_path = r'Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
-slickrun_file_path = r"C:\Users\{}\AppData\Roaming\SlickRun\SlickRun.ini".format(username.lower())
+slickrun_file_path = os.path.join(os.environ['APPDATA'], 'SlickRun', 'SlickRun.ini')
+slickrun_exe_path = r"C:\Program Files\SlickRun\sr.exe"
 
-def main(message:MainCommandMessage):
-    print('run main')
+MOD_WIN = 8   # SlickRun BringUpModifier value for the Win key
+MOD_ALT = 1   # SlickRun BringUpModifier value for the Alt key
+
+
+def main(message: MainCommandMessage):
+    '''
+Toggle Win+R between SlickRun and the Windows Run dialog
+(restarts Explorer and SlickRun)
+'''
     try:
-        if _get_state_slick_winkey_r():
-            print("SlickRun Win+R is enabled.")
+        if _get_slick_modifier() == MOD_WIN:
+            print("SlickRun currently owns Win+R -> switching back to Windows Run.")
             _run_disable()
         else:
-            print("SlickRun Win+R is disabled.")
+            print("Windows Run currently owns Win+R -> switching to SlickRun.")
             _run_enable()
     except Exception as e:
         print(f"An error occurred: {e}")
         input()
 
-def enable(message:SubCommandMessage):
+
+def enable(message: SubCommandMessage):
+    '''
+Win+R opens SlickRun
+'''
     _run_enable()
 
-def _run_enable():
-    print('run enable')
-    try:
-        _disable_windows_winkey_r()
-        _enable_slick_winkey_r()
-        _kill_slick_process()
-        _run_slick_process()
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        input()
 
-
-def disable(message:SubCommandMessage):
+def disable(message: SubCommandMessage):
+    '''
+Win+R opens the Windows Run dialog
+'''
     _run_disable()
 
-def _run_disable():
-    print('run disable')
-    try:
-        _enable_windows_winkey_r()
-        _disable_slick_winkey_r()
-        _kill_slick_process()
-        _run_slick_process()
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        input()
 
-def _kill_slick_process():
-    process_name = "sr.exe"
-    # Iterate over all running processes
-    process_names = [proc.info['name'] for proc in psutil.process_iter(['name'])]
+def _run_enable():
+    _switch(windows_owns_win_r=False, slick_modifier=MOD_WIN)
+    print("Done: Win+R -> SlickRun")
+
+
+def _run_disable():
+    _switch(windows_owns_win_r=True, slick_modifier=MOD_ALT)
+    print("Done: Win+R -> Windows Run (SlickRun on Alt+R)")
+
+
+def _switch(windows_owns_win_r: bool, slick_modifier: int):
+    # Stop SlickRun first so it releases its hotkey and can't overwrite the ini on exit
+    _kill_process("sr.exe")
+    _set_windows_win_r(windows_owns_win_r)
+    _set_slick_modifier(slick_modifier)
+    # Explorer reads DisabledHotkeys only at startup
+    _restart_explorer()
+    # Start SlickRun after Explorer so Explorer doesn't grab Win+R first
+    subprocess.Popen([slickrun_exe_path])
+    print("SlickRun started.")
+
+
+def _kill_process(name: str):
     for proc in psutil.process_iter(['pid', 'name']):
-        # Check if process name matches
-        if proc.info['name'] == process_name:
-            # Kill the process
-            proc.kill()
-            print(f"Killed process {process_name} with PID {proc.info['pid']}")
+        if (proc.info['name'] or '').lower() == name.lower():
+            try:
+                proc.kill()
+                proc.wait(timeout=5)
+                print(f"Killed {name} (PID {proc.info['pid']})")
+            except psutil.Error:
+                pass
+
+
+def _is_running(name: str) -> bool:
+    return any((p.info['name'] or '').lower() == name.lower()
+               for p in psutil.process_iter(['name']))
+
+
+def _restart_explorer():
+    print("Restarting Explorer...")
+    subprocess.run(["taskkill", "/f", "/im", "explorer.exe"],
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    # Windows usually relaunches the shell automatically; start it only if it didn't
+    for _ in range(20):
+        time.sleep(0.25)
+        if _is_running("explorer.exe"):
             break
     else:
-        print(f"No process named {process_name} found.")
+        subprocess.Popen(["explorer.exe"])
+    time.sleep(2)  # let the shell finish registering its hotkeys
 
-def _run_slick_process():
-    # Path to the executable
-    exe_path = r"C:\Program Files\SlickRun\sr.exe"
 
-    # Run the executable
-    try:
-        process = subprocess.Popen([exe_path])
-        print("SlickRun started successfully.")
-    except subprocess.CalledProcessError as e:
-        print(f"Failed to start SlickRun. Error: {e}")
-    except FileNotFoundError:
-        print(f"The file {exe_path} was not found.")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+def _set_windows_win_r(enabled: bool):
+    with reg.OpenKey(reg.HKEY_CURRENT_USER, key_path, 0, reg.KEY_WRITE) as key:
+        if enabled:
+            try:
+                reg.DeleteValue(key, "DisabledHotkeys")
+            except FileNotFoundError:
+                pass
+        else:
+            reg.SetValueEx(key, "DisabledHotkeys", 0, reg.REG_SZ, 'R')
+    print(f"Windows Win+R {'enabled' if enabled else 'disabled'} in registry.")
 
-def _disable_windows_winkey_r():
-    # Open the registry key with write access
-    registry_key = reg.OpenKey(reg.HKEY_CURRENT_USER, key_path, 0, reg.KEY_WRITE)
-    # Create a new DWORD value named "DisabledHotkeys"
-    reg.SetValueEx(registry_key, "DisabledHotkeys", 0, reg.REG_EXPAND_SZ, 'R')
-    # Close the registry key
-    reg.CloseKey(registry_key)
-    print("Registry key updated successfully.")
 
-def _enable_windows_winkey_r():
-    # Open the registry key with write access
-    registry_key = reg.OpenKey(reg.HKEY_CURRENT_USER, key_path, 0, reg.KEY_WRITE)
-    # Delete the DisabledHotkeys value
-    reg.DeleteValue(registry_key, "DisabledHotkeys")
-    # Close the registry key
-    reg.CloseKey(registry_key)
-    print("Registry key updated successfully.")
+def _get_slick_modifier() -> int:
+    with open(slickrun_file_path, 'r') as file:
+        for line in file:
+            if line.startswith("BringUpModifier="):
+                return int(line.split('=', 1)[1])
+    return MOD_ALT
 
-def _get_state_slick_winkey_r():
-    # Read the file
+
+def _set_slick_modifier(modifier: int):
     with open(slickrun_file_path, 'r') as file:
         lines = file.readlines()
-
-    # Find the BringUpModifier value
-    for line in lines:
-        if "BringUpModifier" in line:
-            return True if int(line.split('=')[1]) == 8 else False
-
-def _enable_slick_winkey_r():
-    # Read the file
-    with open(slickrun_file_path, 'r') as file:
-        lines = file.readlines()
-
-    # Modify the BringUpModifier value
     with open(slickrun_file_path, 'w') as file:
         for line in lines:
-            if "BringUpModifier" in line:
-                file.write("BringUpModifier=8\n")
+            if line.startswith("BringUpModifier="):
+                file.write(f"BringUpModifier={modifier}\n")
             else:
                 file.write(line)
-
-def _disable_slick_winkey_r():
-    # Read the file
-    with open(slickrun_file_path, 'r') as file:
-        lines = file.readlines()
-
-    # Modify the BringUpModifier value
-    with open(slickrun_file_path, 'w') as file:
-        for line in lines:
-            if "BringUpModifier" in line:
-                file.write("BringUpModifier=1\n")
-            else:
-                file.write(line)
+    print(f"SlickRun BringUpModifier={modifier}")
