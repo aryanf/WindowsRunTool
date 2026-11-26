@@ -7,6 +7,5 @@ python/l/
 python/cp/
 python/i/
 python/ii/
-python/t/
 python/__pycache__/*.pyc
 python/**/__pycache__/*.pyc

@@ -10,7 +10,6 @@ Some command folders hold private data (personal info, work notes, credentials h
 | `python/cp` | Copy-to-clipboard scripts |
 | `python/i` | Info topics |
 | `python/ii` | Secondary info topics (personal) |
-| `python/t` | Tertiary info topics |
 
 ## Setup on a new laptop
 
